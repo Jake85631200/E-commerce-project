@@ -4,7 +4,8 @@
   "description": "building E-commerce website",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon server.js",
+    "dev": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +26,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.9.0",
     "mongoose": "^8.7.0",
+    "morgan": "^1.10.0",
     "node": "^20.18.0",
     "nodemon": "^3.1.7",
     "pug": "^3.0.3",
