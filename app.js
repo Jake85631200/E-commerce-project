@@ -1,6 +1,8 @@
 const express = require("express");
 const morgan = require("morgan");
 
+const userRouter = require("./routes/userRouter");
+
 const app = express();
 
 // middleware
@@ -14,7 +16,7 @@ if (process.env.NODE_ENV === "development") {
 
 // app.use("/");
 // app.use('/api/v1/products')
-// app.use("/api/v1/users");
+app.use("/api/v1/users", userRouter);
 // app.use("/api/v1/reviews");
 // app.use("/api/v1/bookings");
 
