@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 
 const userRouter = require("./routes/userRouter");
+const productRouter = require("./routes/productRouter");
 
 const app = express();
 
@@ -15,7 +16,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // app.use("/");
-// app.use('/api/v1/products')
+app.use("/api/v1/products", productRouter);
 app.use("/api/v1/users", userRouter);
 // app.use("/api/v1/reviews");
 // app.use("/api/v1/bookings");
