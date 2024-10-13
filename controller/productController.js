@@ -4,7 +4,7 @@ exports.getAllProducts = async (req, res, next) => {
   const products = await Products.find();
 
   res.status(200).json({
-    status: "success",
+    status: "success.",
     result: products.length,
     data: {
       products,
@@ -14,6 +14,19 @@ exports.getAllProducts = async (req, res, next) => {
 
 exports.getProduct = async (req, res, next) => {
   const product = await Products.findById(req.params.id);
+
+  res.status(200).json({
+    status: "success.",
+    data: {
+      product,
+    },
+  });
+};
+
+exports.updateProduct = async (req, res, next) => {
+  const product = await Products.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
 
   res.status(200).json({
     status: "success.",
@@ -37,11 +50,8 @@ exports.createProduct = async (req, res, next) => {
 exports.deleteProduct = async (req, res, next) => {
   const product = await Products.findByIdAndDelete(req.params.id);
 
-  console.log(product);
   res.status(204).json({
-    status: "success",
-    data: {
-      product,
-    },
+    status: "success.",
+    data: null,
   });
 };
