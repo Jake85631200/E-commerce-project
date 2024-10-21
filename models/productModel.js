@@ -35,6 +35,9 @@ const productSchema = new mongoose.Schema({
     type: Number,
     require: [true, "Please provide available quantity."],
   },
+  sold: {
+    type: Number,
+  },
   release_date: {
     type: Date,
     default: Date.now,
@@ -50,11 +53,14 @@ const productSchema = new mongoose.Schema({
     type: Number,
     min: [0, "Weight can't be below 0."],
   },
-  rating: {
+  ratingsAverage: {
     type: Number,
     min: 0,
     max: 5,
     default: 4.5,
+  },
+  ratingsQuantity: {
+    type: Number,
   },
   customer_reviews: {
     type: Number,
@@ -67,6 +73,8 @@ const productSchema = new mongoose.Schema({
     type: Number,
   },
 });
+
+
 
 const Products = mongoose.model("Products", productSchema);
 module.exports = Products;

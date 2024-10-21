@@ -43,7 +43,7 @@ const deleteData = async () => {
 };
 
 // IMPORT AND DELETE DATA BY USING process.argv ON TERMINAL
-// node <Path of this file> --import or --delete
+// node dev-data/import-dev-data.js --import or --delete
 if (process.argv[2] === "--import") {
   importData();
 } else if (process.argv[2] === "--delete") {
