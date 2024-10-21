@@ -8,7 +8,10 @@ const {
   createProduct,
   deleteProduct,
   updateProduct,
+  productStats,
 } = require("./../controller/productController");
+
+router.route("/productStats").get(productStats);
 
 router.route("/").get(getAllProducts).post(createProduct);
 
