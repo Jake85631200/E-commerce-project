@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const bcrypt = require("bcrypt");
+const BCRYPT_SALT_ROUNDS = 12;
 
 const userSchema = new mongoose.Schema(
   {
@@ -55,6 +57,26 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+//
+// correctPassword method
+userSchema.methods.correctPassword = async function (
+  candidatePassword,
+  userPassword
+) {
+  return await bcrypt.compare(candidatePassword, userPassword);
+};
+
+// Middleware
+
+// encrypt password when
+userSchema.pre("save", async function (next) {
+  // middleware -> can't use arrow function
+  if (!this.isModified("password")) return next(); //isModified: Mongoose method，檢查字段是否被修改
+  this.password = await bcrypt.hash(this.password, BCRYPT_SALT_ROUNDS);
+  this.passwordConfirm = undefined;
+  next();
+});
 
 const Users = mongoose.model("User", userSchema);
 module.exports = Users;
