@@ -15,16 +15,16 @@ mongoose.connect(DB).then(() => {
 });
 
 const port = process.env.PORT;
-const server = app
-  .listen(port, () => {
-    console.log(`App is running on port: ${port}`);
-  })
-  .on("error", (err) => {
-    if (err.code === "EADDRINUSE") {
-      console.log(`Port ${port} is in use, switching to port 3000...`);
-      server.close(); // closing current server
-      app.listen(3000, () => {
-        console.log(`App is running on port: 3000`);
-      });
-    }
-  });
+app.listen(port, () => {
+  console.log(`App is running on port: ${port}`);
+});
+
+// .on("error", (err) => {
+//   if (err.code === "EADDRINUSE") {
+//     console.log(`Port ${port} is in use, switching to port 3000...`);
+//     server.close(); // closing current server
+//     app.listen(3000, () => {
+//       console.log(`App is running on port: 3000`);
+//     });
+//   }
+// });
