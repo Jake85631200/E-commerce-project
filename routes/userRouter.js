@@ -1,5 +1,4 @@
 const express = require("express");
-
 const router = express.Router();
 
 const {
@@ -7,14 +6,20 @@ const {
   getUser,
   deleteUser,
   updateUser,
+  disableMe,
 } = require("./../controller/userController");
 
-const { login, signUp } = require("./../controller/authController");
+const { login, signUp, protect } = require("./../controller/authController");
+
+const {} = require("./../middleware/authMiddleware");
+
+router.post("/login", login);
 
 router.route("/").get(getAllUsers).post(signUp);
 
-router.route("/:id").get(getUser).patch(updateUser).delete(deleteUser);
+router.use(protect);
 
-router.route("/login").post(login);
+router.delete("/disableMe", disableMe);
 
+router.route("/:id").get(protect, getUser).patch(updateUser).delete(deleteUser);
 module.exports = router;
