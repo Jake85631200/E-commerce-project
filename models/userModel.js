@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
-const BCRYPT_SALT_ROUNDS = 12;
+const { encryptPassword } = require("./../middleware/authMiddleware");
 
 const userSchema = new mongoose.Schema(
   {
@@ -11,16 +11,16 @@ const userSchema = new mongoose.Schema(
     },
     first_name: {
       type: String,
-      require: [true, "A user must have first name."],
+      required: [true, "A user must have first name."],
     },
     last_name: {
       type: String,
-      require: [true, "A user must have last name."],
+      required: [true, "A user must have last name."],
     },
     image: { type: String, default: "default.jpg" },
     email: {
       type: String,
-      require: [true, "A user must have a email."],
+      required: [true, "A user must have a email."],
       unique: true,
       lowercase: true,
       validate: [validator.isEmail, "Please provide a valid email."],
@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema(
     },
     passwordConfirm: {
       type: String,
-      require: [true, "Please confirm your password."],
+      required: [true, "Please confirm your password."],
       validate: {
         validator: function (el) {
           return el === this.password;
@@ -43,16 +43,21 @@ const userSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      require: [true, "Please provide your gender."],
+      required: [true, "Please provide your gender."],
       enum: ["Female", "Male", "Other"],
     },
     address: {
       type: String,
-      require: [true, "Please provide a address."],
+      required: [true, "Please provide a address."],
     },
     phone_number: {
       type: String,
-      require: [true, "Please provide a phone number."],
+      required: [true, "Please provide a phone number."],
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
+      // select: false,
     },
   },
   { timestamps: true }
@@ -68,13 +73,11 @@ userSchema.methods.correctPassword = async function (
 };
 
 // Middleware
+// encrypt password when save
+userSchema.pre("save", encryptPassword);
 
-// encrypt password when
-userSchema.pre("save", async function (next) {
-  // middleware -> can't use arrow function
-  if (!this.isModified("password")) return next(); //isModified: Mongoose method，檢查字段是否被修改
-  this.password = await bcrypt.hash(this.password, BCRYPT_SALT_ROUNDS);
-  this.passwordConfirm = undefined;
+userSchema.pre(/^find/, function (next) {
+  this.where({ isActive: true });
   next();
 });
 

@@ -7,7 +7,8 @@
     "password": "test1234",
     "gender": "Male",
     "address": "56 Iowa Park",
-    "phone_number": "821-285-9126"
+    "phone_number": "821-285-9126",
+    "isActive": true
   },
   {
     "first_name": "Keelia",
@@ -17,7 +18,8 @@
     "password": "test1234",
     "gender": "Female",
     "address": "608 Dorton Lane",
-    "phone_number": "338-688-8911"
+    "phone_number": "338-688-8911",
+    "isActive": true
   },
   {
     "first_name": "Shelby",
@@ -27,7 +29,8 @@
     "password": "test1234",
     "gender": "Female",
     "address": "06 Old Gate Crossing",
-    "phone_number": "240-787-4727"
+    "phone_number": "240-787-4727",
+    "isActive": true
   },
   {
     "first_name": "Zulema",
@@ -37,7 +40,8 @@
     "password": "test1234",
     "gender": "Female",
     "address": "54 Hagan Point",
-    "phone_number": "796-859-6224"
+    "phone_number": "796-859-6224",
+    "isActive": true
   },
   {
     "first_name": "Irvine",
@@ -47,7 +51,8 @@
     "password": "test1234",
     "gender": "Male",
     "address": "6013 Packers Lane",
-    "phone_number": "728-200-0832"
+    "phone_number": "728-200-0832",
+    "isActive": true
   },
   {
     "first_name": "Marlo",
@@ -57,7 +62,8 @@
     "password": "test1234",
     "gender": "Male",
     "address": "9 Dorton Alley",
-    "phone_number": "837-839-3110"
+    "phone_number": "837-839-3110",
+    "isActive": true
   },
   {
     "first_name": "Susana",
@@ -67,7 +73,8 @@
     "password": "test1234",
     "gender": "Female",
     "address": "124 Grim Way",
-    "phone_number": "601-998-4517"
+    "phone_number": "601-998-4517",
+    "isActive": true
   },
   {
     "first_name": "Erl",
@@ -77,7 +84,8 @@
     "password": "test1234",
     "gender": "Male",
     "address": "980 Forest Dale Place",
-    "phone_number": "678-389-9638"
+    "phone_number": "678-389-9638",
+    "isActive": true
   },
   {
     "first_name": "Isidro",
@@ -87,18 +95,19 @@
     "password": "test1234",
     "gender": "Male",
     "address": "61 Mesta Drive",
-    "phone_number": "852-582-7753"
+    "phone_number": "852-582-7753",
+    "isActive": true
   },
   {
     "first_name": "Pamella",
     "last_name": "Ring",
-    "image": "https://plus.unsplash.com/premium_vector-1721131162952-136aada0aad2?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "image": "",
     "email": "pring9@tuttocitta.it",
     "password": "test1234",
     "gender": "Female",
     "address": "4914 Butternut Court",
-    "phone_number": "849-865-4997"
+    "phone_number": "849-865-4997",
+    "isActive": true
   },
   {
     "first_name": "Belva",
@@ -108,7 +117,8 @@
     "password": "test1234",
     "gender": "Female",
     "address": "5 Waubesa Point",
-    "phone_number": "906-459-1821"
+    "phone_number": "906-459-1821",
+    "isActive": true
   },
   {
     "first_name": "Fanchon",
@@ -118,7 +128,8 @@
     "password": "test1234",
     "gender": "Female",
     "address": "3 Eagan Trail",
-    "phone_number": "567-455-0664"
+    "phone_number": "567-455-0664",
+    "isActive": true
   },
   {
     "first_name": "Dwayne",
@@ -128,7 +139,8 @@
     "password": "test1234",
     "gender": "Male",
     "address": "9608 Eggendart Alley",
-    "phone_number": "875-758-9642"
+    "phone_number": "875-758-9642",
+    "isActive": true
   },
   {
     "first_name": "Yves",
@@ -138,7 +150,8 @@
     "password": "test1234",
     "gender": "Bigender",
     "address": "47249 Burrows Junction",
-    "phone_number": "861-955-7526"
+    "phone_number": "861-955-7526",
+    "isActive": true
   },
   {
     "first_name": "Wandis",
@@ -148,7 +161,8 @@
     "password": "test1234",
     "gender": "Female",
     "address": "011 Aberg Alley",
-    "phone_number": "500-156-9801"
+    "phone_number": "500-156-9801",
+    "isActive": true
   },
   {
     "first_name": "Patricio",
@@ -158,7 +172,8 @@
     "password": "test1234",
     "gender": "Male",
     "address": "36 Mcguire Road",
-    "phone_number": "231-132-3698"
+    "phone_number": "231-132-3698",
+    "isActive": true
   },
   {
     "first_name": "Josefina",
@@ -168,7 +183,8 @@
     "password": "test1234",
     "gender": "Female",
     "address": "70942 Lighthouse Bay Court",
-    "phone_number": "666-334-4296"
+    "phone_number": "666-334-4296",
+    "isActive": true
   },
   {
     "first_name": "Barb",
@@ -178,7 +194,8 @@
     "password": "test1234",
     "gender": "Female",
     "address": "8932 Fremont Avenue",
-    "phone_number": "943-725-1140"
+    "phone_number": "943-725-1140",
+    "isActive": true
   },
   {
     "first_name": "Brose",
@@ -188,7 +205,8 @@
     "password": "test1234",
     "gender": "Male",
     "address": "7903 Southridge Center",
-    "phone_number": "647-963-4277"
+    "phone_number": "647-963-4277",
+    "isActive": true
   },
   {
     "first_name": "Reinold",
@@ -198,6 +216,7 @@
     "password": "test1234",
     "gender": "Male",
     "address": "1 Jenna Crossing",
-    "phone_number": "427-548-9244"
+    "phone_number": "427-548-9244",
+    "isActive": true
   }
 ]
