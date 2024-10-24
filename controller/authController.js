@@ -1,7 +1,7 @@
 const User = require("./../models/userModel");
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.JWT_SECRET;
+const { promisify } = require("util");
 
 const signToken = (id) => {
   return jwt.sign({ id }, jwtSecret, {
@@ -10,12 +10,12 @@ const signToken = (id) => {
 };
 
 const verifyToken = (token) => {
-  jwt.verify(token, jwtSecret, (err, decoded) => {
+  jwt.verify(token, jwtSecret, (err, payload) => {
     if (err) {
       console.error("Token validation failed.", err.message);
       return null;
     }
-    return decoded;
+    return payload;
   });
 };
 
@@ -45,7 +45,16 @@ const createSendToken = (user, statusCode, req, res) => {
 
 exports.signUp = async (req, res, next) => {
   try {
-    const newUser = await User.create(req.body);
+    const newUser = await User.create({
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      email: req.body.email,
+      password: req.body.password,
+      passwordConfirm: req.body.passwordConfirm,
+      gender: req.body.gender,
+      address: req.body.address,
+      phone_number: req.body.phone_number,
+    });
 
     createSendToken(newUser, 201, req, res);
   } catch (err) {
@@ -83,6 +92,58 @@ exports.login = async (req, res, next) => {
   } catch (err) {
     res.status(404).json({
       status: "fail",
+      message: err.message,
+    });
+  }
+};
+
+exports.protect = async (req, res, next) => {
+  try {
+    let token;
+    // 1) Get and check if token existed in headers
+    if (
+      req.headers.authorization &&
+      req.headers.authorization.startsWith("Bearer")
+    ) {
+      token = req.headers.authorization.split(" ")[1];
+    } else if (req.cookies.jwt) {
+      token = req.cookies.jwt;
+    }
+
+    if (!token) {
+      return res.status(401).json({
+        status: "error",
+        message: "You're not logged in! Please log in to get access!",
+      });
+    }
+
+    // 2) Verification token
+    const payload = await promisify(jwt.verify)(token, jwtSecret); // payload 包含 user 的資訊
+
+    // 3) If user still exist
+    const currentUser = await User.findById(payload.id);
+    if (!currentUser) {
+      return res.status(401).json({
+        status: "error",
+        message: "The user of this token is no-longer exist.",
+      });
+    }
+
+    // 4) if user changed password
+    // if (currentUser.changedPasswordAfter(payload.iat)) {
+    //   return res.status(401).json({
+    //     status: "error",
+    //     message: "User recently changed password! Please log in again.",
+    //   });
+    // }
+
+    req.user = currentUser;
+    res.locals.user = currentUser;
+    console.log(req.user);
+    next();
+  } catch (err) {
+    res.status(400).json({
+      status: "error",
       message: err.message,
     });
   }
