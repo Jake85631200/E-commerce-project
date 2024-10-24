@@ -35,8 +35,6 @@ exports.getUser = async (req, res, next) => {
   }
 };
 
-
-
 exports.updateUser = async (req, res, next) => {
   try {
     const user = await User.findByIdAndUpdate(req.params.id, req.body, {
@@ -53,6 +51,23 @@ exports.updateUser = async (req, res, next) => {
     res.status(404).json({
       status: "fail",
       message: err.message,
+    });
+  }
+};
+
+exports.disableMe = async (req, res, next) => {
+  try {
+    await User.findByIdAndUpdate(req.user.id, { isActive: false });
+
+    res.status(204).json({
+      status: "success.",
+      data: null,
+    });
+  } catch (err) {
+    console.log(err)
+    res.status(404).json({
+      status: "fail",
+      message: err,
     });
   }
 };
