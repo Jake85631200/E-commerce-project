@@ -1,106 +1,80 @@
 const Products = require("./../models/productModel");
 const GetAllProductsFeature = require("../utils/getAllProductsFeature");
+const catchAsync = require("../utils/catchAsync");
 
-exports.getAllProducts = async (req, res, next) => {
-  try {
-    const query = Products.find();
-    const APIFeatures = new GetAllProductsFeature(query, req.query)
-      .filter()
-      .paginate()
-      .sort()
-      .fields();
+exports.getAllProducts = catchAsync(async (req, res, next) => {
+  const query = Products.find();
+  const APIFeatures = new GetAllProductsFeature(query, req.query)
+    .filter()
+    .paginate()
+    .sort()
+    .fields();
 
-    const products = await APIFeatures.query;
+  const products = await APIFeatures.query;
 
-    res.status(200).json({
-      status: "success.",
-      result: products.length,
-      data: {
-        products,
-      },
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(404).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-};
+  res.status(200).json({
+    status: "success.",
+    result: products.length,
+    data: {
+      products,
+    },
+  });
+});
 
-exports.getProduct = async (req, res, next) => {
-  try {
-    const product = await Products.findById(req.params.id);
+exports.getProduct = catchAsync(async (req, res, next) => {
+  const product = await Products.findById(req.params.id);
 
-    res.status(200).json({
-      status: "success.",
-      data: {
-        product,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-};
+  if (!product)
+    return next(new AppError("Can't find product with that ID!", 404));
 
-exports.updateProduct = async (req, res, next) => {
-  try {
-    const product = await Products.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+  res.status(200).json({
+    status: "success.",
+    data: {
+      product,
+    },
+  });
+});
 
-    res.status(200).json({
-      status: "success.",
-      data: {
-        product,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-};
+exports.updateProduct = catchAsync(async (req, res, next) => {
+  const product = await Products.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
 
-exports.createProduct = async (req, res, next) => {
-  try {
-    const product = await Products.create(req.body);
+  if (!product)
+    return next(new AppError("Can't find product with that ID!", 404));
 
-    res.status(201).json({
-      status: "success.",
-      data: {
-        product,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-};
+  res.status(200).json({
+    status: "success.",
+    data: {
+      product,
+    },
+  });
+});
 
-exports.deleteProduct = async (req, res, next) => {
-  try {
-    await Products.findByIdAndDelete(req.params.id);
+exports.createProduct = catchAsync(async (req, res, next) => {
+  const product = await Products.create(req.body);
 
-    res.status(204).json({
-      status: "success.",
-      data: null,
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-};
+  res.status(201).json({
+    status: "success.",
+    data: {
+      product,
+    },
+  });
+});
 
-exports.productStats = async (req, res, next) => {
+exports.deleteProduct = catchAsync(async (req, res, next) => {
+  await Products.findByIdAndDelete(req.params.id);
+
+  if (!product)
+    return next(new AppError("Can't find product with that ID!", 404));
+
+  res.status(204).json({
+    status: "success.",
+    data: null,
+  });
+});
+
+exports.productStats = catchAsync(async (req, res, next) => {
   try {
     const list = await Products.aggregate([
       {
@@ -130,4 +104,4 @@ exports.productStats = async (req, res, next) => {
   } catch (err) {
     console.log(err);
   }
-};
+});

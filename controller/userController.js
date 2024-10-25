@@ -1,89 +1,62 @@
 const User = require("../models/userModel");
+const AppError = require("../utils/AppError");
+const catchAsync = require("./../utils/catchAsync");
 
-exports.getAllUsers = async (req, res, next) => {
-  try {
-    const users = await User.find();
+exports.getAllUsers = catchAsync(async (req, res, next) => {
+  const users = await User.find();
 
-    res.status(200).json({
-      status: "success.",
-      result: users.length,
-      data: users,
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-};
+  res.status(200).json({
+    status: "success.",
+    result: users.length,
+    data: users,
+  });
+});
 
-exports.getUser = async (req, res, next) => {
-  try {
-    const user = await User.findById(req.params.id);
+exports.getUser = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
 
-    res.status(200).json({
-      status: "success.",
-      data: {
-        user,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-};
+  if (!user) return next(new AppError("No user found with that ID!", 404));
 
-exports.updateUser = async (req, res, next) => {
-  try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+  res.status(200).json({
+    status: "success.",
+    data: {
+      user,
+    },
+  });
+});
 
-    res.status(200).json({
-      status: "success.",
-      data: {
-        user,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-};
+exports.updateUser = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true, // 避免被帶入不該存在的值
+  });
 
-exports.disableMe = async (req, res, next) => {
-  try {
-    await User.findByIdAndUpdate(req.user.id, { isActive: false });
+  if (!user) return next(new AppError("No user found with that ID!", 404));
 
-    res.status(204).json({
-      status: "success.",
-      data: null,
-    });
-  } catch (err) {
-    console.log(err)
-    res.status(404).json({
-      status: "fail",
-      message: err,
-    });
-  }
-};
+  res.status(200).json({
+    status: "success.",
+    data: {
+      user,
+    },
+  });
+});
 
-exports.deleteUser = async (req, res, next) => {
-  try {
-    const user = await User.findByIdAndDelete(req.params.id);
+exports.disableMe = catchAsync(async (req, res, next) => {
+  await User.findByIdAndUpdate(req.user.id, { isActive: false });
 
-    res.status(204).json({
-      status: "success.",
-      data: null,
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: "fail",
-      message: err.message,
-    });
-  }
-};
+  res.status(204).json({
+    status: "success.",
+    data: null,
+  });
+});
+
+exports.deleteUser = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndDelete(req.params.id);
+
+  if (!user) return next(new AppError("No user found with that ID!", 404));
+
+  res.status(204).json({
+    status: "success.",
+    data: null,
+  });
+});
