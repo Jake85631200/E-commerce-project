@@ -22,4 +22,5 @@ router.use(protect);
 router.delete("/disableMe", disableMe);
 
 router.route("/:id").get(protect, getUser).patch(updateUser).delete(deleteUser);
+
 module.exports = router;
