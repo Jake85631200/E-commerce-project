@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+
+// 專門用於密碼哈希，簡單易用，提供了高安全性，特別適合用於用戶密碼的存儲。
 const bcrypt = require("bcrypt");
-const { encryptPassword } = require("./../middleware/authMiddleware");
+// 適合需要多種加密和哈希功能的場景，靈活性高，但需要更多的加密知識。
+const crypto = require("crypto");
+
+const BCRYPT_SALT_ROUNDS = 12;
 
 const userSchema = new mongoose.Schema(
   {
@@ -59,11 +64,13 @@ const userSchema = new mongoose.Schema(
       default: true,
       // select: false,
     },
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
   },
   { timestamps: true }
 );
 
-//
 // correctPassword method
 userSchema.methods.correctPassword = async function (
   candidatePassword,
@@ -72,9 +79,32 @@ userSchema.methods.correctPassword = async function (
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
+//resetPassword method
+userSchema.methods.createPasswordResetToken = function () {
+  const resetToken = crypto.randomBytes(32).toString("hex");
+
+  // Encrypted and store resetToken into DB
+  this.passwordResetToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  // Set expiration for this resetToken
+  this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+
+  return resetToken;
+};
+
 // Middleware
 // encrypt password when save
-userSchema.pre("save", encryptPassword);
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+
+  this.password = await bcrypt.hash(this.password, BCRYPT_SALT_ROUNDS);
+
+  this.passwordConfirm = undefined;
+  next();
+});
 
 userSchema.pre(/^find/, function (next) {
   this.where({ isActive: true });
