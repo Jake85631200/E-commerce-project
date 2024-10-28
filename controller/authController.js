@@ -3,23 +3,18 @@ const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.JWT_SECRET;
 const { promisify } = require("util");
 const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/AppError");
+const crypto = require("crypto");
+const sendMail = require("../utils/Email");
 
+// 產生 JWT
 const signToken = (id) => {
   return jwt.sign({ id }, jwtSecret, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
 
-const verifyToken = (token) => {
-  jwt.verify(token, jwtSecret, (err, payload) => {
-    if (err) {
-      console.error("Token validation failed.", err.message);
-      return null;
-    }
-    return payload;
-  });
-};
-
+// 在 cookie 中 create JWT
 const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
   res.cookie("jwt", token, {
@@ -62,28 +57,101 @@ exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
   // 1) 檢查帳號密碼是否存在 （檢查輸入有效性）
-  if (!email || !password)
-    return res.status(404).json({
-      status: "fail",
-      message: "Invalid email or password! Please try again!",
-    });
+  if (!email || !password) {
+    return next(
+      new AppError("Invalid email or password! Please try again!", 400)
+    );
+  }
 
   // 2) 檢查用戶是否存在，密碼是否正確 （進行身份驗證）
-
-  //依 email 找到 user，並將 password 一併顯示以供驗證
   const user = await User.findOne({ email }).select("+password");
 
-  if (!user || !(await user.correctPassword(password, user.password)))
-    return res.status(404).json({
-      status: "fail",
-      message: "User not existed! Please try again!",
-    });
+  if (!user || !(await user.correctPassword(password, user.password))) {
+    return next(
+      new AppError(
+        "User does not exist or password is incorrect! Please try again!",
+        401
+      )
+    );
+  }
 
   // 3) 產生並送出 token：設置一個名為 "jwt" 且包含 token 的 cookie
   createSendToken(user, 200, req, res);
 });
 
-// 確保
+exports.logOut = catchAsync(async (req, res, next) => {
+  res.clearCookie("jwt");
+  res.status(200).json({
+    status: "success.",
+    message: "Logged out.",
+  });
+});
+
+exports.forgetPassword = catchAsync(async (req, res, next) => {
+  // 1) 用 email 確認 user 身份
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    return next(new AppError("User not existed or invalid email.", 401));
+  }
+  // 2) Generate resetToken
+  const resetToken = user.createPasswordResetToken();
+  await user.save({ validateBeforeSave: false });
+
+  // 3) Send resetPassword URL within resetToken
+  try {
+    await sendMail(
+      "test1@gmail.com",
+      "test email",
+      `${req.protocol}://${req.get(
+        "host"
+      )}/api/v1/users/resetPassword/${resetToken}`
+    );
+
+    res.status(200).send("Token sent to email!");
+  } catch (err) {
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save({ validateBeforeSave: false });
+
+    return next(
+      new AppError(
+        "Something wrong when sending email! Please try again later!",
+        500
+      )
+    );
+  }
+});
+
+exports.resetPassword = catchAsync(async (req, res, next) => {
+  // 1) Get user based on the token
+  const hashedToken = crypto
+    .createHash("sha256") // 創建一個 SHA-256 的哈希實例
+    .update(req.params.token) // 將請求參數中的 token 更新到哈希實例中
+    .digest("hex"); // 將哈希結果轉換為十六進制的字串
+
+  const user = await User.findOne({
+    passwordResetToken: hashedToken,
+    passwordResetExpires: { $gt: Date.now() },
+  });
+
+  // 2) If token has not expired, and there is user, set the new password
+  if (!user) {
+    return next(new AppError("Invalid token or expired.", 401));
+  }
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  // 重設密碼後，token 和 expiration 就不需要了。防止用戶再次使用相同的 token 來重設密碼
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+
+  // 3) Update changedPasswordAt property for the user
+  User.passwordChangedAt = Date.now() - 1000;
+  await user.save();
+
+  // 4) Log the user in, send JWT
+  createSendToken(user, 200, req, res);
+});
+
 exports.protect = catchAsync(async (req, res, next) => {
   let token;
   // 1) Get and check if token existed in headers
@@ -97,10 +165,9 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   if (!token) {
-    return res.status(401).json({
-      status: "error",
-      message: "You're not logged in! Please log in to get access!",
-    });
+    return next(
+      new AppError("You're not logged in! Please log in to get access!", 401)
+    );
   }
 
   // 2) Verification token
@@ -109,12 +176,10 @@ exports.protect = catchAsync(async (req, res, next) => {
   // 3) If user still exist
   const currentUser = await User.findById(payload.id);
   if (!currentUser) {
-    return res.status(401).json({
-      status: "error",
-      message: "The user of this token is no-longer exist.",
-    });
+    return next(
+      new AppError("The user of this token is no-longer exist.", 401)
+    );
   }
-
   // 4) if user changed password
   // if (currentUser.changedPasswordAfter(payload.iat)) {
   //   return res.status(401).json({
