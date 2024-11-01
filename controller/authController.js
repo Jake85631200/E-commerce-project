@@ -14,8 +14,6 @@ const signToken = (id) => {
   });
 };
 
-// 角色與權限管理：實作角色（如 admin, user）和權限管理，確保不同角色的用戶只能訪問他們被授權的資源。
-// 5. 帳號鎖定功能：在多次登入失敗後鎖定帳號，防止暴力破解攻擊。
 // 6. 雙因素驗證：增加雙因素驗證（2FA），提高帳號安全性。
 // 7. Token 失效機制：實作 token 失效機制，讓用戶可以主動使某些 token 失效（例如在用戶報告帳號被盜時）。
 
@@ -59,29 +57,94 @@ exports.signUp = catchAsync(async (req, res, next) => {
   createSendToken(newUser, 201, req, res);
 });
 
+// 帳號鎖定功能：在多次登入失敗後鎖定帳號，防止暴力破解攻擊。
+// 1) 設定錯誤次數和時間範圍 （10分鐘內失敗3次）
+// 2) 錯誤後同一組 email 禁止嘗試登入5分鐘
+// 3) 提供 email 驗證信供解鎖並更換密碼的 URL
+// 4) 重設錯誤次數、時間
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
-  // 1) 檢查帳號密碼是否存在 （檢查輸入有效性）
+  // 檢查是否有輸入帳號密碼
   if (!email || !password) {
-    return next(
-      new AppError("Invalid email or password! Please try again!", 400)
-    );
+    return next(new AppError("Please provide email and password!", 400));
   }
 
-  // 2) 檢查用戶是否存在，密碼是否正確 （進行身份驗證）
+  // 密碼是否正確，檢查用戶是否存在（進行身份驗證）
   const user = await User.findOne({ email }).select("+password");
+  if (!user) {
+    return next(new AppError("Incorrect email or password", 401));
+  }
 
-  if (!user || !(await user.correctPassword(password, user.password))) {
+  // 檢查帳號是否被鎖定
+  if (user.lockUntil && user.lockUntil > Date.now()) {
+    const countDown = Math.ceil((user.lockUntil - Date.now()) / 1000);
     return next(
       new AppError(
-        "User does not exist or password is incorrect! Please try again!",
-        401
+        `Your account has been locked for safety. Please try again in ${countDown} seconds`,
+        403
       )
     );
   }
 
-  // 3) 產生並送出 token：設置一個名為 "jwt" 且包含 token 的 cookie
+  // 如果之前被鎖定但現在已過期，重置嘗試次數
+  if (user.lockUntil && user.lockUntil <= Date.now()) {
+    await User.updateOne(
+      { _id: user._id },
+      {
+        $set: {
+          loginAttempts: 0,
+          lockUntil: null
+        }
+      }
+    );
+    user.loginAttempts = 0;
+  }
+
+  // 驗證密碼
+  if (!(await user.correctPassword(password, user.password))) {
+    // 增加登入嘗試次數
+    const newAttempts = (user.loginAttempts || 0) + 1;
+    
+    // 如果錯誤 3 次，設置禁止時間 30 秒
+    if (newAttempts >= 3) {
+      await User.updateOne(
+        { _id: user._id },
+        {
+          $set: {
+            loginAttempts: newAttempts,
+            lockUntil: Date.now() + 30 * 1000
+          }
+        }
+      );
+      return next(
+        new AppError(
+          `Due to failed login attempts, your account has been locked for 30 seconds.`,
+          403
+        )
+      );
+    }
+
+    // 更新嘗試次數
+    await User.updateOne(
+      { _id: user._id },
+      { $set: { loginAttempts: newAttempts } }
+    );
+    
+    return next(new AppError("Incorrect email or password", 401));
+  }
+
+  // 登入成功，重置鎖定狀態
+  await User.updateOne(
+    { _id: user._id },
+    {
+      $set: {
+        loginAttempts: 0,
+        lockUntil: null
+      }
+    }
+  );
+
   createSendToken(user, 200, req, res);
 });
 
@@ -94,7 +157,7 @@ exports.logOut = catchAsync(async (req, res, next) => {
 });
 
 exports.forgetPassword = catchAsync(async (req, res, next) => {
-  // 1) 用 email 確認 user 身份
+  // 1) 用 email 確認 user 
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
     return next(new AppError("User not existed or invalid email.", 401));
@@ -152,6 +215,11 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // 3) Update changedPasswordAt property for the user
   User.passwordChangedAt = Date.now() - 1000;
+
+  // 解除登入限制
+  user.loginAttempts = 0;
+  user.lockUntil = null;
+
   await user.save();
 
   // 4) Log the user in, send JWT
