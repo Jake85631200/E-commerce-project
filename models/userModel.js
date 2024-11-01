@@ -44,6 +44,14 @@ const userSchema = new mongoose.Schema({
       message: "Passwords are not the same!",
     },
   },
+  loginAttempts: {
+    type: Number,
+    default: 0,
+  },
+  lockUntil: {
+    type: Date,
+    default: null,
+  },
   gender: {
     type: String,
     required: [true, "Please provide your gender."],
