@@ -14,7 +14,8 @@
     "ratingsAverage": 4.6,
     "ratingsQuantity": 50,
     "seller_name": "Voonix",
-    "seller_rating": 4.0
+    "seller_rating": 4.0,
+    "isActive": true
   },
   {
     "product_name": "Fudge - Cream Fudge",
@@ -31,7 +32,8 @@
     "ratingsAverage": 3.6,
     "ratingsQuantity": 14,
     "seller_name": "Twitterbeat",
-    "seller_rating": 3.0
+    "seller_rating": 3.0,
+    "isActive": true
   },
   {
     "product_name": "Salmon Atl.whole 8 - 10 Lb",
@@ -48,7 +50,8 @@
     "ratingsAverage": 4.0,
     "ratingsQuantity": 53,
     "seller_name": "Dabvine",
-    "seller_rating": 3.7
+    "seller_rating": 3.7,
+    "isActive": true
   },
   {
     "product_name": "Oven Mitts - 15 Inch",
@@ -65,7 +68,8 @@
     "ratingsAverage": 1.9,
     "ratingsQuantity": 9,
     "seller_name": "Myworks",
-    "seller_rating": 2.2
+    "seller_rating": 2.2,
+    "isActive": true
   },
   {
     "product_name": "Crab Brie In Phyllo",
@@ -82,7 +86,8 @@
     "ratingsAverage": 3.9,
     "ratingsQuantity": 20,
     "seller_name": "Jabbersphere",
-    "seller_rating": 1.3
+    "seller_rating": 1.3,
+    "isActive": true
   },
   {
     "product_name": "Nestea - Ice Tea, Diet",
@@ -99,7 +104,8 @@
     "ratingsAverage": 2.6,
     "ratingsQuantity": 16,
     "seller_name": "Youbridge",
-    "seller_rating": 1.1
+    "seller_rating": 1.1,
+    "isActive": true
   },
   {
     "product_name": "Cheese - Fontina",
@@ -116,7 +122,8 @@
     "ratingsAverage": 4.1,
     "ratingsQuantity": 37,
     "seller_name": "Aivee",
-    "seller_rating": 4.2
+    "seller_rating": 4.2,
+    "isActive": true
   },
   {
     "product_name": "Longos - Grilled Veg Sandwiches",
@@ -133,7 +140,8 @@
     "ratingsAverage": 4.6,
     "ratingsQuantity": 61,
     "seller_name": "Gabvine",
-    "seller_rating": 4.3
+    "seller_rating": 4.3,
+    "isActive": true
   },
   {
     "product_name": "Shrimp - Black Tiger 16/20",
@@ -150,7 +158,8 @@
     "ratingsAverage": 1.6,
     "ratingsQuantity": 7,
     "seller_name": "Gigazoom",
-    "seller_rating": 3.3
+    "seller_rating": 3.3,
+    "isActive": true
   },
   {
     "product_name": "Lemonade - Island Tea, 591 Ml",
@@ -167,7 +176,8 @@
     "ratingsAverage": 4.3,
     "ratingsQuantity": 44,
     "seller_name": "Demimbu",
-    "seller_rating": 4.5
+    "seller_rating": 4.5,
+    "isActive": true
   },
   {
     "product_name": "Lamb - Pieces, Diced",
@@ -184,7 +194,8 @@
     "ratingsAverage": 3.9,
     "ratingsQuantity": 33,
     "seller_name": "Yabox",
-    "seller_rating": 3.7
+    "seller_rating": 3.7,
+    "isActive": true
   },
   {
     "product_name": "Almonds Ground Blanched",
@@ -201,7 +212,8 @@
     "ratingsAverage": 3.7,
     "ratingsQuantity": 18,
     "seller_name": "Voolia",
-    "seller_rating": 4.0
+    "seller_rating": 4.0,
+    "isActive": true
   },
   {
     "product_name": "Butcher Twine 4r",
@@ -218,7 +230,8 @@
     "ratingsAverage": 2.0,
     "ratingsQuantity": 11,
     "seller_name": "Agivu",
-    "seller_rating": 2.2
+    "seller_rating": 2.2,
+    "isActive": true
   },
   {
     "product_name": "Wine - Mas Chicet Rose, Vintage",
@@ -235,7 +248,8 @@
     "ratingsAverage": 4.8,
     "ratingsQuantity": 66,
     "seller_name": "Realbridge",
-    "seller_rating": 1.8
+    "seller_rating": 1.8,
+    "isActive": true
   },
   {
     "product_name": "Vodka - Hot, Lnferno",
@@ -252,7 +266,8 @@
     "ratingsAverage": 4.9,
     "ratingsQuantity": 59,
     "seller_name": "Photospace",
-    "seller_rating": 3.0
+    "seller_rating": 3.0,
+    "isActive": true
   },
   {
     "product_name": "Butter Sweet",
@@ -269,7 +284,8 @@
     "ratingsAverage": 1.1,
     "ratingsQuantity": 5,
     "seller_name": "Ozu",
-    "seller_rating": 2.0
+    "seller_rating": 2.0,
+    "isActive": true
   },
   {
     "product_name": "Ice Cream Bar - Hageen Daz To",
@@ -286,7 +302,8 @@
     "ratingsAverage": 4.7,
     "ratingsQuantity": 25,
     "seller_name": "Fatz",
-    "seller_rating": 4.5
+    "seller_rating": 4.5,
+    "isActive": true
   },
   {
     "product_name": "Lobster - Live",
@@ -303,7 +320,8 @@
     "ratingsAverage": 2.9,
     "ratingsQuantity": 37,
     "seller_name": "Realpoint",
-    "seller_rating": 3.8
+    "seller_rating": 3.8,
+    "isActive": true
   },
   {
     "product_name": "Wine - Redchard Merritt",
@@ -320,7 +338,8 @@
     "ratingsAverage": 1.6,
     "ratingsQuantity": 14,
     "seller_name": "Yadel",
-    "seller_rating": 2.9
+    "seller_rating": 2.9,
+    "isActive": true
   },
   {
     "product_name": "Sambuca Cream",
@@ -337,6 +356,7 @@
     "ratingsAverage": 4.6,
     "ratingsQuantity": 9,
     "seller_name": "Kare",
-    "seller_rating": 3.9
+    "seller_rating": 3.9,
+    "isActive": true
   }
 ]
