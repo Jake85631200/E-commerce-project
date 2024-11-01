@@ -72,9 +72,18 @@ const productSchema = new mongoose.Schema({
   seller_rating: {
     type: Number,
   },
+  isActive: {
+    type: Boolean,
+    default: true,
+    // select: false,
+  },
 });
 
-
+// Hide not active product
+productSchema.pre(/^find/, function (next) {
+  this.where({ isActive: true });
+  next();
+});
 
 const Products = mongoose.model("Products", productSchema);
 module.exports = Products;
