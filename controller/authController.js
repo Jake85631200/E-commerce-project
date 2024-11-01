@@ -14,6 +14,11 @@ const signToken = (id) => {
   });
 };
 
+// 角色與權限管理：實作角色（如 admin, user）和權限管理，確保不同角色的用戶只能訪問他們被授權的資源。
+// 5. 帳號鎖定功能：在多次登入失敗後鎖定帳號，防止暴力破解攻擊。
+// 6. 雙因素驗證：增加雙因素驗證（2FA），提高帳號安全性。
+// 7. Token 失效機制：實作 token 失效機制，讓用戶可以主動使某些 token 失效（例如在用戶報告帳號被盜時）。
+
 // 在 cookie 中 create JWT
 const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
@@ -49,6 +54,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
     gender: req.body.gender,
     address: req.body.address,
     phone_number: req.body.phone_number,
+    role: req.body.role,
   });
   createSendToken(newUser, 201, req, res);
 });
@@ -152,6 +158,27 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   createSendToken(user, 200, req, res);
 });
 
+// 更新密碼功能：允許用戶在已登入的情況下更新自己的密碼，並在更新後使舊的 token 失效。
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  // 檢查 token 是否有效，是否為登入狀態
+  const user = await User.findById(req.user._id).select("+password");
+
+  if (!(await user.correctPassword(req.body.passwordCurrent, user.password)))
+    return next(
+      new AppError("Your current password is incorrect! Please try again!"),
+      401
+    );
+  // 檢查 req.body 是否包含 valid password and passwordConfirm
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  await user.save();
+
+  res.clearCookie("jwt");
+
+  createSendToken(user, 200, req, res);
+});
+
 exports.protect = catchAsync(async (req, res, next) => {
   let token;
   // 1) Get and check if token existed in headers
@@ -181,14 +208,23 @@ exports.protect = catchAsync(async (req, res, next) => {
     );
   }
   // 4) if user changed password
-  // if (currentUser.changedPasswordAfter(payload.iat)) {
-  //   return res.status(401).json({
-  //     status: "error",
-  //     message: "User recently changed password! Please log in again.",
-  //   });
-  // }
+  if (currentUser.changedPasswordAfter(payload.iat)) {
+    return res.status(401).json({
+      status: "error",
+      message: "User recently changed password! Please log in again.",
+    });
+  }
 
   req.user = currentUser;
   res.locals.user = currentUser;
   next();
 });
+
+exports.restrictTo = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role))
+      return next(new AppError("Your don't have permission to this api!", 403));
+
+    next();
+  };
+};
