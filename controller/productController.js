@@ -1,24 +1,29 @@
 const Products = require("./../models/productModel");
 const GetAllProductsFeature = require("../utils/getAllProductsFeature");
 const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/AppError");
 
 exports.getAllProducts = catchAsync(async (req, res, next) => {
-  const query = Products.find();
-  const APIFeatures = new GetAllProductsFeature(query, req.query)
-    .filter()
-    .paginate()
-    .sort()
-    .fields();
+  try {
+    const query = Products.find();
+    const APIFeatures = new GetAllProductsFeature(query, req.query)
+      .filter()
+      .paginate()
+      .sort()
+      .fields();
 
-  const products = await APIFeatures.query;
+    const products = await APIFeatures.query;
 
-  res.status(200).json({
-    status: "success.",
-    result: products.length,
-    data: {
-      products,
-    },
-  });
+    res.status(200).json({
+      status: "success.",
+      result: products.length,
+      data: {
+        products,
+      },
+    });
+  } catch (err) {
+    return next(err);
+  }
 });
 
 exports.getProduct = catchAsync(async (req, res, next) => {
@@ -52,18 +57,36 @@ exports.updateProduct = catchAsync(async (req, res, next) => {
 });
 
 exports.createProduct = catchAsync(async (req, res, next) => {
-  const product = await Products.create(req.body);
+  try {
+    const product = await Products.create(req.body);
 
-  res.status(201).json({
+    res.status(201).json({
+      status: "success.",
+      data: {
+        product,
+      },
+    });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+exports.disableProd = catchAsync(async (req, res, next) => {
+  const product = await Products.findByIdAndUpdate(req.params.id, {
+    isActive: false,
+  });
+
+  if (!product)
+    return next(new AppError("Can't find product with that ID!", 404));
+
+  res.status(204).json({
     status: "success.",
-    data: {
-      product,
-    },
+    data: null,
   });
 });
 
 exports.deleteProduct = catchAsync(async (req, res, next) => {
-  await Products.findByIdAndDelete(req.params.id);
+  const product = await Products.findByIdAndDelete(req.params.id);
 
   if (!product)
     return next(new AppError("Can't find product with that ID!", 404));
