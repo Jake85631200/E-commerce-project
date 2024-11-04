@@ -6,6 +6,7 @@ const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
 const crypto = require("crypto");
 const sendMail = require("../utils/Email");
+const redis = require("../utils/redis");
 
 // 產生 JWT
 const signToken = (id) => {
@@ -14,7 +15,6 @@ const signToken = (id) => {
   });
 };
 
-// 6. 雙因素驗證：增加雙因素驗證（2FA），提高帳號安全性。
 // 7. Token 失效機制：實作 token 失效機制，讓用戶可以主動使某些 token 失效（例如在用戶報告帳號被盜時）。
 
 // 在 cookie 中 create JWT
@@ -42,6 +42,35 @@ const createSendToken = (user, statusCode, req, res) => {
   });
 };
 
+const handleFailedLogin = async (user) => {
+  const newAttempts = (user.loginAttempts || 0) + 1;
+
+  // 如果錯誤 3 次，設置禁止時間 30 秒
+  if (newAttempts >= 3) {
+    await User.updateOne(
+      { _id: user._id },
+      {
+        $set: {
+          loginAttempts: newAttempts,
+          lockUntil: Date.now() + 30 * 1000,
+        },
+      }
+    );
+    throw new AppError(
+      `Due to failed login attempts, your account has been locked for 30 seconds.`,
+      403
+    );
+  }
+
+  // 更新嘗試次數
+  await User.updateOne(
+    { _id: user._id },
+    { $set: { loginAttempts: newAttempts } }
+  );
+
+  throw new AppError("Incorrect email or password", 401);
+};
+
 exports.signUp = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
     first_name: req.body.first_name,
@@ -57,11 +86,6 @@ exports.signUp = catchAsync(async (req, res, next) => {
   createSendToken(newUser, 201, req, res);
 });
 
-// 帳號鎖定功能：在多次登入失敗後鎖定帳號，防止暴力破解攻擊。
-// 1) 設定錯誤次數和時間範圍 （10分鐘內失敗3次）
-// 2) 錯誤後同一組 email 禁止嘗試登入5分鐘
-// 3) 提供 email 驗證信供解鎖並更換密碼的 URL
-// 4) 重設錯誤次數、時間
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -94,8 +118,8 @@ exports.login = catchAsync(async (req, res, next) => {
       {
         $set: {
           loginAttempts: 0,
-          lockUntil: null
-        }
+          lockUntil: null,
+        },
       }
     );
     user.loginAttempts = 0;
@@ -103,35 +127,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
   // 驗證密碼
   if (!(await user.correctPassword(password, user.password))) {
-    // 增加登入嘗試次數
-    const newAttempts = (user.loginAttempts || 0) + 1;
-    
-    // 如果錯誤 3 次，設置禁止時間 30 秒
-    if (newAttempts >= 3) {
-      await User.updateOne(
-        { _id: user._id },
-        {
-          $set: {
-            loginAttempts: newAttempts,
-            lockUntil: Date.now() + 30 * 1000
-          }
-        }
-      );
-      return next(
-        new AppError(
-          `Due to failed login attempts, your account has been locked for 30 seconds.`,
-          403
-        )
-      );
-    }
-
-    // 更新嘗試次數
-    await User.updateOne(
-      { _id: user._id },
-      { $set: { loginAttempts: newAttempts } }
-    );
-    
-    return next(new AppError("Incorrect email or password", 401));
+    return await handleFailedLogin(user);
   }
 
   // 登入成功，重置鎖定狀態
@@ -140,11 +136,73 @@ exports.login = catchAsync(async (req, res, next) => {
     {
       $set: {
         loginAttempts: 0,
-        lockUntil: null
-      }
+        lockUntil: null,
+      },
     }
   );
 
+  createSendToken(user, 200, req, res);
+});
+
+exports.twoFactor = catchAsync(async (req, res, next) => {
+  // Check if user exist by email
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    return next(new AppError("User not existed or invalid email", 401));
+  }
+
+  // Generate verification code and set expiration to 10 minutes
+  const faCode = Math.floor(100000 + Math.random() * 900000).toString();
+
+  await redis.setex(`2fa_${user.email}`, 600, faCode);
+
+  // Send verification code to email
+  await sendMail(
+    user.email,
+    "Two-Factor Authentication Code",
+    `Your verification code is: ${faCode}. This code will expire in 10 minutes.`
+  );
+
+  res.status(200).json({
+    status: "success.",
+    message: `Verification code has been send to ${req.body.email}. This code will expire in 10 minutes.`,
+  });
+});
+
+exports.validateFACode = catchAsync(async (req, res, next) => {
+  // Check if user provide email and FACode
+  const { email, yourFACode } = req.body;
+  if (!email || !yourFACode) {
+    return next(
+      new AppError("Please provide email and verification code.", 400)
+    );
+  }
+
+  // Get verification code which is stored in redis
+  const storedCode = await redis.get(`2fa_${email}`);
+
+  // If verification code expired
+  if (storedCode === null) {
+    return next(
+      new AppError(
+        "Verification code expired. Please resend verification code again",
+        400
+      )
+    );
+  }
+
+  // Comparing verification co
+  if (yourFACode !== storedCode) {
+    return next(
+      new AppError("Verification code invalid. Please try again", 400)
+    );
+  }
+
+  // Delete Verification code in redis
+  await redis.del(`2fa_${email}`);
+
+  // Find user and login user
+  const user = await User.findOne({ email });
   createSendToken(user, 200, req, res);
 });
 
@@ -157,7 +215,7 @@ exports.logOut = catchAsync(async (req, res, next) => {
 });
 
 exports.forgetPassword = catchAsync(async (req, res, next) => {
-  // 1) 用 email 確認 user 
+  // 1) 用 email 確認 user
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
     return next(new AppError("User not existed or invalid email.", 401));
