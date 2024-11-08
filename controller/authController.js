@@ -73,8 +73,7 @@ const handleFailedLogin = async (user) => {
 
 exports.signUp = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
+    name: req.body.name,
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
