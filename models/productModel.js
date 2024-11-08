@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { availableMemory } = require("process");
 
 const productSchema = new mongoose.Schema({
   _id: {
@@ -27,10 +26,6 @@ const productSchema = new mongoose.Schema({
     minlength: [20, "Product description must at least 20 characters long."],
     maxlength: [500, "Product description must less than 100 characters long."],
   },
-  availability: {
-    type: Boolean,
-    default: false,
-  },
   quantity: {
     type: Number,
     require: [true, "Please provide available quantity."],
@@ -42,48 +37,52 @@ const productSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  brand: {
-    type: String,
-  },
-  size: {
-    type: String,
-    enum: ["Small", "Medium", "Large"],
-  },
-  weight: {
-    type: Number,
-    min: [0, "Weight can't be below 0."],
-  },
-  ratingsAverage: {
+  rating_average: {
     type: Number,
     min: 0,
     max: 5,
     default: 4.5,
   },
-  ratingsQuantity: {
+  ratings_quantity: {
     type: Number,
   },
   customer_reviews: {
     type: Number,
   },
-  seller_name: {
-    type: String,
-    require: true,
+  seller: {
+    _id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: [true, "Product must belong to a seller."],
+    },
+    seller_name: {
+      type: String,
+      required: true,
+    },
   },
   seller_rating: {
     type: Number,
   },
-  isActive: {
+  isAvailable: {
     type: Boolean,
     default: true,
     // select: false,
   },
 });
 
-// Hide not active product
 productSchema.pre(/^find/, function (next) {
-  this.where({ isActive: true });
+  this.populate({
+    path: "seller",
+    select: ["name"],
+  });
   next();
 });
 
-const Products = mongoose.model("Products", productSchema);
+// Hide not active product
+// productSchema.pre(/^find/, function (next) {
+//   this.where({ isAvailable: true });
+//   next();
+// });
+
+const Products = mongoose.model("Product", productSchema);
 module.exports = Products;
