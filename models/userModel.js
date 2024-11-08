@@ -13,14 +13,15 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     auto: true,
   },
-  first_name: {
+  name: {
     type: String,
-    required: [true, "A user must have first name."],
+    required: [true, "A user must have name."],
+    trim: true,
   },
-  last_name: {
+  image: {
     type: String,
+    default: "https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png",
   },
-  image: { type: String, default: "default.jpg" },
   email: {
     type: String,
     required: [true, "A user must have a email."],
@@ -43,6 +44,10 @@ const userSchema = new mongoose.Schema({
       },
       message: "Passwords are not the same!",
     },
+  },
+  cart: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Cart",
   },
   loginAttempts: {
     type: Number,
@@ -133,6 +138,14 @@ userSchema.pre("save", async function (next) {
 // Hide not active user
 userSchema.pre(/^find/, function (next) {
   this.where({ isActive: true });
+  next();
+});
+
+userSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "cart",
+    select: ["product_name", "price", "quantity"],
+  });
   next();
 });
 
