@@ -4,26 +4,22 @@ const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
 
 exports.getAllProducts = catchAsync(async (req, res, next) => {
-  try {
-    const query = Products.find();
-    const APIFeatures = new GetAllProductsFeature(query, req.query)
-      .filter()
-      .paginate()
-      .sort()
-      .fields();
+  const query = Products.find();
+  const APIFeatures = new GetAllProductsFeature(query, req.query)
+    .filter()
+    .paginate()
+    .sort()
+    .fields();
 
-    const products = await APIFeatures.query;
+  const products = await APIFeatures.query;
 
-    res.status(200).json({
-      status: "success.",
-      result: products.length,
-      data: {
-        products,
-      },
-    });
-  } catch (err) {
-    return next(err);
-  }
+  res.status(200).json({
+    status: "success.",
+    result: products.length,
+    data: {
+      products,
+    },
+  });
 });
 
 exports.getProduct = catchAsync(async (req, res, next) => {
@@ -58,7 +54,24 @@ exports.updateProduct = catchAsync(async (req, res, next) => {
 
 exports.createProduct = catchAsync(async (req, res, next) => {
   try {
-    const product = await Products.create(req.body);
+    console.log(req.user.name);
+    const product = await Products.create({
+      product_name: req.body.product_name,
+      image: req.body.image,
+      price: req.body.price,
+      description: req.body.description,
+      quantity: req.body.quantity,
+      release_date: req.body.release_date,
+      ratings_average: req.body.ratingsAverage,
+      customer_reviews: req.body.customer_reviews,
+      // Nested object
+      seller: {
+        _id: req.user._id,
+        seller_name: req.user.name,
+      },
+      seller_rating: req.body.seller_rating,
+      isAvailable: req.body.isAvailable,
+    });
 
     res.status(201).json({
       status: "success.",
