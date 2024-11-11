@@ -30,9 +30,6 @@ const productSchema = new mongoose.Schema({
     type: Number,
     require: [true, "Please provide available quantity."],
   },
-  sold: {
-    type: Number,
-  },
   release_date: {
     type: Date,
     default: Date.now,

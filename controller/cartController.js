@@ -11,8 +11,24 @@ exports.setTourUserIds = (req, res, next) => {
   next();
 };
 
-// 添加商品到購物車
+// createCart: Cart will be created when user signup
+
+// Check cart
+exports.checkAllCart = catchAsync(async (req, res, next) => {
+  const carts = await Cart.find();
+
+  res.status(200).json({
+    status: "success.",
+    result: carts.length,
+    data: {
+      carts,
+    },
+  });
+});
+
+// Add prod into cart
 exports.addToCart = catchAsync(async (req, res, next) => {
+  // 從 URL 取得商品 id
   const product = await Products.findById(req.params.id);
 
   if (!product) return next(AppError("Product not found.", 404));
@@ -33,4 +49,3 @@ exports.addToCart = catchAsync(async (req, res, next) => {
   });
 });
 // 從購物車刪除商品
-// 查看購物車內容

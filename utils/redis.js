@@ -4,11 +4,12 @@ const redis = new Redis({
   host: process.env.REDIS_HOST || "localhost",
   port: process.env.REDIS_PORT || 6379,
 
+  // retry when redis connection failed
   retryStrategy(times) {
     const delay = Math.min(times * 50, 2000);
     return delay;
   },
-  // 添加錯誤處理
+
   maxRetriesPerRequest: 3,
 });
 
@@ -17,7 +18,7 @@ redis.on("connect", () => {
 });
 
 redis.on("error", (err) => {
-  console.error("❌ Redis 錯誤:", err);
+  console.error("❌Redis error:", err);
 });
 
 // // 測試

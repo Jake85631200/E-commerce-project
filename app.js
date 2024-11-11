@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === "development") {
 // app.use("/");
 app.use("/api/v1/products", productRouter);
 app.use("/api/v1/users", userRouter);
-app.use("/api/v1/cart", cartRouter);
+app.use("/api/v1/carts", cartRouter);
 // app.use("/api/v1/reviews");
 
 app.all("*", (req, res, next) => {
