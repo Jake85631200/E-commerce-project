@@ -8,7 +8,8 @@
     "gender": "Male",
     "address": "56 Iowa Park",
     "phone_number": "821-285-9126",
-    "isActive": true
+    "isActive": true,
+    "cart": "652e10e9fc13ae2b026747bc"
   },
   {
     "_id": { "$oid": "672e10e9fc13ae2b026747bd" },
@@ -19,7 +20,8 @@
     "gender": "Female",
     "address": "608 Dorton Lane",
     "phone_number": "338-688-8911",
-    "isActive": true
+    "isActive": true,
+    "cart": "652e10e9fc13ae2b026747bd"
   },
   {
     "_id": { "$oid": "672e10e9fc13ae2b026747be" },
@@ -30,7 +32,8 @@
     "gender": "Male",
     "address": "123 Main Street",
     "phone_number": "555-123-4567",
-    "isActive": true
+    "isActive": true,
+    "cart": "652e10e9fc13ae2b026747be"
   },
   {
     "_id": { "$oid": "672e10e9fc13ae2b026747bf" },
@@ -41,7 +44,8 @@
     "gender": "Female",
     "address": "456 Elm Street",
     "phone_number": "555-987-6543",
-    "isActive": true
+    "isActive": true,
+    "cart": "652e10e9fc13ae2b026747bf"
   },
   {
     "_id": { "$oid": "672e10e9fc13ae2b026747c0" },
@@ -52,7 +56,8 @@
     "gender": "Male",
     "address": "789 Oak Street",
     "phone_number": "555-654-3210",
-    "isActive": true
+    "isActive": true,
+    "cart": "652e10e9fc13ae2b026747c0"
   },
   {
     "_id": { "$oid": "672e10e9fc13ae2b026747c1" },
@@ -63,7 +68,8 @@
     "gender": "Female",
     "address": "321 Pine Street",
     "phone_number": "555-321-0987",
-    "isActive": true
+    "isActive": true,
+    "cart": "652e10e9fc13ae2b026747c1"
   },
   {
     "_id": { "$oid": "672e10e9fc13ae2b026747c2" },
@@ -74,7 +80,8 @@
     "gender": "Male",
     "address": "654 Maple Street",
     "phone_number": "555-789-0123",
-    "isActive": true
+    "isActive": true,
+    "cart": "652e10e9fc13ae2b026747c2"
   },
   {
     "_id": { "$oid": "672e10e9fc13ae2b026747c3" },
@@ -85,7 +92,8 @@
     "gender": "Female",
     "address": "987 Birch Street",
     "phone_number": "555-012-3456",
-    "isActive": true
+    "isActive": true,
+    "cart": "652e10e9fc13ae2b026747c3"
   },
   {
     "_id": { "$oid": "672e10e9fc13ae2b026747c4" },
@@ -96,7 +104,8 @@
     "gender": "Male",
     "address": "159 Cedar Street",
     "phone_number": "555-345-6789",
-    "isActive": true
+    "isActive": true,
+    "cart": "652e10e9fc13ae2b026747c4"
   },
   {
     "_id": { "$oid": "672e10e9fc13ae2b026747c5" },
@@ -107,6 +116,20 @@
     "gender": "Female",
     "address": "753 Walnut Street",
     "phone_number": "555-678-9012",
-    "isActive": true
+    "isActive": true,
+    "cart": "652e10e9fc13ae2b026747c5"
+  },
+  {
+    "_id": { "$oid": "672e10e9fc13ae2b026747c6" },
+    "name": "Jake Tang",
+    "image": "https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png",
+    "email": "admin@test.com",
+    "password": "admin1234",
+    "gender": "Male",
+    "address": "Earth, Taiwan",
+    "phone_number": "0909-090-090",
+    "isActive": true,
+    "role": "admin",
+    "cart": "652e10e9fc13ae2b026747c6"
   }
 ]

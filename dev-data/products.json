@@ -10,10 +10,12 @@
     "ratings_average": 4.2,
     "ratings_quantity": 150,
     "customer_reviews": 200,
-    "seller_name": "TechStore",
-    "seller_rating": 4.3,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747bc",
+      "seller_name": "Travus"
+    },
     "isAvailable": true,
-    "Category": "Electronics"
+    "category": "Electronics"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674613" },
@@ -26,10 +28,12 @@
     "ratings_average": 3.8,
     "ratings_quantity": 80,
     "customer_reviews": 100,
-    "seller_name": "HomeAppliances",
-    "seller_rating": 4.0,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747bd",
+      "seller_name": "Keelia"
+    },
     "isAvailable": true,
-    "Category": "Home Appliances"
+    "category": "Home Appliances"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674614" },
@@ -42,10 +46,12 @@
     "ratings_average": 4.1,
     "ratings_quantity": 220,
     "customer_reviews": 250,
-    "seller_name": "Sporty",
-    "seller_rating": 4.2,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747be",
+      "seller_name": "Jaxon"
+    },
     "isAvailable": true,
-    "Category": "Footwear"
+    "category": "Footwear"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674615" },
@@ -58,10 +64,12 @@
     "ratings_average": 4.0,
     "ratings_quantity": 150,
     "customer_reviews": 200,
-    "seller_name": "BeautyCare",
-    "seller_rating": 4.1,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747bf",
+      "seller_name": "Avery"
+    },
     "isAvailable": true,
-    "Category": "Beauty & Personal Care"
+    "category": "Beauty & Personal Care"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674616" },
@@ -74,10 +82,12 @@
     "ratings_average": 4.3,
     "ratings_quantity": 180,
     "customer_reviews": 220,
-    "seller_name": "WellnessShop",
-    "seller_rating": 4.4,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747c0",
+      "seller_name": "Mason"
+    },
     "isAvailable": true,
-    "Category": "Health & Wellness"
+    "category": "Health & Wellness"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674617" },
@@ -90,10 +100,12 @@
     "ratings_average": 4.1,
     "ratings_quantity": 200,
     "customer_reviews": 250,
-    "seller_name": "KitchenPro",
-    "seller_rating": 4.2,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747c1",
+      "seller_name": "Olivia"
+    },
     "isAvailable": true,
-    "Category": "Home & Kitchen"
+    "category": "Home & Kitchen"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674618" },
@@ -106,10 +118,12 @@
     "ratings_average": 4.4,
     "ratings_quantity": 100,
     "customer_reviews": 120,
-    "seller_name": "OutdoorGear",
-    "seller_rating": 4.3,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747c2",
+      "seller_name": "Liam"
+    },
     "isAvailable": true,
-    "Category": "Sports & Outdoors"
+    "category": "Sports & Outdoors"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674619" },
@@ -122,10 +136,12 @@
     "ratings_average": 3.9,
     "ratings_quantity": 150,
     "customer_reviews": 200,
-    "seller_name": "GameZone",
-    "seller_rating": 4.0,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747c3",
+      "seller_name": "Emma"
+    },
     "isAvailable": true,
-    "Category": "Toys & Games"
+    "category": "Toys & Games"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674620" },
@@ -138,10 +154,12 @@
     "ratings_average": 3.7,
     "ratings_quantity": 90,
     "customer_reviews": 100,
-    "seller_name": "AutoCare",
-    "seller_rating": 3.9,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747c4",
+      "seller_name": "Noah"
+    },
     "isAvailable": true,
-    "Category": "Automotive"
+    "category": "Automotive"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674621" },
@@ -154,10 +172,12 @@
     "ratings_average": 3.8,
     "ratings_quantity": 50,
     "customer_reviews": 70,
-    "seller_name": "StationeryHub",
-    "seller_rating": 4.1,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747c5",
+      "seller_name": "Sophia"
+    },
     "isAvailable": true,
-    "Category": "Books & Stationery"
+    "category": "Books & Stationery"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674622" },
@@ -170,10 +190,12 @@
     "ratings_average": 4.2,
     "ratings_quantity": 200,
     "customer_reviews": 250,
-    "seller_name": "PetSupplies",
-    "seller_rating": 4.3,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747bc",
+      "seller_name": "Travus"
+    },
     "isAvailable": true,
-    "Category": "Pet Supplies"
+    "category": "Pet Supplies"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674623" },
@@ -186,10 +208,12 @@
     "ratings_average": 4.3,
     "ratings_quantity": 30,
     "customer_reviews": 40,
-    "seller_name": "FurnitureWorld",
-    "seller_rating": 4.4,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747bd",
+      "seller_name": "Keelia"
+    },
     "isAvailable": true,
-    "Category": "Furniture"
+    "category": "Furniture"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674624" },
@@ -202,10 +226,12 @@
     "ratings_average": 4.0,
     "ratings_quantity": 120,
     "customer_reviews": 150,
-    "seller_name": "JewelryBox",
-    "seller_rating": 4.1,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747be",
+      "seller_name": "Jaxon"
+    },
     "isAvailable": true,
-    "Category": "Jewelry & Accessories"
+    "category": "Jewelry & Accessories"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674625" },
@@ -218,10 +244,12 @@
     "ratings_average": 4.5,
     "ratings_quantity": 300,
     "customer_reviews": 400,
-    "seller_name": "GroceryStore",
-    "seller_rating": 4.6,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747bf",
+      "seller_name": "Avery"
+    },
     "isAvailable": true,
-    "Category": "Groceries"
+    "category": "Groceries"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674626" },
@@ -234,10 +262,12 @@
     "ratings_average": 4.1,
     "ratings_quantity": 350,
     "customer_reviews": 400,
-    "seller_name": "TechStore",
-    "seller_rating": 4.2,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747c0",
+      "seller_name": "Mason"
+    },
     "isAvailable": true,
-    "Category": "Electronics"
+    "category": "Electronics"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674627" },
@@ -250,10 +280,12 @@
     "ratings_average": 3.9,
     "ratings_quantity": 150,
     "customer_reviews": 200,
-    "seller_name": "HomeAppliances",
-    "seller_rating": 4.0,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747c1",
+      "seller_name": "Olivia"
+    },
     "isAvailable": true,
-    "Category": "Home Appliances"
+    "category": "Home Appliances"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674628" },
@@ -266,10 +298,12 @@
     "ratings_average": 4.2,
     "ratings_quantity": 180,
     "customer_reviews": 200,
-    "seller_name": "FashionHub",
-    "seller_rating": 4.1,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747c2",
+      "seller_name": "Liam"
+    },
     "isAvailable": true,
-    "Category": "Clothing & Apparel"
+    "category": "Clothing & Apparel"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674629" },
@@ -282,10 +316,12 @@
     "ratings_average": 4.3,
     "ratings_quantity": 400,
     "customer_reviews": 450,
-    "seller_name": "BeautyCare",
-    "seller_rating": 4.2,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747c3",
+      "seller_name": "Emma"
+    },
     "isAvailable": true,
-    "Category": "Beauty & Personal Care"
+    "category": "Beauty & Personal Care"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674630" },
@@ -298,10 +334,12 @@
     "ratings_average": 4.4,
     "ratings_quantity": 250,
     "customer_reviews": 300,
-    "seller_name": "OutdoorGear",
-    "seller_rating": 4.3,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747c4",
+      "seller_name": "Noah"
+    },
     "isAvailable": true,
-    "Category": "Sports & Outdoors"
+    "category": "Sports & Outdoors"
   },
   {
     "product_id": { "$oid": "672dfe24fc13ae2bd0674631" },
@@ -314,9 +352,11 @@
     "ratings_average": 4.0,
     "ratings_quantity": 600,
     "customer_reviews": 700,
-    "seller_name": "GameZone",
-    "seller_rating": 4.1,
+    "seller": {
+      "_id": "672e10e9fc13ae2b026747c5",
+      "seller_name": "Sophia"
+    },
     "isAvailable": true,
-    "Category": "Toys & Games"
+    "category": "Toys & Games"
   }
 ]
