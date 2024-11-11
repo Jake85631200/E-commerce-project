@@ -1,12 +1,6 @@
 const mongoose = require("mongoose");
 
 const cartSchema = new mongoose.Schema({
-  // ref: user, product
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Users",
-    required: true,
-  },
   items: [
     {
       product: {
@@ -35,6 +29,11 @@ const cartSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+
+// Virtual property
+cartSchema.virtual("isEmpty").get(function(){
+  return this.items.length === 0 ? "empty" : this.items
+})
 
 // Middleware
 cartSchema.pre("save", function (next) {
