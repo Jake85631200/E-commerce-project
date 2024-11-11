@@ -1,4 +1,5 @@
 const User = require("./../models/userModel");
+const Cart = require("./../models/cartModel");
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.JWT_SECRET;
 const { promisify } = require("util");
@@ -14,8 +15,6 @@ const signToken = (id) => {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
-
-// 7. Token 失效機制：實作 token 失效機制，讓用戶可以主動使某些 token 失效（例如在用戶報告帳號被盜時）。
 
 // 在 cookie 中 create JWT
 const createSendToken = (user, statusCode, req, res) => {
@@ -42,36 +41,29 @@ const createSendToken = (user, statusCode, req, res) => {
   });
 };
 
-const handleFailedLogin = async (user) => {
-  const newAttempts = (user.loginAttempts || 0) + 1;
+const handleFailedLogin = async (user, endOfDay, attempts) => {
+  attempts = attempts + 1;
 
-  // 如果錯誤 3 次，設置禁止時間 30 秒
-  if (newAttempts >= 3) {
-    await User.updateOne(
-      { _id: user._id },
-      {
-        $set: {
-          loginAttempts: newAttempts,
-          lockUntil: Date.now() + 30 * 1000,
-        },
-      }
-    );
+  // 1. 更新嘗試次數
+  await redis.setex(`loginAttempts_${user._id}`, endOfDay, attempts);
+  
+  // 2. 檢查是否達到鎖定條件
+  if (attempts >= 3) {
+    const ttl = 10;
+    await redis.setex(`locked_${user._id}`, ttl, "locked");
+    
     throw new AppError(
-      `Due to failed login attempts, your account has been locked for 30 seconds.`,
+      `Due to failed login attempts, your account has been locked for ${ttl} seconds.`,
       403
     );
   }
 
-  // 更新嘗試次數
-  await User.updateOne(
-    { _id: user._id },
-    { $set: { loginAttempts: newAttempts } }
-  );
-
+  // 3. 如果未達到鎖定條件，拋出一般登入失敗錯誤
   throw new AppError("Incorrect email or password", 401);
 };
 
 exports.signUp = catchAsync(async (req, res, next) => {
+  const newCart = await Cart.create({ createAt: Date.now() });
   const newUser = await User.create({
     name: req.body.name,
     email: req.body.email,
@@ -80,28 +72,35 @@ exports.signUp = catchAsync(async (req, res, next) => {
     gender: req.body.gender,
     address: req.body.address,
     phone_number: req.body.phone_number,
-    role: req.body.role,
+    cart: newCart._id,
+    // role: req.body.role,
   });
   createSendToken(newUser, 201, req, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
+  // 1. 驗證輸入資料
   const { email, password } = req.body;
-
-  // 檢查是否有輸入帳號密碼
   if (!email || !password) {
     return next(new AppError("Please provide email and password!", 400));
   }
 
-  // 密碼是否正確，檢查用戶是否存在（進行身份驗證）
+  // 2. 確認用戶存在
   const user = await User.findOne({ email }).select("+password");
   if (!user) {
     return next(new AppError("Incorrect email or password", 401));
   }
 
-  // 檢查帳號是否被鎖定
-  if (user.lockUntil && user.lockUntil > Date.now()) {
-    const countDown = Math.ceil((user.lockUntil - Date.now()) / 1000);
+  // 3. 初始化時間和嘗試次數相關變數
+  const endOfDay = Math.floor(
+    (new Date().setHours(23, 59, 59, 999) - Date.now()) / 1000
+  );
+  let attempts = parseInt(await redis.get(`loginAttempts_${user._id}`)) || 0;
+
+  // 4. 檢查帳號是否被鎖定
+  const lockUntil = await redis.get(`locked_${user._id}`);
+  if (lockUntil) {
+    const countDown = await redis.ttl(`locked_${user._id}`);
     return next(
       new AppError(
         `Your account has been locked for safety. Please try again in ${countDown} seconds`,
@@ -110,36 +109,18 @@ exports.login = catchAsync(async (req, res, next) => {
     );
   }
 
-  // 如果之前被鎖定但現在已過期，重置嘗試次數
-  if (user.lockUntil && user.lockUntil <= Date.now()) {
-    await User.updateOne(
-      { _id: user._id },
-      {
-        $set: {
-          loginAttempts: 0,
-          lockUntil: null,
-        },
-      }
-    );
-    user.loginAttempts = 0;
+  // 5. 初始化或重置登入嘗試次數
+  if (lockUntil === null) {
+    await redis.setex(`loginAttempts_${user._id}`, endOfDay, 0);
   }
 
-  // 驗證密碼
+  // 6. 驗證密碼
   if (!(await user.correctPassword(password, user.password))) {
-    return await handleFailedLogin(user);
+    return await handleFailedLogin(user, endOfDay, attempts);
   }
 
-  // 登入成功，重置鎖定狀態
-  await User.updateOne(
-    { _id: user._id },
-    {
-      $set: {
-        loginAttempts: 0,
-        lockUntil: null,
-      },
-    }
-  );
-
+  // 7. 登入成功處理
+  await redis.setex(`loginAttempts_${user._id}`, endOfDay, 0);
   createSendToken(user, 200, req, res);
 });
 
@@ -151,8 +132,9 @@ exports.twoFactor = catchAsync(async (req, res, next) => {
   }
 
   // Generate verification code and set expiration to 10 minutes
-  const faCode = Math.floor(100000 + Math.random() * 900000).toString();
+  const faCode = Math.floor(100000 + Math.random() * 899999).toString();
 
+  // Set verification code inside redis
   await redis.setex(`2fa_${user.email}`, 600, faCode);
 
   // Send verification code to email
