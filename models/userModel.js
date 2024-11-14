@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 
-// 專門用於密碼哈希，簡單易用，提供了高安全性，特別適合用於用戶密碼的存儲。
+// Used for password hashing, simple to use, provides high security, especially suitable for storing user passwords.
 const bcrypt = require("bcrypt");
-// 適合需要多種加密和哈希功能的場景，靈活性高，但需要更多的加密知識。
+// Suitable for scenarios requiring various encryption and hashing functions, highly flexible, but requires more encryption knowledge.
 const crypto = require("crypto");
 
 const BCRYPT_SALT_ROUNDS = 12;
@@ -77,7 +77,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-// correctPassword method: 登入時，比對密碼和 DB 中密碼是否一致
+// correctPassword method: Compare the password with the DB password during login
 userSchema.methods.correctPassword = async function (
   candidatePassword,
   userPassword
@@ -85,7 +85,7 @@ userSchema.methods.correctPassword = async function (
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
-// changePasswordAfter: 以 payload 上的 JWTTimeStamp 確認 password 是否被更動過
+// changePasswordAfter: Check if the password has been changed after the JWT timestamp
 userSchema.methods.changePasswordAfter = function (JWTTimeStamp) {
   if (passwordChangedAt) {
     const currentTimeStamp = parseInt(
@@ -93,14 +93,14 @@ userSchema.methods.changePasswordAfter = function (JWTTimeStamp) {
       10
     );
 
-    // 如果密碼更改的時間戳大於 JWT 的時間戳，表示密碼在 token 發行後被更改
+    // If the password change timestamp is greater than the JWT timestamp, it means the password was changed after the token was issued
     return currentTimeStamp > JWTTimeStamp;
   }
-  // 如果沒有 passwordChangedAt，表示密碼從未更改過
+  // If there is no passwordChangedAt, it means the password has never been changed
   return false;
 };
 
-//resetPassword method: 用來 create 重置密碼時 forgetPassword fn 需要的 resetToken
+// resetPassword method: Used to create a resetToken needed by the forgetPassword function
 userSchema.methods.createPasswordResetToken = function () {
   const resetToken = crypto.randomBytes(32).toString("hex");
 
@@ -117,7 +117,7 @@ userSchema.methods.createPasswordResetToken = function () {
 };
 
 // Middleware
-// encrypt password when save
+// Encrypt password when save
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 

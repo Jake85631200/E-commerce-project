@@ -11,10 +11,10 @@ const transporter = nodemailer.createTransport({
 
 const sendMail = async (to, subject, text) => {
   const mailOptions = {
-    from: "test@example.com", // 發件人地址
-    to, // 收件人地址
-    subject, // 郵件主題
-    text, // 郵件內容
+    from: "test@example.com",
+    to,
+    subject,
+    text,
   };
 
   try {

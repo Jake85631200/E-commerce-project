@@ -119,10 +119,10 @@ exports.productStats = catchAsync(async (req, res, next) => {
 
       {
         $group: {
-          _id: { $toUpper: "$size" },
+          _id: { $toUpper: "$price" },
           numProds: { $sum: 1 },
-          avgRating: { $avg: "$ratingsAverage" },
-          avgQuantity: { $avg: "$ratingsQuantity" },
+          avgRating: { $avg: "$ratings_average" },
+          avgQuantity: { $avg: "$ratings_quantity" },
           avgSellerRating: { $avg: "$seller_rating" },
           avgPrice: { $avg: "$price" },
           minPrice: { $min: "$price" },

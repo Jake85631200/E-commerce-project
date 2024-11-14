@@ -34,7 +34,7 @@ const productSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  rating_average: {
+  ratings_average: {
     type: Number,
     min: 0,
     max: 5,
@@ -76,10 +76,10 @@ productSchema.pre(/^find/, function (next) {
 });
 
 // Hide not active product
-// productSchema.pre(/^find/, function (next) {
-//   this.where({ isAvailable: true });
-//   next();
-// });
+productSchema.pre(/^find/, function (next) {
+  this.where({ isAvailable: true });
+  next();
+});
 
 const Products = mongoose.model("Product", productSchema);
 module.exports = Products;

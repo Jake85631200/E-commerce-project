@@ -9,24 +9,27 @@ const crypto = require("crypto");
 const sendMail = require("../utils/Email");
 const redis = require("../utils/redis");
 
-// 產生 JWT
+// Generate JWT
 const signToken = (id) => {
   return jwt.sign({ id }, jwtSecret, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
 
-// 在 cookie 中 create JWT
+// Create JWT in cookie
 const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
   res.cookie("jwt", token, {
-    // new Date()：將計算出的毫秒數轉換為 cookie 期望的 object
+    // new Date(): Convert calculated milliseconds to an object expected by cookie
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
-    httpOnly: true, // cookie 不能通過 JS 的 Document.cookie 來訪問，防止 XSS 攻擊。
-    secure: true, // cookie 只能通過 HTTPS 發送，提升 cookie 的安全性
-    signed: true, // cookie 將被簽名，防止 cookie 被篡改 (需要 cookieParser)
+    // Cookie cannot be accessed via JS's Document.cookie, preventing XSS attacks.
+    httpOnly: true,
+    // Cookie can only be sent over HTTPS, enhancing cookie security
+    secure: true,
+    // Cookie will be signed to prevent tampering (requires cookieParser)
+    signed: true,
   });
 
   // Remove password from output
@@ -44,21 +47,21 @@ const createSendToken = (user, statusCode, req, res) => {
 const handleFailedLogin = async (user, endOfDay, attempts) => {
   attempts = attempts + 1;
 
-  // 1. 更新嘗試次數
+  // 1. Update attempt count
   await redis.setex(`loginAttempts_${user._id}`, endOfDay, attempts);
-  
-  // 2. 檢查是否達到鎖定條件
+
+  // 2. Check if lock condition is met
   if (attempts >= 3) {
     const ttl = 10;
     await redis.setex(`locked_${user._id}`, ttl, "locked");
-    
+
     throw new AppError(
       `Due to failed login attempts, your account has been locked for ${ttl} seconds.`,
       403
     );
   }
 
-  // 3. 如果未達到鎖定條件，拋出一般登入失敗錯誤
+  // 3. If lock condition is not met, throw general login failure error
   throw new AppError("Incorrect email or password", 401);
 };
 
@@ -79,25 +82,25 @@ exports.signUp = catchAsync(async (req, res, next) => {
 });
 
 exports.login = catchAsync(async (req, res, next) => {
-  // 1. 驗證輸入資料
+  // 1. Validate input data
   const { email, password } = req.body;
   if (!email || !password) {
     return next(new AppError("Please provide email and password!", 400));
   }
 
-  // 2. 確認用戶存在
+  // 2. Confirm user exists
   const user = await User.findOne({ email }).select("+password");
   if (!user) {
     return next(new AppError("Incorrect email or password", 401));
   }
 
-  // 3. 初始化時間和嘗試次數相關變數
+  // 3. Initialize time and attempt count related variables
   const endOfDay = Math.floor(
     (new Date().setHours(23, 59, 59, 999) - Date.now()) / 1000
   );
   let attempts = parseInt(await redis.get(`loginAttempts_${user._id}`)) || 0;
 
-  // 4. 檢查帳號是否被鎖定
+  // 4. Check if account is locked
   const lockUntil = await redis.get(`locked_${user._id}`);
   if (lockUntil) {
     const countDown = await redis.ttl(`locked_${user._id}`);
@@ -109,17 +112,17 @@ exports.login = catchAsync(async (req, res, next) => {
     );
   }
 
-  // 5. 初始化或重置登入嘗試次數
+  // 5. Initialize or reset login attempt count
   if (lockUntil === null) {
     await redis.setex(`loginAttempts_${user._id}`, endOfDay, 0);
   }
 
-  // 6. 驗證密碼
+  // 6. Validate password
   if (!(await user.correctPassword(password, user.password))) {
     return await handleFailedLogin(user, endOfDay, attempts);
   }
 
-  // 7. 登入成功處理
+  // 7. Login success processing
   await redis.setex(`loginAttempts_${user._id}`, endOfDay, 0);
   createSendToken(user, 200, req, res);
 });
@@ -196,7 +199,7 @@ exports.logOut = catchAsync(async (req, res, next) => {
 });
 
 exports.forgetPassword = catchAsync(async (req, res, next) => {
-  // 1) 用 email 確認 user
+  // 1) Use email to confirm user
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
     return next(new AppError("User not existed or invalid email.", 401));
@@ -233,9 +236,9 @@ exports.forgetPassword = catchAsync(async (req, res, next) => {
 exports.resetPassword = catchAsync(async (req, res, next) => {
   // 1) Get user based on the token
   const hashedToken = crypto
-    .createHash("sha256") // 創建一個 SHA-256 的哈希實例
-    .update(req.params.token) // 將請求參數中的 token 更新到哈希實例中
-    .digest("hex"); // 將哈希結果轉換為十六進制的字串
+    .createHash("sha256") // Create a SHA-256 hash instance
+    .update(req.params.token) // Update the hash instance with the token from request parameters
+    .digest("hex"); // Convert the hash result to a hexadecimal string
 
   const user = await User.findOne({
     passwordResetToken: hashedToken,
@@ -248,14 +251,14 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   }
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
-  // 重設密碼後，token 和 expiration 就不需要了。防止用戶再次使用相同的 token 來重設密碼
+  // After resetting the password, token and expiration are no longer needed. Prevents user from using the same token to reset password again
   user.passwordResetToken = undefined;
   user.passwordResetExpires = undefined;
 
   // 3) Update changedPasswordAt property for the user
   User.passwordChangedAt = Date.now() - 1000;
 
-  // 解除登入限制
+  // Remove login restrictions
   user.loginAttempts = 0;
   user.lockUntil = null;
 
@@ -265,10 +268,10 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   createSendToken(user, 200, req, res);
 });
 
-// 更新密碼功能：允許用戶在已登入的情況下更新自己的密碼，並在更新後使舊的 token 失效。
+// Update password feature: Allows users to update their password while logged in and invalidate the old token after updating.
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
-  // 檢查 token 是否有效，是否為登入狀態
+  // Check if token is valid and if the user is logged in
   const user = await User.findById(req.user._id).select("+password");
 
   if (!(await user.correctPassword(req.body.passwordCurrent, user.password)))
@@ -276,7 +279,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
       new AppError("Your current password is incorrect! Please try again!"),
       401
     );
-  // 檢查 req.body 是否包含 valid password and passwordConfirm
+  // Check if req.body contains valid password and passwordConfirm
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
   await user.save();
@@ -305,7 +308,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   // 2) Verification token
-  const payload = await promisify(jwt.verify)(token, jwtSecret); // payload 包含 user 的資訊
+  const payload = await promisify(jwt.verify)(token, jwtSecret); // payload contains user information
 
   // 3) If user still exist
   const currentUser = await User.findById(payload.id);

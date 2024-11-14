@@ -1,10 +1,21 @@
 const express = require("express");
 const router = express.Router();
 
-const { addToCart, checkAllCart } = require("../controller/cartController");
+const {
+  checkMyCart,
+  addToCart,
+  checkAllCart,
+  removeFormCart,
+} = require("../controller/cartController");
 
-router.route("/").get(checkAllCart);
+const { restrictTo, protect } = require("../controller/authController");
 
-router.route("/:id").post(addToCart);
+router.use(protect);
+
+router.route("/").get(restrictTo("admin"), checkAllCart);
+
+router.route("/my-cart").get(checkMyCart);
+
+router.route("/:id").post(addToCart).delete(removeFormCart);
 
 module.exports = router;

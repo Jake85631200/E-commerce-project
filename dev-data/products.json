@@ -1,6 +1,6 @@
 [
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674612" },
+    "_id": "672dfe24fc13ae2bd0674612",
     "product_name": "Smartphone - Model X",
     "image": "http://dummyimage.com/150x100.png/cc0000/ffffff",
     "price": 799.99,
@@ -18,7 +18,7 @@
     "category": "Electronics"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674613" },
+    "_id": "672dfe24fc13ae2bd0674613",
     "product_name": "Blender - High Speed",
     "image": "http://dummyimage.com/150x100.png/dddddd/000000",
     "price": 120.0,
@@ -36,7 +36,7 @@
     "category": "Home Appliances"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674614" },
+    "_id": "672dfe24fc13ae2bd0674614",
     "product_name": "Running Shoes - Comfort Fit",
     "image": "http://dummyimage.com/150x100.png/5fa2dd/ffffff",
     "price": 89.99,
@@ -54,7 +54,7 @@
     "category": "Footwear"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674615" },
+    "_id": "672dfe24fc13ae2bd0674615",
     "product_name": "Organic Shampoo",
     "image": "http://dummyimage.com/150x100.png/ff4444/ffffff",
     "price": 15.5,
@@ -72,7 +72,7 @@
     "category": "Beauty & Personal Care"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674616" },
+    "_id": "672dfe24fc13ae2bd0674616",
     "product_name": "Yoga Mat - Eco Friendly",
     "image": "http://dummyimage.com/150x100.png/cc0000/ffffff",
     "price": 35.0,
@@ -90,7 +90,7 @@
     "category": "Health & Wellness"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674617" },
+    "_id": "672dfe24fc13ae2bd0674617",
     "product_name": "Cookware Set - Nonstick",
     "image": "http://dummyimage.com/150x100.png/dddddd/000000",
     "price": 150.0,
@@ -108,7 +108,7 @@
     "category": "Home & Kitchen"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674618" },
+    "_id": "672dfe24fc13ae2bd0674618",
     "product_name": "Mountain Bike - 21 Speed",
     "image": "http://dummyimage.com/150x100.png/5fa2dd/ffffff",
     "price": 350.0,
@@ -126,7 +126,7 @@
     "category": "Sports & Outdoors"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674619" },
+    "_id": "672dfe24fc13ae2bd0674619",
     "product_name": "Board Game - Strategy",
     "image": "http://dummyimage.com/150x100.png/ff4444/ffffff",
     "price": 45.0,
@@ -144,7 +144,7 @@
     "category": "Toys & Games"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674620" },
+    "_id": "672dfe24fc13ae2bd0674620",
     "product_name": "Car Vacuum Cleaner",
     "image": "http://dummyimage.com/150x100.png/cc0000/ffffff",
     "price": 60.0,
@@ -162,7 +162,7 @@
     "category": "Automotive"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674621" },
+    "_id": "672dfe24fc13ae2bd0674621",
     "product_name": "Notebook - Hardcover",
     "image": "http://dummyimage.com/150x100.png/dddddd/000000",
     "price": 12.0,
@@ -180,7 +180,7 @@
     "category": "Books & Stationery"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674622" },
+    "_id": "672dfe24fc13ae2bd0674622",
     "product_name": "Dog Food - Premium",
     "image": "http://dummyimage.com/150x100.png/5fa2dd/ffffff",
     "price": 50.0,
@@ -198,7 +198,7 @@
     "category": "Pet Supplies"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674623" },
+    "_id": "672dfe24fc13ae2bd0674623",
     "product_name": "Sofa - Modern Design",
     "image": "http://dummyimage.com/150x100.png/ff4444/ffffff",
     "price": 1200.0,
@@ -216,7 +216,7 @@
     "category": "Furniture"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674624" },
+    "_id": "672dfe24fc13ae2bd0674624",
     "product_name": "Necklace - Gold Plated",
     "image": "http://dummyimage.com/150x100.png/cc0000/ffffff",
     "price": 75.0,
@@ -234,7 +234,7 @@
     "category": "Jewelry & Accessories"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674625" },
+    "_id": "672dfe24fc13ae2bd0674625",
     "product_name": "Organic Honey",
     "image": "http://dummyimage.com/150x100.png/dddddd/000000",
     "price": 20.0,
@@ -252,7 +252,7 @@
     "category": "Groceries"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674626" },
+    "_id": "672dfe24fc13ae2bd0674626",
     "product_name": "Wireless Earbuds",
     "image": "http://dummyimage.com/150x100.png/5fa2dd/ffffff",
     "price": 99.99,
@@ -270,7 +270,7 @@
     "category": "Electronics"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674627" },
+    "_id": "672dfe24fc13ae2bd0674627",
     "product_name": "Electric Kettle",
     "image": "http://dummyimage.com/150x100.png/ff4444/ffffff",
     "price": 45.0,
@@ -288,7 +288,7 @@
     "category": "Home Appliances"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674628" },
+    "_id": "672dfe24fc13ae2bd0674628",
     "product_name": "Leather Jacket",
     "image": "http://dummyimage.com/150x100.png/cc0000/ffffff",
     "price": 250.0,
@@ -306,7 +306,7 @@
     "category": "Clothing & Apparel"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674629" },
+    "_id": "672dfe24fc13ae2bd0674629",
     "product_name": "Face Cream - Anti Aging",
     "image": "http://dummyimage.com/150x100.png/dddddd/000000",
     "price": 60.0,
@@ -324,7 +324,7 @@
     "category": "Beauty & Personal Care"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674630" },
+    "_id": "672dfe24fc13ae2bd0674630",
     "product_name": "Camping Tent - 4 Person",
     "image": "http://dummyimage.com/150x100.png/5fa2dd/ffffff",
     "price": 180.0,
@@ -342,7 +342,7 @@
     "category": "Sports & Outdoors"
   },
   {
-    "product_id": { "$oid": "672dfe24fc13ae2bd0674631" },
+    "_id": "672dfe24fc13ae2bd0674631",
     "product_name": "Puzzle - 1000 Pieces",
     "image": "http://dummyimage.com/150x100.png/ff4444/ffffff",
     "price": 25.0,
