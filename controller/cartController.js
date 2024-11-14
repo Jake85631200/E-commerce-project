@@ -3,7 +3,7 @@ const AppError = require("../utils/AppError");
 const Products = require("../models/productModel");
 const Cart = require("../models/cartModel");
 
-// 從 URL 和 req.user 帶入 product 和 user id
+// Set product and user id from URL and req.user
 exports.setTourUserIds = (req, res, next) => {
   // Allow nested routes
   if (!req.body.product) req.body.product = req.params.productId;
@@ -26,26 +26,92 @@ exports.checkAllCart = catchAsync(async (req, res, next) => {
   });
 });
 
-// Add prod into cart
+exports.checkMyCart = catchAsync(async (req, res, next) => {
+  const cart = await Cart.findById(req.user.cart._id);
+
+  res.status(200).json({
+    status: "success.",
+    data: {
+      cart,
+    },
+  });
+});
+
+// Add product into cart
 exports.addToCart = catchAsync(async (req, res, next) => {
-  // 從 URL 取得商品 id
+  // Get product id from URL
   const product = await Products.findById(req.params.id);
+  const cart = await Cart.findById(req.user.cart._id);
 
-  if (!product) return next(AppError("Product not found.", 404));
-
-  if (!user || !req.user.id)
+  if (!req.user.id)
     return next(
-      AppError(
-        "You're not log in or authorization expired, please login again.",
+      new AppError(
+        "You're not logged in or authorization expired, please login again.",
         401
       )
     );
 
-  await Cart.create(product);
+  if (!product) return next(new AppError("Product not found.", 404));
+  const existingItem = cart.items.find(
+    (item) => item.product.toString() === req.params.id
+  );
+
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.items.push({
+      product: req.params.id,
+      quantity: 1,
+      price: product.price,
+      total: product.price
+    });
+  }
+
+  await cart.save();
 
   res.status(200).json({
     status: "success.",
     message: "This item has been added into your cart!",
+    data: {
+      cart,
+    },
   });
 });
-// 從購物車刪除商品
+
+// Remove product from cart
+exports.removeFormCart = catchAsync(async (req, res, next) => {
+  const product = await Products.findById(req.params.id);
+  const cart = await Cart.findById(req.user.cart._id);
+
+  if (!req.user.id)
+    return next(
+      new AppError(
+        "You're not logged in or authorization expired, please login again.",
+        401
+      )
+    );
+
+  if (!product) return next(new AppError("Product not found.", 404));
+
+  const existingItem = cart.items.find(
+    (item) => item.product.toString() === req.params.id
+  );
+
+  if (existingItem && existingItem.quantity > 1) {
+    existingItem.quantity -= 1;
+  } else {
+    cart.items = cart.items.filter(
+      (item) => item.product.toString() !== req.params.id
+    );
+  }
+
+  await cart.save();
+
+  res.status(200).json({
+    status: "success.",
+    message: "This item has been removed from your cart!",
+    data: {
+      cart,
+    },
+  });
+});
