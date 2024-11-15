@@ -1,6 +1,6 @@
 [
   {
-    "_id": { "$oid": "672e10e9fc13ae2b026747bc" },
+    "_id": "672e10e9fc13ae2b026747bc",
     "name": "Travus",
     "image": "https://cdn.jsdelivr.net/gh/alohe/memojis/png/teams_1.png",
     "email": "Travus@test.com",
@@ -12,7 +12,7 @@
     "cart": "652e10e9fc13ae2b026747bc"
   },
   {
-    "_id": { "$oid": "672e10e9fc13ae2b026747bd" },
+    "_id": "672e10e9fc13ae2b026747bd",
     "name": "Keelia",
     "image": "https://cdn.jsdelivr.net/gh/alohe/memojis/png/teams_3.png",
     "email": "Keelia@test.com",
@@ -24,7 +24,7 @@
     "cart": "652e10e9fc13ae2b026747bd"
   },
   {
-    "_id": { "$oid": "672e10e9fc13ae2b026747be" },
+    "_id": "672e10e9fc13ae2b026747be",
     "name": "Jaxon",
     "image": "https://cdn.jsdelivr.net/gh/alohe/memojis/png/teams_2.png",
     "email": "Jaxon@test.com",
@@ -36,7 +36,7 @@
     "cart": "652e10e9fc13ae2b026747be"
   },
   {
-    "_id": { "$oid": "672e10e9fc13ae2b026747bf" },
+    "_id": "672e10e9fc13ae2b026747bf",
     "name": "Avery",
     "image": "https://cdn.jsdelivr.net/gh/alohe/memojis/png/teams_4.png",
     "email": "Avery@test.com",
@@ -48,7 +48,7 @@
     "cart": "652e10e9fc13ae2b026747bf"
   },
   {
-    "_id": { "$oid": "672e10e9fc13ae2b026747c0" },
+    "_id": "672e10e9fc13ae2b026747c0",
     "name": "Mason",
     "image": "https://cdn.jsdelivr.net/gh/alohe/memojis/png/teams_5.png",
     "email": "Mason@test.com",
@@ -60,7 +60,7 @@
     "cart": "652e10e9fc13ae2b026747c0"
   },
   {
-    "_id": { "$oid": "672e10e9fc13ae2b026747c1" },
+    "_id": "672e10e9fc13ae2b026747c1",
     "name": "Olivia",
     "image": "https://cdn.jsdelivr.net/gh/alohe/memojis/png/teams_6.png",
     "email": "Olivia@test.com",
@@ -72,7 +72,7 @@
     "cart": "652e10e9fc13ae2b026747c1"
   },
   {
-    "_id": { "$oid": "672e10e9fc13ae2b026747c2" },
+    "_id": "672e10e9fc13ae2b026747c2",
     "name": "Liam",
     "image": "https://cdn.jsdelivr.net/gh/alohe/memojis/png/teams_7.png",
     "email": "Liam@test.com",
@@ -84,7 +84,7 @@
     "cart": "652e10e9fc13ae2b026747c2"
   },
   {
-    "_id": { "$oid": "672e10e9fc13ae2b026747c3" },
+    "_id": "672e10e9fc13ae2b026747c3",
     "name": "Emma",
     "image": "https://cdn.jsdelivr.net/gh/alohe/memojis/png/teams_9.png",
     "email": "Emma@test.com",
@@ -96,7 +96,7 @@
     "cart": "652e10e9fc13ae2b026747c3"
   },
   {
-    "_id": { "$oid": "672e10e9fc13ae2b026747c4" },
+    "_id": "672e10e9fc13ae2b026747c4",
     "name": "Noah",
     "image": "https://cdn.jsdelivr.net/gh/alohe/memojis/png/teams_8.png",
     "email": "Noah@test.com",
@@ -108,7 +108,7 @@
     "cart": "652e10e9fc13ae2b026747c4"
   },
   {
-    "_id": { "$oid": "672e10e9fc13ae2b026747c5" },
+    "_id": "672e10e9fc13ae2b026747c5",
     "name": "Sophia",
     "image": "https://cdn.jsdelivr.net/gh/alohe/memojis/png/upstream_5.png",
     "email": "Sophia@test.com",
@@ -120,7 +120,7 @@
     "cart": "652e10e9fc13ae2b026747c5"
   },
   {
-    "_id": { "$oid": "672e10e9fc13ae2b026747c6" },
+    "_id": "672e10e9fc13ae2b026747c6",
     "name": "Jake Tang",
     "image": "https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png",
     "email": "admin@test.com",

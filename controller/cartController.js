@@ -3,14 +3,6 @@ const AppError = require("../utils/AppError");
 const Products = require("../models/productModel");
 const Cart = require("../models/cartModel");
 
-// Set product and user id from URL and req.user
-exports.setTourUserIds = (req, res, next) => {
-  // Allow nested routes
-  if (!req.body.product) req.body.product = req.params.productId;
-  if (!req.body.user) req.body.user = req.user.id; // user is from protect middleware
-  next();
-};
-
 // createCart: Cart will be created when user signup
 
 // Check cart
