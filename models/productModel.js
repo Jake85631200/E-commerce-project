@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const slugify = require("slugify");
 
 const productSchema = new mongoose.Schema({
   _id: {
@@ -11,6 +12,7 @@ const productSchema = new mongoose.Schema({
     minlength: [8, "Product name must at least 8 characters long."],
     maxlength: [100, "Product name must less than 100 characters long."],
   },
+  slug: String,
   image: {
     type: String,
     require: [true, "Please provide a image of the product."],
@@ -78,6 +80,12 @@ productSchema.pre(/^find/, function (next) {
 // Hide not active product
 productSchema.pre(/^find/, function (next) {
   this.where({ isAvailable: true });
+  next();
+});
+
+productSchema.pre("save", function (next) {
+  // slugify converts string into URL friendly format
+  this.slug = slugify(this.product_name, { lower: true });
   next();
 });
 
