@@ -7,7 +7,7 @@ const {
   deleteUser,
   updateUser,
   disableMe,
-} = require("./../controller/userController");
+} = require("../controller/userController");
 
 const {
   login,
@@ -20,7 +20,7 @@ const {
   validateFACode,
   protect,
   restrictTo,
-} = require("./../controller/authController");
+} = require("../controller/authController");
 
 router.post("/signUp", signUp);
 router.post("/login", login);

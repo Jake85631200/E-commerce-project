@@ -4,10 +4,11 @@ const cookieParser = require("cookie-parser");
 const AppError = require("./utils/AppError.js");
 const globalErrorHandler = require("./controller/errorController.js");
 
-const userRouter = require("./routes/userRouter");
-const productRouter = require("./routes/productRouter");
-const cartRouter = require("./routes/cartRouter.js");
-const reviewRouter = require("./routes/reviewRouter.js");
+const userRoute = require("./routes/userRoute.js");
+const productRoute = require("./routes/productRoute.js");
+const cartRoute = require("./routes/cartRoute.js");
+const reviewRoute = require("./routes/reviewRoute.js");
+const bookingRoute = require("./routes/bookingRoute.js");
 
 const app = express();
 
@@ -24,10 +25,11 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // app.use("/");
-app.use("/api/v1/products", productRouter);
-app.use("/api/v1/users", userRouter);
-app.use("/api/v1/carts", cartRouter);
-app.use("/api/v1/reviews", reviewRouter);
+app.use("/api/v1/products", productRoute);
+app.use("/api/v1/users", userRoute);
+app.use("/api/v1/carts", cartRoute);
+app.use("/api/v1/reviews", reviewRoute);
+app.use("/api/v1/bookings", bookingRoute);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

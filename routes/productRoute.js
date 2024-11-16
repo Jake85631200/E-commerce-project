@@ -9,9 +9,9 @@ const {
   updateProduct,
   disableProd,
   productStats,
-} = require("./../controller/productController");
+} = require("../controller/productController");
 
-const { protect, restrictTo } = require("./../controller/authController");
+const { protect, restrictTo } = require("../controller/authController");
 
 router.use(protect);
 
