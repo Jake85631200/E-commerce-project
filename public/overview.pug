@@ -1,0 +1,174 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title E-commerce Homepage
+  // 引入 Bootstrap CSS
+  link(href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css' rel='stylesheet')
+  style.
+    .custom-cart-btn {
+    background-color: #ffd700;
+    border-color: #ffd700;
+    }
+// 導航欄
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
+  a.navbar-brand(href='#') E-commerce
+  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  #navbarNav.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      li.nav-item.active
+        a.nav-link(href='#')
+          | Home
+          span.sr-only (current)
+      li.nav-item.dropdown
+        a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
+          | More
+        .dropdown-menu(aria-labelledby='navbarDropdown')
+          a.dropdown-item(href='#') Profile
+          a.dropdown-item(href='#') Setting
+          .dropdown-divider
+          a.dropdown-item(href='#') Login/Logout
+    // 搜索欄
+    form.form-inline.my-2.my-lg-0
+      input.form-control.mr-sm-2(type='search' placeholder='Search' aria-label='Search')
+      button.btn.btn-outline-light.my-2.my-sm-0(type='submit')
+        | Search
+    // 購物車圖標
+    a.nav-link.text-warning(href='#')
+      i.fas.fa-shopping-cart
+      |  Cart
+// 標題容器
+.container-fluid.text-center.py-5(style='margin-top: 56px; background-color: #ffd700')
+  h1 Welcome!
+  p An e-commerce site, not much goods!
+// 產品容器
+.container.mt-4
+  .row
+    // 這裡可以放置產品
+    .col-md-3.mb-4
+      .card
+        img.card-img-top(src='/public/img/product-1.jpg' alt='Product Image')
+        .card-body
+          h5.card-title &#x7522;&#x54C1;&#x540D;&#x7A31;
+          .product-rating.mb-2
+            span.rating-value 4.5
+            span.stars  &starf;&starf;&starf;&starf;&star; 
+          a.btn.btn-outline-dark(href='#') purchase
+          a.btn.btn-warning.custom-cart-btn(href='#') Add to cart
+    .col-md-3.mb-4
+      .card
+        img.card-img-top(src='/public/img/product-1.jpg' alt='Product Image')
+        .card-body
+          h5.card-title &#x7522;&#x54C1;&#x540D;&#x7A31;
+          .product-rating.mb-2
+            span.rating-value 4.5
+            span.stars  &starf;&starf;&starf;&starf;&star; 
+          a.btn.btn-outline-dark(href='#') purchase
+          a.btn.btn-warning.custom-cart-btn(href='#') Add to cart
+    .col-md-3.mb-4
+      .card
+        img.card-img-top(src='/public/img/product-1.jpg' alt='Product Image')
+        .card-body
+          h5.card-title &#x7522;&#x54C1;&#x540D;&#x7A31;
+          .product-rating.mb-2
+            span.rating-value 4.5
+            span.stars  &starf;&starf;&starf;&starf;&star; 
+          a.btn.btn-outline-dark(href='#') purchase
+          a.btn.btn-warning.custom-cart-btn(href='#') Add to cart
+    .col-md-3.mb-4
+      .card
+        img.card-img-top(src='/public/img/product-1.jpg' alt='Product Image')
+        .card-body
+          h5.card-title &#x7522;&#x54C1;&#x540D;&#x7A31;
+          .product-rating.mb-2
+            span.rating-value 4.5
+            span.stars  &starf;&starf;&starf;&starf;&star; 
+          a.btn.btn-outline-dark(href='#') purchase
+          a.btn.btn-warning.custom-cart-btn(href='#') Add to cart
+    .col-md-3.mb-4
+      .card
+        img.card-img-top(src='/public/img/product-1.jpg' alt='Product Image')
+        .card-body
+          h5.card-title &#x7522;&#x54C1;&#x540D;&#x7A31;
+          .product-rating.mb-2
+            span.rating-value 4.5
+            span.stars  &starf;&starf;&starf;&starf;&star; 
+          a.btn.btn-outline-dark(href='#') purchase
+          a.btn.btn-warning.custom-cart-btn(href='#') Add to cart
+    .col-md-3.mb-4
+      .card
+        img.card-img-top(src='/public/img/product-1.jpg' alt='Product Image')
+        .card-body
+          h5.card-title &#x7522;&#x54C1;&#x540D;&#x7A31;
+          .product-rating.mb-2
+            span.rating-value 4.5
+            span.stars  &starf;&starf;&starf;&starf;&star; 
+          a.btn.btn-outline-dark(href='#') purchase
+          a.btn.btn-warning.custom-cart-btn(href='#') Add to cart
+    .col-md-3.mb-4
+      .card
+        img.card-img-top(src='/public/img/product-1.jpg' alt='Product Image')
+        .card-body
+          h5.card-title &#x7522;&#x54C1;&#x540D;&#x7A31;
+          .product-rating.mb-2
+            span.rating-value 4.5
+            span.stars  &starf;&starf;&starf;&starf;&star; 
+          a.btn.btn-outline-dark(href='#') purchase
+          a.btn.btn-warning.custom-cart-btn(href='#') Add to cart
+    .col-md-3.mb-4
+      .card
+        img.card-img-top(src='/public/img/product-1.jpg' alt='Product Image')
+        .card-body
+          h5.card-title &#x7522;&#x54C1;&#x540D;&#x7A31;
+          .product-rating.mb-2
+            span.rating-value 4.5
+            span.stars  &starf;&starf;&starf;&starf;&star; 
+          a.btn.btn-outline-dark(href='#') purchase
+          a.btn.btn-warning.custom-cart-btn(href='#') Add to cart
+    .col-md-3.mb-4
+      .card
+        img.card-img-top(src='/public/img/product-1.jpg' alt='Product Image')
+        .card-body
+          h5.card-title &#x7522;&#x54C1;&#x540D;&#x7A31;
+          .product-rating.mb-2
+            span.rating-value 4.5
+            span.stars  &starf;&starf;&starf;&starf;&star; 
+          a.btn.btn-outline-dark(href='#') purchase
+          a.btn.btn-warning.custom-cart-btn(href='#') Add to cart
+    .col-md-3.mb-4
+      .card
+        img.card-img-top(src='/public/img/product-1.jpg' alt='Product Image')
+        .card-body
+          h5.card-title &#x7522;&#x54C1;&#x540D;&#x7A31;
+          .product-rating.mb-2
+            span.rating-value 4.5
+            span.stars  &starf;&starf;&starf;&starf;&star; 
+          a.btn.btn-outline-dark(href='#') purchase
+          a.btn.btn-warning.custom-cart-btn(href='#') Add to cart
+    .col-md-3.mb-4
+      .card
+        img.card-img-top(src='/public/img/product-1.jpg' alt='Product Image')
+        .card-body
+          h5.card-title &#x7522;&#x54C1;&#x540D;&#x7A31;
+          .product-rating.mb-2
+            span.rating-value 4.5
+            span.stars  &starf;&starf;&starf;&starf;&star; 
+          a.btn.btn-outline-dark(href='#') purchase
+          a.btn.btn-warning.custom-cart-btn(href='#') Add to cart
+    .col-md-3.mb-4
+      .card
+        img.card-img-top(src='/public/img/product-1.jpg' alt='Product Image')
+        .card-body
+          h5.card-title &#x7522;&#x54C1;&#x540D;&#x7A31;
+          .product-rating.mb-2
+            span.rating-value 4.5
+            span.stars  &starf;&starf;&starf;&starf;&star; 
+          a.btn.btn-outline-dark(href='#') purchase
+          a.btn.btn-warning.custom-cart-btn(href='#') Add to cart
+    // 更多產品卡片可以放在這裡 
+// 引入 Bootstrap 和 FontAwesome JavaScript
+script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js')
+script(src='https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js')
+script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js')
+script(src='https://kit.fontawesome.com/a076d05399.js')
