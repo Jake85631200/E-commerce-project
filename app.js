@@ -3,6 +3,7 @@ const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const AppError = require("./utils/AppError.js");
 const globalErrorHandler = require("./controller/errorController.js");
+const { webhookCheckout } = require("./controller/bookingController.js");
 
 const userRoute = require("./routes/userRoute.js");
 const productRoute = require("./routes/productRoute.js");
@@ -11,6 +12,12 @@ const reviewRoute = require("./routes/reviewRoute.js");
 const bookingRoute = require("./routes/bookingRoute.js");
 
 const app = express();
+
+app.post(
+  "/webhook-checkout",
+  express.raw({ type: "application/json" }),
+  webhookCheckout
+);
 
 // middleware
 // parse JSON request bodies
@@ -36,5 +43,7 @@ app.all("*", (req, res, next) => {
 });
 
 app.use(globalErrorHandler);
+
+app.use(express.static("public"));
 
 module.exports = app;
