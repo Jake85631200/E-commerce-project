@@ -5,11 +5,7 @@ const AppError = require("../utils/AppError");
 
 exports.getAllProducts = catchAsync(async (req, res, next) => {
   const query = Products.find();
-  const APIFeatures = new GetAllProductsFeature(query, req.query)
-    .filter()
-    .paginate()
-    .sort()
-    .fields();
+  const APIFeatures = new GetAllProductsFeature(query, req.query).filter().paginate().sort().fields();
 
   const products = await APIFeatures.query;
 
@@ -25,8 +21,7 @@ exports.getAllProducts = catchAsync(async (req, res, next) => {
 exports.getProduct = catchAsync(async (req, res, next) => {
   const product = await Products.findById(req.params.id);
 
-  if (!product)
-    return next(new AppError("Can't find product with that ID!", 404));
+  if (!product) return next(new AppError("Can't find product with that ID!", 404));
 
   res.status(200).json({
     status: "success.",
@@ -36,13 +31,30 @@ exports.getProduct = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getMyProduct = catchAsync(async (req, res, next) => {
+  const products = await Products.find({ "seller._id": req.user._id });
+
+  console.log(products);
+
+  if (!products || products.length === 0) {
+    return next(new AppError("Can't find any products for this user!", 404));
+  }
+
+  res.status(200).json({
+    status: "success.",
+    result: products.length,
+    data: {
+      products,
+    },
+  });
+});
+
 exports.updateProduct = catchAsync(async (req, res, next) => {
   const product = await Products.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
   });
 
-  if (!product)
-    return next(new AppError("Can't find product with that ID!", 404));
+  if (!product) return next(new AppError("Can't find product with that ID!", 404));
 
   res.status(200).json({
     status: "success.",
@@ -89,8 +101,7 @@ exports.disableProd = catchAsync(async (req, res, next) => {
     isActive: false,
   });
 
-  if (!product)
-    return next(new AppError("Can't find product with that ID!", 404));
+  if (!product) return next(new AppError("Can't find product with that ID!", 404));
 
   res.status(204).json({
     status: "success.",
@@ -101,8 +112,7 @@ exports.disableProd = catchAsync(async (req, res, next) => {
 exports.deleteProduct = catchAsync(async (req, res, next) => {
   const product = await Products.findByIdAndDelete(req.params.id);
 
-  if (!product)
-    return next(new AppError("Can't find product with that ID!", 404));
+  if (!product) return next(new AppError("Can't find product with that ID!", 404));
 
   res.status(204).json({
     status: "success.",
