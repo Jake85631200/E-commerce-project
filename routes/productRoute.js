@@ -9,15 +9,18 @@ const {
   updateProduct,
   disableProd,
   productStats,
+  getMyProduct,
 } = require("../controller/productController");
 
 const { protect, restrictTo } = require("../controller/authController");
 
 router.use(protect);
 
-router.route("/productStats").get(productStats);
-
 router.route("/").get(getAllProducts).post(createProduct);
+
+router.route("/myProduct").get(getMyProduct);
+
+router.route("/productStats").get(productStats);
 
 router.route("/:id").get(getProduct);
 
