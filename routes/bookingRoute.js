@@ -9,4 +9,6 @@ router.use(protect);
 
 router.get("/checkout-session/:productId", getCheckoutSession);
 
+
+
 module.exports = router;
