@@ -1,13 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const {
-  getAllUsers,
-  getUser,
-  deleteUser,
-  updateUser,
-  disableMe,
-} = require("../controller/userController");
+const { getAllUsers, getUser, deleteUser, updateUser, disableMe, getProfile } = require("../controller/userController");
 
 const {
   login,
@@ -31,6 +25,8 @@ router.post("/twoFactor", twoFactor);
 router.post("/validateFACode", validateFACode);
 
 router.use(protect);
+
+router.get("/profile", getProfile);
 
 router.patch("/updatePassword", updatePassword);
 
