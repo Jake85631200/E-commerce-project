@@ -2,117 +2,32 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>E-commerce Product</title>
-  <!-- 引入 Bootstrap CSS-->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0" />
+  <title>Product</title>
+  <!-- Import Bootstrap CSS-->
   <link
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    rel="stylesheet" />
+  <link
+    href="/public/css/product.css"
+    rel="stylesheet" />
+  <link
     rel="stylesheet"
-  />
-  <style>
-    .custom-cart-btn {
-      background-color: #ffd700;
-      border-color: #ffd700;
-    }
-    body {
-      max-width: 1200px;
-      margin: 0 auto;
-      height: auto;
-    }
-    main {
-      margin-left: auto;
-      margin-right: auto;
-      width: 1200px;
-      /* border: 4px solid red; */
-    }
-    .product-container {
-      display: flex;
-      justify-content: space-around;
-    }
-    .image-block {
-      max-width: 30%;
-      height: auto;
-    }
-    .product-details {
-      display: flex;
-      flex-direction: column;
-      max-width: 50%;
-      width: 100%;
-      justify-content: space-evenly;
-    }
-    .user-comment {
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      -webkit-line-clamp: 3;
-    }
-    .user-comment.expanded {
-      display: block;
-      -webkit-line-clamp: unset;
-    }
-    .user-reviews {
-      display: flex;
-      flex-direction: column;
-    }
-    .review {
-      width: 60%;
-      height: auto;
-      margin: 20px;
-      border: 1px solid black;
-      border-radius: 5px;
-    }
-    .review-content {
-      margin: 10px;
-    }
-    .user-info {
-      display: flex;
-      justify-content: flex-start;
-      align-items: flex-end;
-    }
-    .user-name {
-      margin-bottom: 5px;
-    }
-    .user-comment {
-      height: auto;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: wrap;
-      margin-top: 10px;
-      margin-bottom: 0px;
-    }
-    .toggle-block {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-    }
-    .user-photo {
-      width: 60px;
-      height: 60px;
-      border-radius: 90px;
-    }
-    .user-rating {
-      margin: 0px;
-    }
-    /* body,
-    main *:not(nav) {
-      border: 1px solid black;
-    } */
-    .toggle-button {
-      color: rgb(187, 186, 186);
-      font-style: italic;
-      text-decoration: underline;
-      padding: 0px;
-    }
-  </style>
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
 
 <body>
-  <!-- 導航欄-->
+  <!-- Nav-bar -->
   <header>
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">E-commerce</a>
+        <a
+          class="navbar-brand"
+          href="#"
+          >E-commerce</a
+        >
         <button
           class="navbar-toggler"
           type="button"
@@ -120,14 +35,17 @@
           data-target="#navbarNav"
           aria-controls="navbarNav"
           aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+          aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div
+          class="collapse navbar-collapse"
+          id="navbarNav">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#"
+              <a
+                class="nav-link"
+                href="#"
                 >Home<span class="sr-only">(current)</span>
               </a>
             </li>
@@ -142,28 +60,50 @@
                 aria-expanded="false"
                 >More
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Account</a>
-                <a class="dropdown-item" href="#">Change password</a>
-                <a class="dropdown-item" href="#">Setting</a>
+              <div
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdown">
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  >Account</a
+                >
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  >Change password</a
+                >
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  >Setting</a
+                >
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Login/Logout</a>
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  >Login/Logout</a
+                >
               </div>
             </li>
           </ul>
-          <!-- 搜索欄-->
+          <!-- Search-bar -->
           <form class="form-inline my-2 my-lg-0">
             <input
               class="form-control mr-sm-2"
               type="search"
               placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+              aria-label="Search" />
+            <button
+              class="btn btn-outline-light my-2 my-sm-0"
+              type="submit">
               Search
             </button>
           </form>
-          <!-- 購物車圖標--><a class="nav-link text-warning" href="#"
+          <!-- Cart-icon -->
+          <a
+            class="nav-link text-warning"
+            href="#"
             ><i class="fas fa-shopping-cart"></i> Cart</a
           >
         </div>
@@ -173,159 +113,209 @@
 
   <main>
     <div class="product-container mt-5 mb-4 pt-5">
-      <!-- 商品圖片 -->
+      <!-- Product-image -->
       <img
         class="card-img-top image-block"
         src="/public/img/product-1.jpg"
-        alt="Product Image"
-      />
+        alt="Product Image" />
       <div class="product-details mt-2">
         <h1 style="margin-bottom: 1rem">Smartphone - Model X</h1>
         <p style="margin-bottom: 1rem">Category: Electronics</p>
-        <!-- 售價 -->
-        <h4 class="price" style="margin-bottom: 1rem">Price: $799.99</h4>
+        <!-- Price -->
+        <h4
+          class="price"
+          style="margin-bottom: 1rem">
+          Price: $799.99
+        </h4>
 
-        <!-- 商品描述 -->
-        <div class="rating" style="margin-bottom: 1rem">
-          <!-- 商品評分 -->
+        <!-- Product-description -->
+        <!-- Rating -->
+        <div
+          class="rating"
+          style="margin-bottom: 1rem">
           <p class="mt-2 mb-2">Rating: ★★★★☆ (4.5/5)</p>
-          <!-- 購買/加入購物車 -->
         </div>
 
-        <div class="prod-action" style="margin-bottom: 1rem">
-          <a class="btn btn-outline-dark mr-2" href="#">purchase</a>
-          <a class="btn btn-warning custom-cart-btn" href="#">Add to cart</a>
+        <!-- Purchase/Add to cart -->
+        <div
+          class="prod-action"
+          style="margin-bottom: 1rem">
+          <a
+            class="btn btn-outline-dark mr-2"
+            href="#"
+            >purchase</a
+          >
+          <a
+            class="btn btn-warning custom-cart-btn"
+            href="#"
+            >Add to cart</a
+          >
         </div>
       </div>
     </div>
     <div class="prod-description m-3">
       <h3>Description:</h3>
 
-      The latest smartphone model with a powerful processor and high-definition
-      display.The latest smartphone model with a powerful processor and
-      high-definition display.
+      The latest smartphone model with a powerful processor and high-definition display.The latest smartphone model with
+      a powerful processor and high-definition display.
     </div>
 
-    <!-- 使用者評論 -->
+    <!-- User-reviews -->
     <div>
       <h2 class="m-3">Reviews</h2>
-      <div class="user-reviews">
-        <div class="review">
-          <div class="review-content">
-            <div class="user-info">
-              <img
-                src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png"
-                alt="使用者照片"
-                class="user-photo"
-              />
-              <div class="ml-3" style="display: flex; flex-direction: column">
-                <h4 class="user-name">Username</h4>
-                <p class="user-rating">Rating: ★★★★☆</p>
+      <div class="review-container">
+        <div class="user-reviews m-3">
+          <div class="review">
+            <div class="review-content">
+              <div class="user-info">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png"
+                  alt="User-photo"
+                  class="user-photo" />
+                <div
+                  class="ml-3"
+                  style="display: flex; flex-direction: column">
+                  <h4 class="user-name">Username</h4>
+                  <p class="user-rating">Rating: ★★★★☆</p>
+                </div>
+              </div>
+              <p class="user-comment">
+                Tempus curabitur faucibus auctor bibendum duis gravida tincidunt litora himenaeos facilisis vivamus
+                vehicula potenti semper fusce suspendisse sagittis! litora himenaeos facilisis vivamus vehicula potenti
+                semper fusce suspendisse sagittis!Tempus curabitur faucibus auctor bibendum duis gravida tincidunt
+                litora himenaeos facilisis vivamus vehicula potenti semper fusce suspendisse sagittis! litora himenaeos
+                facilisis vivamus vehicula potenti semper fusce suspendisse sagittis!
+              </p>
+              <!-- Expand/Fold button -->
+              <div class="toggle-block">
+                <button
+                  class="btn toggle-button"
+                  onclick="toggleText(this)">
+                  (Expand comment)
+                </button>
               </div>
             </div>
-            <p class="user-comment">
-              Tempus curabitur faucibus auctor bibendum duis gravida tincidunt
-              litora himenaeos facilisis vivamus vehicula potenti semper fusce
-              suspendisse sagittis! litora himenaeos facilisis vivamus vehicula
-              potenti semper fusce suspendisse sagittis!Tempus curabitur
-              faucibus auctor bibendum duis gravida tincidunt litora himenaeos
-              facilisis vivamus vehicula potenti semper fusce suspendisse
-              sagittis! litora himenaeos facilisis vivamus vehicula potenti
-              semper fusce suspendisse sagittis!
-            </p>
-            <div class="toggle-block">
-              <button class="btn toggle-button" onclick="toggleText(this)">
-                (Expand comment)
-              </button>
+          </div>
+          <div class="review">
+            <div class="review-content">
+              <div class="user-info">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png"
+                  alt="User-photo"
+                  class="user-photo" />
+                <div
+                  class="ml-3"
+                  style="display: flex; flex-direction: column">
+                  <h4 class="user-name">Username</h4>
+                  <p class="user-rating">Rating: ★★★★☆</p>
+                </div>
+              </div>
+              <p class="user-comment">Tempus curabitur faucibus</p>
+              <!-- Expand/Fold button -->
+              <div class="toggle-block">
+                <button
+                  class="btn toggle-button"
+                  onclick="toggleText(this)">
+                  (Expand comment)
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="review">
+            <div class="review-content">
+              <div class="user-info">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png"
+                  alt="User-photo"
+                  class="user-photo" />
+                <div
+                  class="ml-3"
+                  style="display: flex; flex-direction: column">
+                  <h4 class="user-name">Username</h4>
+                  <p class="user-rating">Rating: ★★★★☆</p>
+                </div>
+              </div>
+              <p class="user-comment">
+                Tempus curabitur faucibus auctor bibendum duis gravida tincidunt litora himenaeos facilisis vivamus
+                vehicula potenti semper fusce suspendisse sagittis! litora himenaeos facilisis vivamus vehicula potenti
+                semper fusce suspendisse sagittis!Tempus curabitur faucibus auctor bibendum duis gravida tincidunt
+                litora himenaeos facilisis vivamus vehicula potenti semper fusce suspendisse sagittis! litora himenaeos
+                facilisis vivamus vehicula potenti semper fusce suspendisse sagittis!
+              </p>
+              <!-- Expand/Fold button -->
+              <div class="toggle-block">
+                <button
+                  class="btn toggle-button"
+                  onclick="toggleText(this)">
+                  (Expand comment)
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="review">
+            <div class="review-content">
+              <div class="user-info">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png"
+                  alt="User-photo"
+                  class="user-photo" />
+                <div
+                  class="ml-3"
+                  style="display: flex; flex-direction: column">
+                  <h4 class="user-name">Username</h4>
+                  <p class="user-rating">Rating: ★★★★☆</p>
+                </div>
+              </div>
+              <p class="user-comment">
+                Tempus curabitur faucibus auctor bibendum duis gravida tincidunt litora himenaeos facilisis vivamus
+                vehicula potenti semper fusce suspendisse sagittis! litora himenaeos facilisis vivamus vehicula potenti
+                semper fusce suspendisse sagittis!Tempus curabitur faucibus auctor bibendum duis gravida tincidunt
+                litora himenaeos facilisis vivamus vehicula potenti semper fusce suspendisse sagittis! litora himenaeos
+                facilisis vivamus vehicula potenti semper fusce suspendisse sagittis!
+              </p>
+              <!-- Expand/Fold button -->
+              <div class="toggle-block">
+                <button
+                  class="btn toggle-button"
+                  onclick="toggleText(this)">
+                  (Expand comment)
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        <div class="review">
-          <div class="review-content">
-            <div class="user-info">
-              <img
-                src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png"
-                alt="使用者照片"
-                class="user-photo"
-              />
-              <div class="ml-3" style="display: flex; flex-direction: column">
-                <h4 class="user-name">Username</h4>
-                <p class="user-rating">Rating: ★★★★☆</p>
+        <div class="leave-comment m-3">
+          <!-- Leave a comment -->
+          <div class="comment-container">
+            <textarea
+              class="comment-textarea"
+              placeholder="Leave a comment"></textarea>
+            <div class="submit">
+              <!-- Ratings Stars -->
+              <span>Your Rating: </span>
+              <div class="star-rating">
+                <script>
+                  for (let i = 1; i <= 5; i++) {
+                    document.write(`
+                      <div class="star fa-regular fa-star fa-lg" data-value="${i}">
+                        <span class="span-box">
+                          <span class="span-left"></span>
+                          <span class="span-right"></span>
+                        </span>
+                      </div>
+                    `);
+                  }
+                </script>
               </div>
-            </div>
-            <p class="user-comment">
-              Tempus curabitur faucibus auctor bibendum duis gravida tincidunt
-              litora himenaeos facilisis vivamus vehicula potenti semper fusce
-              suspendisse sagittis! litora himenaeos facilisis vivamus vehicula
-              potenti semper fusce suspendisse sagittis!Tempus curabitur
-              faucibus auctor bibendum duis gravida tincidunt litora himenaeos
-              facilisis vivamus vehicula potenti semper fusce suspendisse
-              sagittis! litora himenaeos facilisis vivamus vehicula potenti
-              semper fusce suspendisse sagittis!
-            </p>
-            <div class="toggle-block">
-              <button class="btn toggle-button" onclick="toggleText(this)">
-                (Expand comment)
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="review">
-          <div class="review-content">
-            <div class="user-info">
-              <img
-                src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png"
-                alt="使用者照片"
-                class="user-photo"
-              />
-              <div class="ml-3" style="display: flex; flex-direction: column">
-                <h4 class="user-name">Username</h4>
-                <p class="user-rating">Rating: ★★★★☆</p>
-              </div>
-            </div>
-            <p class="user-comment">
-              Tempus curabitur faucibus auctor bibendum duis gravida tincidunt
-              litora himenaeos facilisis vivamus vehicula potenti semper fusce
-              suspendisse sagittis! litora himenaeos facilisis vivamus vehicula
-              potenti semper fusce suspendisse sagittis!Tempus curabitur
-              faucibus auctor bibendum duis gravida tincidunt litora himenaeos
-              facilisis vivamus vehicula potenti semper fusce suspendisse
-              sagittis! litora himenaeos facilisis vivamus vehicula potenti
-              semper fusce suspendisse sagittis!
-            </p>
-            <div class="toggle-block">
-              <button class="btn toggle-button" onclick="toggleText(this)">
-                (Expand comment)
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="review">
-          <div class="review-content">
-            <div class="user-info">
-              <img
-                src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png"
-                alt="使用者照片"
-                class="user-photo"
-              />
-              <div class="ml-3" style="display: flex; flex-direction: column">
-                <h4 class="user-name">Username</h4>
-                <p class="user-rating">Rating: ★★★★☆</p>
-              </div>
-            </div>
-            <p class="user-comment">
-              Tempus curabitur faucibus auctor bibendum duis gravida tincidunt
-              litora himenaeos facilisis vivamus vehicula potenti semper fusce
-              suspendisse sagittis! litora himenaeos facilisis vivamus vehicula
-              potenti semper fusce suspendisse sagittis!Tempus curabitur
-              faucibus auctor bibendum duis gravida tincidunt litora himenaeos
-              facilisis vivamus vehicula potenti semper fusce suspendisse
-              sagittis! litora himenaeos facilisis vivamus vehicula potenti
-              semper fusce suspendisse sagittis!
-            </p>
-            <div class="toggle-block">
-              <button class="btn toggle-button" onclick="toggleText(this)">
-                (Expand comment)
+              <input
+                type="hidden"
+                id="rating"
+                name="rating"
+                value="0" />
+              <button
+                class="btn btn-warning"
+                style="margin-left: 20px">
+                Submit
               </button>
             </div>
           </div>
@@ -334,35 +324,105 @@
     </div>
   </main>
 
-  <!-- 引入 Bootstrap 和 FontAwesome JavaScript-->
+  <!-- Import Bootstrap, FontAwesome, JavaScript-->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <script>
+    // Expand/Fold review text
+    // 1) Show expand button when review is overflowed
     document.addEventListener("DOMContentLoaded", function () {
+      // select all "review"
       const reviews = document.querySelectorAll(".review");
       reviews.forEach((review) => {
+        // select "user-comment" and "toggle-button" in each review
         const comment = review.querySelector(".user-comment");
         const button = review.querySelector(".toggle-button");
-        // 檢查文字是否溢出
+
+        // check if review is overflowed
         if (comment.scrollHeight > comment.clientHeight) {
+          // if overflowed, show expand button
           button.style.display = "block";
         } else {
+          // if not overflowed, hide expand button
           button.style.display = "none";
         }
       });
     });
 
+    // 2)Toggle review text (expand/fold)
     function toggleText(button) {
+      // select button's previous sibling (review)
       const comment = button.parentElement.previousElementSibling;
+      // check if review is expanded
       if (comment.classList.contains("expanded")) {
+        // if expanded, fold review and change button text
         comment.classList.remove("expanded");
         button.textContent = "Expand Comment";
       } else {
+        // if not expanded, expand review and change button text
         comment.classList.add("expanded");
         button.textContent = "(Fold)";
       }
     }
+
+    // Rating stars
+    document.addEventListener("DOMContentLoaded", function () {
+      // 1) select all stars and rating input
+      const stars = document.querySelectorAll(".fa-star");
+      const ratingInput = document.getElementById("rating");
+
+      // 2) add listener to each star
+      stars.forEach((star) => {
+        // select star left and right half
+        const spanLeft = star.querySelector(".span-left");
+        const spanRight = star.querySelector(".span-right");
+
+        // 3) set value when left and  half clicked
+
+        // a)when left half clicked
+        spanLeft.addEventListener("click", function () {
+          // rating value = data-value - 0.5 (ex: 4.5 - 0.5 = 4)
+          const value = parseFloat(star.getAttribute("data-value")) - 0.5;
+          // update rating input value
+          ratingInput.value = value;
+          // update stars display
+          updateStars(stars, value);
+        });
+
+        // b)when right half clicked
+        spanRight.addEventListener("click", function () {
+          // rating value = data-value
+          const value = parseFloat(star.getAttribute("data-value"));
+          // update rating input value
+          ratingInput.value = value;
+          // update stars display
+          updateStars(stars, value);
+        });
+      });
+
+      // 4)update stars display
+      function updateStars(stars, selectedValue) {
+        stars.forEach((star) => {
+          const value = parseFloat(star.getAttribute("data-value"));
+          // if star value less <= selected rating value, display as solid
+          if (value <= selectedValue) {
+            star.classList.add("fa-solid");
+            star.classList.remove("fa-regular", "fa-star-half-stroke");
+          }
+          // if star value - 0.5 = selected rating value, display as half star
+          else if (value - 0.5 === selectedValue) {
+            star.classList.add("fa-regular", "fa-star-half-stroke");
+            star.classList.remove("fa-solid");
+          }
+          // display as empty
+          else {
+            star.classList.remove("fa-solid", "fa-star-half-stroke");
+            star.classList.add("fa-regular");
+          }
+        });
+      }
+    });
   </script>
 </body>
