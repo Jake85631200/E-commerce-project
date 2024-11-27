@@ -3,21 +3,17 @@ const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const AppError = require("./utils/AppError.js");
 const globalErrorHandler = require("./controller/errorController.js");
-const { webhookCheckout } = require("./controller/bookingController.js");
+const { webhookCheckout } = require("./controller/orderController.js");
 
 const userRoute = require("./routes/userRoute.js");
 const productRoute = require("./routes/productRoute.js");
 const cartRoute = require("./routes/cartRoute.js");
 const reviewRoute = require("./routes/reviewRoute.js");
-const bookingRoute = require("./routes/bookingRoute.js");
+const orderRoute = require("./routes/orderRoute.js");
 
 const app = express();
 
-app.post(
-  "/webhook-checkout",
-  express.raw({ type: "application/json" }),
-  webhookCheckout
-);
+app.post("/webhook-checkout", express.raw({ type: "application/json" }), webhookCheckout);
 
 // middleware
 // parse JSON request bodies
@@ -36,7 +32,7 @@ app.use("/api/v1/products", productRoute);
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/carts", cartRoute);
 app.use("/api/v1/reviews", reviewRoute);
-app.use("/api/v1/bookings", bookingRoute);
+app.use("/api/v1/orders", orderRoute);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

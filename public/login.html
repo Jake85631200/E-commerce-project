@@ -2,55 +2,29 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>E-commerce My account</title>
-  <!-- 引入 Bootstrap CSS-->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <!-- Import Bootstrap CSS-->
   <link
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
-  <style>
-    html,
-    body {
-      max-width: 900px;
-      margin: 0 auto;
-      height: auto;
-    }
-    main {
-      margin: 100px auto;
-    }
-    .nav-content {
-      display: flex;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .login-container {
-      display: flex;
-      text-align: center;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 130px;
-    }
-    .login-form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 28%;
-      height: auto;
-      margin-bottom: 20px;
-    }
-    /* body,
-    main *:not(nav) {
-      border: 1px solid black;
-    } */
-  </style>
+    rel="stylesheet" />
+  <link
+    href="/public/css/login.css"
+    rel="stylesheet" />
 </head>
 
 <body>
+  <!-- Nav-bar -->
   <header>
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">E-commerce</a>
+        <a
+          class="navbar-brand"
+          href="#"
+          >E-commerce</a
+        >
         <button
           class="navbar-toggler"
           type="button"
@@ -58,14 +32,17 @@
           data-target="#navbarNav"
           aria-controls="navbarNav"
           aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+          aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div
+          class="collapse navbar-collapse"
+          id="navbarNav">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#"
+              <a
+                class="nav-link"
+                href="#"
                 >Home<span class="sr-only">(current)</span>
               </a>
             </li>
@@ -80,28 +57,49 @@
                 aria-expanded="false"
                 >More
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Account</a>
-                <a class="dropdown-item" href="#">Change password</a>
-                <a class="dropdown-item" href="#">Setting</a>
+              <div
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdown">
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  >Account</a
+                >
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  >Change password</a
+                >
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  >Setting</a
+                >
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Login/Logout</a>
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  >Login/Logout</a
+                >
               </div>
             </li>
           </ul>
-          <!-- 搜索欄-->
+          <!-- Search-bar -->
           <form class="form-inline my-2 my-lg-0">
             <input
               class="form-control mr-sm-2"
               type="search"
               placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+              aria-label="Search" />
+            <button
+              class="btn btn-outline-light my-2 my-sm-0"
+              type="submit">
               Search
             </button>
           </form>
-          <!-- 購物車圖標--><a class="nav-link text-warning" href="#"
+          <!-- Cart-icon --><a
+            class="nav-link text-warning"
+            href="#"
             ><i class="fas fa-shopping-cart"></i> Cart</a
           >
         </div>
@@ -109,19 +107,27 @@
     </div>
   </header>
   <main>
-    <div style="text-align: center" class="login-container">
+    <div
+      style="text-align: center"
+      class="login-container">
       <h1 style="margin: 40px 0">Login</h1>
       <form class="login-form">
-        <input type="text" placeholder="Email" />
-        <input type="password" placeholder="Password" />
+        <input
+          type="text"
+          placeholder="Email" />
+        <input
+          type="password"
+          placeholder="Password" />
         <button class="btn btn-outline-warning">Login</button>
-        <button type="button" class="btn btn-outline-info">
+        <button
+          type="button"
+          class="btn btn-outline-info">
           Forget password?
         </button>
       </form>
     </div>
   </main>
-  <!-- 引入 Bootstrap 和 FontAwesome JavaScript-->
+  <!-- Import Bootstrap, FontAwesome, JavaScript-->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

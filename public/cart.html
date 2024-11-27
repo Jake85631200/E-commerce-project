@@ -2,127 +2,27 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>E-commerce My Cart</title>
-  <!-- 引入 Bootstrap CSS-->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0" />
+  <title>My Cart</title>
+  <!-- Import Bootstrap CSS-->
   <link
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
-  <style>
-    .custom-cart-btn {
-      background-color: #ffd700;
-      border-color: #ffd700;
-    }
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-    }
-    main {
-      max-width: 1200px;
-      margin: auto;
-      background-color: white;
-      border-radius: 3px;
-    }
-    .carts,
-    .carts-container {
-      height: 100%;
-    }
-    .title-container,
-    .item-info {
-      padding: 20px 15px;
-    }
-    .item-titles,
-    .item {
-      display: flex;
-      align-items: center;
-      border: 3px solid rgb(244, 243, 243);
-      border-radius: 3px;
-      padding: 20px 15px;
-    }
-    .item {
-      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
-    }
-    .checkbox-container {
-      display: flex;
-      flex-direction: column;
-      margin: 10px;
-      padding: 10px;
-    }
-    .prod-img {
-      height: 80px;
-      width: 80px;
-    }
-    .title-name {
-      width: 46%;
-    }
-    .item-name {
-      width: 38.55%;
-      padding-left: 10px;
-    }
-    .title-price,
-    .item-price,
-    .title-quantity,
-    .item-quantity,
-    .title-total,
-    .item-total,
-    .title-delete,
-    .item-delete {
-      display: flex;
-      justify-content: center;
-    }
-    .title-price,
-    .item-price,
-    .title-quantity,
-    .item-quantity {
-      width: 16%;
-    }
-    .title-total,
-    .item-total {
-      width: 10%;
-    }
-    .title-delete,
-    .item-delete {
-      width: 13%;
-    }
-    .decrease-btn {
-      display: flex;
-    }
-    .qt-input {
-      width: 50px;
-      text-align: center;
-    }
-    .checkout-summary {
-      display: block;
-      height: 100px;
-      width: 100%;
-      padding: 20px 15px;
-      position: relative;
-      background-color: white;
-      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-    }
-    .item-selected {
-      width: 76%;
-    }
-    .selected-statement {
-      display: flex;
-      justify-content: center;
-      width: 20%;
-    }
-    .checkout {
-      display: flex;
-      justify-content: center;
-      width: 13%;
-    }
-  </style>
+    rel="stylesheet" />
+  <link
+    href="/public/css/cart.css"
+    rel="stylesheet" />
 </head>
 <body>
   <header>
+    <!-- Nav-bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">E-commerce</a>
+      <a
+        class="navbar-brand"
+        href="#"
+        >E-commerce</a
+      >
       <button
         class="navbar-toggler"
         type="button"
@@ -130,14 +30,17 @@
         data-target="#navbarNav"
         aria-controls="navbarNav"
         aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+        aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div
+        class="collapse navbar-collapse"
+        id="navbarNav">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#"
+            <a
+              class="nav-link"
+              href="#"
               >Home<span class="sr-only">(current)</span>
             </a>
           </li>
@@ -152,28 +55,49 @@
               aria-expanded="false"
               >More
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Account</a>
-              <a class="dropdown-item" href="#">Change password</a>
-              <a class="dropdown-item" href="#">Setting</a>
+            <div
+              class="dropdown-menu"
+              aria-labelledby="navbarDropdown">
+              <a
+                class="dropdown-item"
+                href="#"
+                >Account</a
+              >
+              <a
+                class="dropdown-item"
+                href="#"
+                >Change password</a
+              >
+              <a
+                class="dropdown-item"
+                href="#"
+                >Setting</a
+              >
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Login/Logout</a>
+              <a
+                class="dropdown-item"
+                href="#"
+                >Login/Logout</a
+              >
             </div>
           </li>
         </ul>
-        <!-- 搜索欄-->
+        <!-- Search-bar -->
         <form class="form-inline my-2 my-lg-0">
           <input
             class="form-control mr-sm-2"
             type="search"
             placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+            aria-label="Search" />
+          <button
+            class="btn btn-outline-light my-2 my-sm-0"
+            type="submit">
             Search
           </button>
         </form>
-        <!-- 購物車圖標--><a class="nav-link text-warning" href="#"
+        <!-- Cart-icon --><a
+          class="nav-link text-warning"
+          href="#"
           ><i class="fas fa-shopping-cart"></i> Cart</a
         >
       </div>
@@ -186,277 +110,292 @@
         <!-- Cart Titles -->
         <div class="title-container">
           <div class="item-titles">
-            <div class="checkbox-container">
-              <div class="checkbox">
-                <input
-                  class="checkbox__input"
-                  type="checkbox"
-                  tabindex="0"
-                  role="checkbox"
-                />
+            <div class="title-group-1">
+              <div class="checkbox-container">
+                <div class="checkbox">
+                  <input
+                    class="checkbox__input"
+                    type="checkbox"
+                    tabindex="0"
+                    role="checkbox" />
+                </div>
               </div>
+              <div class="title-name">Product</div>
             </div>
-            <div class="title-name">Product</div>
-            <div class="title-price">Price</div>
-            <div class="title-quantity">Quantity</div>
-            <div class="title-total">Total</div>
-            <div class="title-delete">delete</div>
+            <div class="title-group-2">
+              <div class="title-price">Price</div>
+              <div class="title-quantity">Quantity</div>
+              <div class="title-total">Total</div>
+              <div class="title-delete">delete</div>
+            </div>
           </div>
         </div>
 
         <!-- Cart Items -->
         <div class="item-info">
           <div class="item">
-            <div class="checkbox-container">
-              <div class="checkbox">
-                <input
-                  class="checkbox__input"
-                  type="checkbox"
-                  tabindex="0"
-                  role="checkbox"
-                />
+            <div class="item-group-1">
+              <div class="checkbox-container">
+                <div class="checkbox">
+                  <input
+                    class="checkbox__input"
+                    type="checkbox"
+                    tabindex="0"
+                    role="checkbox" />
+                </div>
               </div>
+              <div class="img-container">
+                <img
+                  class="prod-img"
+                  src="/public/img/product-1.jpg"
+                  alt="Product Image" />
+              </div>
+              <div class="item-name">Smartphone - Model X</div>
             </div>
-            <div class="img-container">
-              <img
-                class="prod-img"
-                src="/public/img/product-1.jpg"
-                alt="Product Image"
-              />
+            <div class="item-group-2">
+              <div class="item-price">$799.99</div>
+              <div class="item-quantity">
+                <button class="decrease-btn">-</button>
+                <input
+                  class="qt-input"
+                  type="text"
+                  value="1" />
+                <button class="increase-btn">+</button>
+              </div>
+              <div class="item-total">799.99</div>
+              <div class="btn item-delete">delete</div>
             </div>
-            <div class="item-name">Smartphone - Model X</div>
-            <div class="item-price">$799.99</div>
-            <div class="item-quantity">
-              <button class="decrease-btn">-</button>
-              <input class="qt-input" type="text" value="1" />
-              <button class="increase-btn">+</button>
-            </div>
-            <div class="item-total">799.99</div>
-            <div class="btn item-delete">delete</div>
           </div>
           <div class="item">
-            <div class="checkbox-container">
-              <div class="checkbox">
-                <input
-                  class="checkbox__input"
-                  type="checkbox"
-                  tabindex="0"
-                  role="checkbox"
-                />
+            <div class="item-group-1">
+              <div class="checkbox-container">
+                <div class="checkbox">
+                  <input
+                    class="checkbox__input"
+                    type="checkbox"
+                    tabindex="0"
+                    role="checkbox" />
+                </div>
               </div>
+              <div class="img-container">
+                <img
+                  class="prod-img"
+                  src="/public/img/product-1.jpg"
+                  alt="Product Image" />
+              </div>
+              <div class="item-name">Smartphone - Model X</div>
             </div>
-            <div class="img-container">
-              <img
-                class="prod-img"
-                src="/public/img/product-1.jpg"
-                alt="Product Image"
-              />
+            <div class="item-group-2">
+              <div class="item-price">$799.99</div>
+              <div class="item-quantity">
+                <button class="decrease-btn">-</button>
+                <input
+                  class="qt-input"
+                  type="text"
+                  value="1" />
+                <button class="increase-btn">+</button>
+              </div>
+              <div class="item-total">799.99</div>
+              <div class="btn item-delete">delete</div>
             </div>
-            <div class="item-name">Smartphone - Model X</div>
-            <div class="item-price">$799.99</div>
-            <div class="item-quantity">
-              <button class="decrease-btn">-</button>
-              <input class="qt-input" type="text" value="1" />
-              <button class="increase-btn">+</button>
-            </div>
-            <div class="item-total">799.99</div>
-            <div class="btn item-delete">delete</div>
           </div>
           <div class="item">
-            <div class="checkbox-container">
-              <div class="checkbox">
-                <input
-                  class="checkbox__input"
-                  type="checkbox"
-                  tabindex="0"
-                  role="checkbox"
-                />
+            <div class="item-group-1">
+              <div class="checkbox-container">
+                <div class="checkbox">
+                  <input
+                    class="checkbox__input"
+                    type="checkbox"
+                    tabindex="0"
+                    role="checkbox" />
+                </div>
               </div>
+              <div class="img-container">
+                <img
+                  class="prod-img"
+                  src="/public/img/product-1.jpg"
+                  alt="Product Image" />
+              </div>
+              <div class="item-name">Smartphone - Model X</div>
             </div>
-            <div class="img-container">
-              <img
-                class="prod-img"
-                src="/public/img/product-1.jpg"
-                alt="Product Image"
-              />
+            <div class="item-group-2">
+              <div class="item-price">$799.99</div>
+              <div class="item-quantity">
+                <button class="decrease-btn">-</button>
+                <input
+                  class="qt-input"
+                  type="text"
+                  value="1" />
+                <button class="increase-btn">+</button>
+              </div>
+              <div class="item-total">799.99</div>
+              <div class="btn item-delete">delete</div>
             </div>
-            <div class="item-name">Smartphone - Model X</div>
-            <div class="item-price">$799.99</div>
-            <div class="item-quantity">
-              <button class="decrease-btn">-</button>
-              <input class="qt-input" type="text" value="1" />
-              <button class="increase-btn">+</button>
-            </div>
-            <div class="item-total">799.99</div>
-            <div class="btn item-delete">delete</div>
           </div>
           <div class="item">
-            <div class="checkbox-container">
-              <div class="checkbox">
-                <input
-                  class="checkbox__input"
-                  type="checkbox"
-                  tabindex="0"
-                  role="checkbox"
-                />
+            <div class="item-group-1">
+              <div class="checkbox-container">
+                <div class="checkbox">
+                  <input
+                    class="checkbox__input"
+                    type="checkbox"
+                    tabindex="0"
+                    role="checkbox" />
+                </div>
               </div>
+              <div class="img-container">
+                <img
+                  class="prod-img"
+                  src="/public/img/product-1.jpg"
+                  alt="Product Image" />
+              </div>
+              <div class="item-name">Smartphone - Model X</div>
             </div>
-            <div class="img-container">
-              <img
-                class="prod-img"
-                src="/public/img/product-1.jpg"
-                alt="Product Image"
-              />
+            <div class="item-group-2">
+              <div class="item-price">$799.99</div>
+              <div class="item-quantity">
+                <button class="decrease-btn">-</button>
+                <input
+                  class="qt-input"
+                  type="text"
+                  value="1" />
+                <button class="increase-btn">+</button>
+              </div>
+              <div class="item-total">799.99</div>
+              <div class="btn item-delete">delete</div>
             </div>
-            <div class="item-name">Smartphone - Model X</div>
-            <div class="item-price">$799.99</div>
-            <div class="item-quantity">
-              <button class="decrease-btn">-</button>
-              <input class="qt-input" type="text" value="1" />
-              <button class="increase-btn">+</button>
-            </div>
-            <div class="item-total">799.99</div>
-            <div class="btn item-delete">delete</div>
           </div>
           <div class="item">
-            <div class="checkbox-container">
-              <div class="checkbox">
-                <input
-                  class="checkbox__input"
-                  type="checkbox"
-                  tabindex="0"
-                  role="checkbox"
-                />
+            <div class="item-group-1">
+              <div class="checkbox-container">
+                <div class="checkbox">
+                  <input
+                    class="checkbox__input"
+                    type="checkbox"
+                    tabindex="0"
+                    role="checkbox" />
+                </div>
               </div>
+              <div class="img-container">
+                <img
+                  class="prod-img"
+                  src="/public/img/product-1.jpg"
+                  alt="Product Image" />
+              </div>
+              <div class="item-name">Smartphone - Model X</div>
             </div>
-            <div class="img-container">
-              <img
-                class="prod-img"
-                src="/public/img/product-1.jpg"
-                alt="Product Image"
-              />
+            <div class="item-group-2">
+              <div class="item-price">$799.99</div>
+              <div class="item-quantity">
+                <button class="decrease-btn">-</button>
+                <input
+                  class="qt-input"
+                  type="text"
+                  value="1" />
+                <button class="increase-btn">+</button>
+              </div>
+              <div class="item-total">799.99</div>
+              <div class="btn item-delete">delete</div>
             </div>
-            <div class="item-name">Smartphone - Model X</div>
-            <div class="item-price">$799.99</div>
-            <div class="item-quantity">
-              <button class="decrease-btn">-</button>
-              <input class="qt-input" type="text" value="1" />
-              <button class="increase-btn">+</button>
-            </div>
-            <div class="item-total">799.99</div>
-            <div class="btn item-delete">delete</div>
           </div>
           <div class="item">
-            <div class="checkbox-container">
-              <div class="checkbox">
-                <input
-                  class="checkbox__input"
-                  type="checkbox"
-                  tabindex="0"
-                  role="checkbox"
-                />
+            <div class="item-group-1">
+              <div class="checkbox-container">
+                <div class="checkbox">
+                  <input
+                    class="checkbox__input"
+                    type="checkbox"
+                    tabindex="0"
+                    role="checkbox" />
+                </div>
               </div>
+              <div class="img-container">
+                <img
+                  class="prod-img"
+                  src="/public/img/product-1.jpg"
+                  alt="Product Image" />
+              </div>
+              <div class="item-name">Smartphone - Model X</div>
             </div>
-            <div class="img-container">
-              <img
-                class="prod-img"
-                src="/public/img/product-1.jpg"
-                alt="Product Image"
-              />
+            <div class="item-group-2">
+              <div class="item-price">$799.99</div>
+              <div class="item-quantity">
+                <button class="decrease-btn">-</button>
+                <input
+                  class="qt-input"
+                  type="text"
+                  value="1" />
+                <button class="increase-btn">+</button>
+              </div>
+              <div class="item-total">799.99</div>
+              <div class="btn item-delete">delete</div>
             </div>
-            <div class="item-name">Smartphone - Model X</div>
-            <div class="item-price">$799.99</div>
-            <div class="item-quantity">
-              <button class="decrease-btn">-</button>
-              <input class="qt-input" type="text" value="1" />
-              <button class="increase-btn">+</button>
-            </div>
-            <div class="item-total">799.99</div>
-            <div class="btn item-delete">delete</div>
           </div>
+
           <div class="item">
-            <div class="checkbox-container">
-              <div class="checkbox">
-                <input
-                  class="checkbox__input"
-                  type="checkbox"
-                  tabindex="0"
-                  role="checkbox"
-                />
+            <div class="item-group-1">
+              <div class="checkbox-container">
+                <div class="checkbox">
+                  <input
+                    class="checkbox__input"
+                    type="checkbox"
+                    tabindex="0"
+                    role="checkbox" />
+                </div>
               </div>
-            </div>
-            <div class="img-container">
-              <img
-                class="prod-img"
-                src="/public/img/product-1.jpg"
-                alt="Product Image"
-              />
-            </div>
-            <div class="item-name">Smartphone - Model X</div>
-            <div class="item-price">$799.99</div>
-            <div class="item-quantity">
-              <button class="decrease-btn">-</button>
-              <input class="qt-input" type="text" value="1" />
-              <button class="increase-btn">+</button>
-            </div>
-            <div class="item-total">799.99</div>
-            <div class="btn item-delete">delete</div>
-          </div>
-          <div class="item">
-            <div class="checkbox-container">
-              <div class="checkbox">
-                <input
-                  class="checkbox__input"
-                  type="checkbox"
-                  tabindex="0"
-                  role="checkbox"
-                />
+              <div class="img-container">
+                <img
+                  class="prod-img"
+                  src="/public/img/product-1.jpg"
+                  alt="Product Image" />
               </div>
+              <div class="item-name">Smartphone - Model X</div>
             </div>
-            <div class="img-container">
-              <img
-                class="prod-img"
-                src="/public/img/product-1.jpg"
-                alt="Product Image"
-              />
+            <div class="item-group-2">
+              <div class="item-price">$799.99</div>
+              <div class="item-quantity">
+                <button class="decrease-btn">-</button>
+                <input
+                  class="qt-input"
+                  type="text"
+                  value="1" />
+                <button class="increase-btn">+</button>
+              </div>
+              <div class="item-total">799.99</div>
+              <div class="btn item-delete">delete</div>
             </div>
-            <div class="item-name">Smartphone - Model X</div>
-            <div class="item-price">$799.99</div>
-            <div class="item-quantity">
-              <button class="decrease-btn">-</button>
-              <input class="qt-input" type="text" value="1" />
-              <button class="increase-btn">+</button>
-            </div>
-            <div class="item-total">799.99</div>
-            <div class="btn item-delete">delete</div>
           </div>
         </div>
       </div>
+
+      <section class="checkout-summary fixed-bottom">
+        <div class="cart-overview">
+          <div class="item-titles">
+            <div class="checkbox-container">
+              <div class="checkbox">
+                <input
+                  class="checkbox__input"
+                  type="checkbox"
+                  tabindex="0"
+                  role="checkbox" />
+              </div>
+            </div>
+            <div class="item-selected">selected(1)</div>
+            <div class="selected-statement">Total (1 item): $799.99</div>
+            <div class="checkout">
+              <a
+                class="btn btn-warning custom-cart-btn"
+                href="#"
+                >Checkout</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </main>
-  <section class="checkout-summary fixed-bottom">
-    <div class="cart-overview">
-      <div class="item-titles">
-        <div class="checkbox-container">
-          <div class="checkbox">
-            <input
-              class="checkbox__input"
-              type="checkbox"
-              tabindex="0"
-              role="checkbox"
-            />
-          </div>
-        </div>
-        <div class="item-selected">selected(1)</div>
-        <div class="selected-statement">Total(1 item): $799.99</div>
-        <div class="checkout">
-          <a class="btn btn-warning custom-cart-btn" href="#">Checkout</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- 引入 Bootstrap 和 FontAwesome JavaScript-->
+  <!-- Import Bootstrap, FontAwesome, JavaScript-->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

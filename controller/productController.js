@@ -76,7 +76,6 @@ exports.createProduct = catchAsync(async (req, res, next) => {
       release_date: req.body.release_date,
       ratings_average: req.body.ratingsAverage,
       customer_reviews: req.body.customer_reviews,
-      // Nested object
       seller: {
         _id: req.user._id,
         seller_name: req.user.name,
