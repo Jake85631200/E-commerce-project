@@ -1,0 +1,156 @@
+<!doctype html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0" />
+  <title>My Orders</title>
+  <!-- Import Bootstrap CSS-->
+  <link
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    rel="stylesheet" />
+  <link
+    href="/public/css/order.css"
+    rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <!-- Nav-bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <a
+        class="navbar-brand"
+        href="#"
+        >E-commerce</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="collapse navbar-collapse"
+        id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a
+              class="nav-link"
+              href="#"
+              >Home<span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              id="navbarDropdown"
+              href="#"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              >More
+            </a>
+            <div
+              class="dropdown-menu"
+              aria-labelledby="navbarDropdown">
+              <a
+                class="dropdown-item"
+                href="#"
+                >Account</a
+              >
+              <a
+                class="dropdown-item"
+                href="#"
+                >Change password</a
+              >
+              <a
+                class="dropdown-item"
+                href="#"
+                >Setting</a
+              >
+              <div class="dropdown-divider"></div>
+              <a
+                class="dropdown-item"
+                href="#"
+                >Login/Logout</a
+              >
+            </div>
+          </li>
+        </ul>
+        <!-- Search-bar -->
+        <form class="form-inline my-2 my-lg-0">
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search" />
+          <button
+            class="btn btn-outline-light my-2 my-sm-0"
+            type="submit">
+            Search
+          </button>
+        </form>
+        <!-- Cart-icon -->
+        <a
+          class="nav-link text-warning"
+          href="#"
+          ><i class="fas fa-shopping-order"></i>Cart</a
+        >
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="orders">
+      <h1 class="mt-5 ml-5 pt-5">My Orders</h1>
+      <div class="orders-container">
+        <!-- Order Titles -->
+        <div class="title-container">
+          <div class="item-titles">
+            <div class="title-group-1">
+              <div class="title-name">Order</div>
+            </div>
+            <div class="title-group-2">
+              <div class="title-price">Price</div>
+              <div class="title-quantity">Quantity</div>
+              <div class="title-total">Total</div>
+              <div class="title-date">Purchase Date</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Items -->
+        <div class="item-info">
+          <div class="item">
+            <div class="item-group-1">
+              <div class="img-container">
+                <img
+                  class="prod-img"
+                  src="/public/img/product-1.jpg"
+                  alt="Product Image" />
+              </div>
+              <div class="item-name">Smartphone - Model X</div>
+            </div>
+
+            <div class="item-group-2">
+              <div class="item-price">$799.99</div>
+              <div class="item-quantity">1</div>
+              <div class="item-total">$799.99</div>
+              <div class="item-date">2024-01-01</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Import Bootstrap, FontAwesome, JavaScript-->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
