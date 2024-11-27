@@ -1,0 +1,17 @@
+ .custom-cart-btn {
+      background-color: #ffd700;
+      border-color: #ffd700;
+    }
+    .card-img-top {
+      width: 100%;
+      height: auto;
+    }
+    .card-body {
+      text-align: center;
+    }
+    .product-rating {
+      margin-bottom: 1rem;
+    }
+    .btn-outline-dark {
+      margin-right: 0.5rem;
+    }

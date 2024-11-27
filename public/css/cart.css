@@ -1,0 +1,115 @@
+.custom-cart-btn {
+      background-color: #ffd700;
+      border-color: #ffd700;
+    }
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+    main {
+      max-width: 1200px;
+      margin: auto;
+      background-color: white;
+      border-radius: 3px;
+      height: 100%;
+    }
+    .title-container,
+    .item-info {
+      padding: 20px 15px;
+    }
+    .item-titles,
+    .item {
+      display: flex;
+      align-items: center;
+      border: 3px solid rgb(244, 243, 243);
+      border-radius: 3px;
+      padding: 20px 15px;
+    }
+    .title-group-1,
+    .item-group-1 {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      width: 50%;
+    }
+    .title-group-2,
+    .item-group-2 {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 50%;
+    }
+    .item {
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    .checkbox-container {
+      display: flex;
+      flex-direction: column;
+      margin: 10px;
+      padding: 10px;
+    }
+    .prod-img {
+      height: 80px;
+      width: 80px;
+    }
+    .title-name {
+      width: 46%;
+    }
+    .item-name {
+      width: 38.55%;
+      padding-left: 10px;
+    }
+    .title-price,
+    .item-price,
+    .title-quantity,
+    .item-quantity,
+    .title-total,
+    .item-total,
+    .title-delete,
+    .item-delete {
+      display: flex;
+      justify-content: center;
+    }
+    .title-price,
+    .item-price,
+    .title-quantity,
+    .item-quantity {
+      width: 16%;
+    }
+    .title-total,
+    .item-total {
+      width: 10%;
+    }
+    .title-delete,
+    .item-delete {
+      width: 13%;
+    }
+    .decrease-btn {
+      display: flex;
+    }
+    .qt-input {
+      width: 50px;
+      text-align: center;
+    }
+    .checkout-summary {
+      position: sticky;
+      bottom: 0;
+      background-color: white;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 2;
+    }
+    .item-selected {
+      width: 76%;
+    }
+    .selected-statement {
+      display: flex;
+      justify-content: center;
+      width: 20%;
+    }
+    .checkout {
+      display: flex;
+      justify-content: center;
+      width: 13%;
+    }
