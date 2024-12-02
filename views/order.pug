@@ -1,0 +1,96 @@
+doctype html
+head
+  meta(charset="UTF-8")
+  meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  title My Orders
+  // Import Bootstrap CSS
+  link(
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css",
+    rel="stylesheet"
+  )
+  link(href="/public/css/order.css", rel="stylesheet")
+header
+  // Nav-bar
+  nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
+    a.navbar-brand(href="#") E-commerce
+    button.navbar-toggler(
+      type="button",
+      data-toggle="collapse",
+      data-target="#navbarNav",
+      aria-controls="navbarNav",
+      aria-expanded="false",
+      aria-label="Toggle navigation"
+    )
+      span.navbar-toggler-icon
+    #navbarNav.collapse.navbar-collapse
+      ul.navbar-nav.mr-auto
+        li.nav-item.active
+          a.nav-link(href="#")
+            | Home
+            span.sr-only (current)
+        li.nav-item.dropdown
+          a#navbarDropdown.nav-link.dropdown-toggle(
+            href="#",
+            role="button",
+            data-toggle="dropdown",
+            aria-haspopup="true",
+            aria-expanded="false"
+          )
+            | More
+          .dropdown-menu(aria-labelledby="navbarDropdown")
+            a.dropdown-item(href="#") Account
+            a.dropdown-item(href="#") Change password
+            a.dropdown-item(href="#") Setting
+            .dropdown-divider
+            a.dropdown-item(href="#") Login/Logout
+      // Search-bar
+      form.form-inline.my-2.my-lg-0
+        input.form-control.mr-sm-2(
+          type="search",
+          placeholder="Search",
+          aria-label="Search"
+        )
+        button.btn.btn-outline-light.my-2.my-sm-0(type="submit")
+          | Search
+      // Cart-icon
+      a.nav-link.text-warning(href="#")
+        i.fas.fa-shopping-order
+        | Cart
+main
+  .orders
+    h1.mt-5.ml-5.pt-5 My Orders
+    .orders-container
+      // Order Titles
+      .title-container
+        .item-titles
+          .title-group-1
+            .title-name Order
+          .title-group-2
+            .title-price Price
+            .title-quantity Quantity
+            .title-total Total
+            .title-date Purchase Date
+      // Order Items
+      .item-info
+        .item
+          .item-group-1
+            .img-container
+              img.prod-img(
+                src="/public/img/product-1.jpg",
+                alt="Product Image"
+              )
+            .item-name Smartphone - Model X
+          .item-group-2
+            .item-price $799.99
+            .item-quantity 1
+            .item-total $799.99
+            .item-date 2024-01-01
+// Import Bootstrap, FontAwesome, JavaScript
+script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+script(
+  src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+)
+script(
+  src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+)
+script(src="https://kit.fontawesome.com/a076d05399.js")

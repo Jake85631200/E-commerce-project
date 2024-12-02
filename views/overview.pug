@@ -1,0 +1,36 @@
+extends base
+
+block content
+  main
+    //- Title-container
+    .container-fluid.text-center.py-5
+      h1 Welcome!
+      p An e-commerce site, not much goods!
+
+    //- Product-container
+    .container.mt-4
+      .row
+        //- Product-card
+        each product in products
+          .col-md-3.mb-4
+            .card
+              img.card-img-top(src=`${product.image}`, alt="Product Image")
+              .card-body
+                h5.card-title
+                  span= product.product_name
+                .product-rating.mb-2
+                  span.rating-value 4.5
+                  span.stars &starf;&starf;&starf;&starf;&star;
+                .card-buttons.mb-2
+                  a.btn.btn-outline-dark(href="#") purchase
+                  a.add-to-cart.btn.btn-warning.custom-cart-btn.ml-2(
+                    data-bs-toggle="modal",
+                    data-bs-target="#addedToCartModal",
+                    href=`http://127.0.0.1:8000/add-to-cart/${product._id}`
+                  ) Add to cart
+
+    #addedToCartModal.modal.fade(tabindex="-1", aria-labelledby="addedToCartModal")
+      .modal-dialog.modal-sm
+        .modal-content
+          .modal-body
+            #addedToCartText(style="text-align: center") Added to your cart!
