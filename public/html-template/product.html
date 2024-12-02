@@ -290,23 +290,29 @@
             <textarea
               class="comment-textarea"
               placeholder="Leave a comment"></textarea>
-            <div class="submit">
+            <div class="submit-section">
               <!-- Ratings Stars -->
               <span>Your Rating: </span>
               <div class="star-rating">
                 <script>
                   for (let i = 1; i <= 5; i++) {
                     document.write(`
-                      <div class="star fa-regular fa-star fa-lg" data-value="${i}">
+                      <div class="star fa-regular fa-star fa-2xl m-2" style="color: #FFD43B;" data-value="${i}">
                         <span class="span-box">
                           <span class="span-left"></span>
                           <span class="span-right"></span>
                         </span>
                       </div>
+                      
                     `);
                   }
                 </script>
               </div>
+              <span
+                class="rating-value"
+                style="margin-left: 10px; width: 68px; text-align: center"
+                >(0 / 5)</span
+              >
               <input
                 type="hidden"
                 id="rating"
@@ -314,7 +320,7 @@
                 value="0" />
               <button
                 class="btn btn-warning"
-                style="margin-left: 20px">
+                style="margin-left: 10px">
                 Submit
               </button>
             </div>
@@ -369,9 +375,10 @@
 
     // Rating stars
     document.addEventListener("DOMContentLoaded", function () {
-      // 1) select all stars and rating input
+      // 1) select all stars, rating input, rating value
       const stars = document.querySelectorAll(".fa-star");
       const ratingInput = document.getElementById("rating");
+      const ratingValue = document.querySelector(".rating-value");
 
       // 2) add listener to each star
       stars.forEach((star) => {
@@ -379,34 +386,36 @@
         const spanLeft = star.querySelector(".span-left");
         const spanRight = star.querySelector(".span-right");
 
-        // 3) set value when left and  half clicked
+        // 3) set value when left and  half mouseover
 
-        // a)when left half clicked
-        spanLeft.addEventListener("click", function () {
+        // a) when left half mouseover
+        spanLeft.addEventListener("mouseover", function () {
           // rating value = data-value - 0.5 (ex: 4.5 - 0.5 = 4)
           const value = parseFloat(star.getAttribute("data-value")) - 0.5;
           // update rating input value
           ratingInput.value = value;
+          ratingValue.textContent = `(${value} / 5)`;
           // update stars display
           updateStars(stars, value);
         });
 
-        // b)when right half clicked
-        spanRight.addEventListener("click", function () {
+        // b) when right half mouseover
+        spanRight.addEventListener("mouseover", function () {
           // rating value = data-value
           const value = parseFloat(star.getAttribute("data-value"));
-          // update rating input value
+          // update rating input
           ratingInput.value = value;
+          ratingValue.textContent = `(${value} / 5)`;
           // update stars display
           updateStars(stars, value);
         });
       });
 
-      // 4)update stars display
+      // 4) update stars display
       function updateStars(stars, selectedValue) {
         stars.forEach((star) => {
           const value = parseFloat(star.getAttribute("data-value"));
-          // if star value less <= selected rating value, display as solid
+          // if star value <= selected rating value, display as solid
           if (value <= selectedValue) {
             star.classList.add("fa-solid");
             star.classList.remove("fa-regular", "fa-star-half-stroke");

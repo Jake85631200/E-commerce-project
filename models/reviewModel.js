@@ -36,7 +36,7 @@ const reviewSchema = new mongoose.Schema(
 );
 
 // Each combination of product and user has always to be unique
-reviewSchema.index({ product: 1, user: 1 }, { unique: true });
+// reviewSchema.index({ product: 1, user: 1 }, { unique: true });
 
 // MIDDLEWARE
 

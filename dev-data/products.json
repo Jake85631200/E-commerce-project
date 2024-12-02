@@ -2,7 +2,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674612",
     "product_name": "Smartphone - Model X",
-    "image": "http://dummyimage.com/150x100.png/cc0000/ffffff",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-1.jpg",
     "price": 799.99,
     "description": "The latest smartphone model with a powerful processor and high-definition display.",
     "quantity": 500,
@@ -20,7 +20,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674613",
     "product_name": "Blender - High Speed",
-    "image": "http://dummyimage.com/150x100.png/dddddd/000000",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-2.jpg",
     "price": 120.0,
     "description": "High-performance blender suitable for making various juices and smoothies.",
     "quantity": 300,
@@ -38,7 +38,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674614",
     "product_name": "Running Shoes - Comfort Fit",
-    "image": "http://dummyimage.com/150x100.png/5fa2dd/ffffff",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-3.jpg",
     "price": 89.99,
     "description": "Comfortable running shoes providing excellent support and cushioning.",
     "quantity": 200,
@@ -56,7 +56,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674615",
     "product_name": "Organic Shampoo",
-    "image": "http://dummyimage.com/150x100.png/ff4444/ffffff",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-4.jpg",
     "price": 15.5,
     "description": "Organic shampoo suitable for all hair types, promoting healthier hair.",
     "quantity": 800,
@@ -74,7 +74,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674616",
     "product_name": "Yoga Mat - Eco Friendly",
-    "image": "http://dummyimage.com/150x100.png/cc0000/ffffff",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-5.jpg",
     "price": 35.0,
     "description": "Eco-friendly yoga mat providing excellent grip and comfort.",
     "quantity": 600,
@@ -92,7 +92,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674617",
     "product_name": "Cookware Set - Nonstick",
-    "image": "http://dummyimage.com/150x100.png/dddddd/000000",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-6.jpg",
     "price": 150.0,
     "description": "Nonstick cookware set suitable for various cooking needs.",
     "quantity": 400,
@@ -110,7 +110,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674618",
     "product_name": "Mountain Bike - 21 Speed",
-    "image": "http://dummyimage.com/150x100.png/5fa2dd/ffffff",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-7.jpg",
     "price": 350.0,
     "description": "21-speed mountain bike suitable for various terrains.",
     "quantity": 150,
@@ -128,7 +128,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674619",
     "product_name": "Board Game - Strategy",
-    "image": "http://dummyimage.com/150x100.png/ff4444/ffffff",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-8.jpg",
     "price": 45.0,
     "description": "Strategy board game suitable for family and friends gatherings.",
     "quantity": 700,
@@ -146,7 +146,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674620",
     "product_name": "Car Vacuum Cleaner",
-    "image": "http://dummyimage.com/150x100.png/cc0000/ffffff",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-9.jpg",
     "price": 60.0,
     "description": "Portable car vacuum cleaner for maintaining interior cleanliness.",
     "quantity": 350,
@@ -164,7 +164,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674621",
     "product_name": "Notebook - Hardcover",
-    "image": "http://dummyimage.com/150x100.png/dddddd/000000",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-10.jpg",
     "price": 12.0,
     "description": "Hardcover notebook suitable for daily notes and work.",
     "quantity": 1000,
@@ -182,7 +182,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674622",
     "product_name": "Dog Food - Premium",
-    "image": "http://dummyimage.com/150x100.png/5fa2dd/ffffff",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-11.jpg",
     "price": 50.0,
     "description": "Premium dog food providing complete nutrition.",
     "quantity": 600,
@@ -200,7 +200,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674623",
     "product_name": "Sofa - Modern Design",
-    "image": "http://dummyimage.com/150x100.png/ff4444/ffffff",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-12.jpg",
     "price": 1200.0,
     "description": "Modern design sofa, comfortable and stylish.",
     "quantity": 50,
@@ -218,7 +218,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674624",
     "product_name": "Necklace - Gold Plated",
-    "image": "http://dummyimage.com/150x100.png/cc0000/ffffff",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-13.jpg",
     "price": 75.0,
     "description": "Gold plated necklace, exquisite and elegant.",
     "quantity": 300,
@@ -236,7 +236,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674625",
     "product_name": "Organic Honey",
-    "image": "http://dummyimage.com/150x100.png/dddddd/000000",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-14.jpg",
     "price": 20.0,
     "description": "Organic honey, natural and pure.",
     "quantity": 800,
@@ -254,7 +254,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674626",
     "product_name": "Wireless Earbuds",
-    "image": "http://dummyimage.com/150x100.png/5fa2dd/ffffff",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-15.jpg",
     "price": 99.99,
     "description": "Wireless earbuds with clear sound quality and comfortable fit.",
     "quantity": 400,
@@ -272,7 +272,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674627",
     "product_name": "Electric Kettle",
-    "image": "http://dummyimage.com/150x100.png/ff4444/ffffff",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-16.jpg",
     "price": 45.0,
     "description": "Electric kettle, fast heating, safe and reliable.",
     "quantity": 500,
@@ -290,7 +290,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674628",
     "product_name": "Leather Jacket",
-    "image": "http://dummyimage.com/150x100.png/cc0000/ffffff",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-17.jpg",
     "price": 250.0,
     "description": "Leather jacket, classic design, durable and stylish.",
     "quantity": 150,
@@ -308,7 +308,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674629",
     "product_name": "Face Cream - Anti Aging",
-    "image": "http://dummyimage.com/150x100.png/dddddd/000000",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-18.jpg",
     "price": 60.0,
     "description": "Anti-aging face cream, moisturizes skin and reduces fine lines.",
     "quantity": 700,
@@ -326,7 +326,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674630",
     "product_name": "Camping Tent - 4 Person",
-    "image": "http://dummyimage.com/150x100.png/5fa2dd/ffffff",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-19.jpg",
     "price": 180.0,
     "description": "4-person tent suitable for camping and outdoor activities.",
     "quantity": 100,
@@ -344,7 +344,7 @@
   {
     "_id": "672dfe24fc13ae2bd0674631",
     "product_name": "Puzzle - 1000 Pieces",
-    "image": "http://dummyimage.com/150x100.png/ff4444/ffffff",
+    "image": "https://storage.cloud.google.com/pictureefkewp0dc/img/product-20.jpg",
     "price": 25.0,
     "description": "1000-piece puzzle, challenge your intelligence and patience.",
     "quantity": 900,

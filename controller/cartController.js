@@ -19,7 +19,10 @@ exports.checkAllCart = catchAsync(async (req, res, next) => {
 });
 
 exports.checkMyCart = catchAsync(async (req, res, next) => {
-  const cart = await Cart.findById(req.user.cart._id);
+  const cart = await Cart.findById(req.user.cart).populate({
+    path: "productsInCart",
+    select: "image product_name price ",
+  });
 
   res.status(200).json({
     status: "success.",
@@ -34,19 +37,12 @@ exports.addToCart = catchAsync(async (req, res, next) => {
   // Get product id from URL
   const product = await Products.findById(req.params.id);
   const cart = await Cart.findById(req.user.cart._id);
-
+  console.log(product);
   if (!req.user.id)
-    return next(
-      new AppError(
-        "You're not logged in or authorization expired, please login again.",
-        401
-      )
-    );
+    return next(new AppError("You're not logged in or authorization expired, please login again.", 401));
 
   if (!product) return next(new AppError("Product not found.", 404));
-  const existingItem = cart.items.find(
-    (item) => item.product.toString() === req.params.id
-  );
+  const existingItem = cart.items.find((item) => item.product.toString() === req.params.id);
 
   if (existingItem) {
     existingItem.quantity += 1;
@@ -55,7 +51,7 @@ exports.addToCart = catchAsync(async (req, res, next) => {
       product: req.params.id,
       quantity: 1,
       price: product.price,
-      total: product.price
+      total: product.price,
     });
   }
 
@@ -76,25 +72,16 @@ exports.removeFormCart = catchAsync(async (req, res, next) => {
   const cart = await Cart.findById(req.user.cart._id);
 
   if (!req.user.id)
-    return next(
-      new AppError(
-        "You're not logged in or authorization expired, please login again.",
-        401
-      )
-    );
+    return next(new AppError("You're not logged in or authorization expired, please login again.", 401));
 
   if (!product) return next(new AppError("Product not found.", 404));
 
-  const existingItem = cart.items.find(
-    (item) => item.product.toString() === req.params.id
-  );
+  const existingItem = cart.items.find((item) => item.product.toString() === req.params.id);
 
   if (existingItem && existingItem.quantity > 1) {
     existingItem.quantity -= 1;
   } else {
-    cart.items = cart.items.filter(
-      (item) => item.product.toString() !== req.params.id
-    );
+    cart.items = cart.items.filter((item) => item.product.toString() !== req.params.id);
   }
 
   await cart.save();
