@@ -21,9 +21,7 @@ const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
   res.cookie("jwt", token, {
     // new Date(): Convert calculated milliseconds to an object expected by cookie
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-    ),
+    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
     // Cookie cannot be accessed via JS's Document.cookie, preventing XSS attacks.
     httpOnly: true,
     // Cookie can only be sent over HTTPS, enhancing cookie security
@@ -55,10 +53,7 @@ const handleFailedLogin = async (user, endOfDay, attempts) => {
     const ttl = 10;
     await redis.setex(`locked_${user._id}`, ttl, "locked");
 
-    throw new AppError(
-      `Due to failed login attempts, your account has been locked for ${ttl} seconds.`,
-      403
-    );
+    throw new AppError(`Due to failed login attempts, your account has been locked for ${ttl} seconds.`, 403);
   }
 
   // 3. If lock condition is not met, throw general login failure error
@@ -95,21 +90,14 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   // 3. Initialize time and attempt count related variables
-  const endOfDay = Math.floor(
-    (new Date().setHours(23, 59, 59, 999) - Date.now()) / 1000
-  );
+  const endOfDay = Math.floor((new Date().setHours(23, 59, 59, 999) - Date.now()) / 1000);
   let attempts = parseInt(await redis.get(`loginAttempts_${user._id}`)) || 0;
 
   // 4. Check if account is locked
   const lockUntil = await redis.get(`locked_${user._id}`);
   if (lockUntil) {
     const countDown = await redis.ttl(`locked_${user._id}`);
-    return next(
-      new AppError(
-        `Your account has been locked for safety. Please try again in ${countDown} seconds`,
-        403
-      )
-    );
+    return next(new AppError(`Your account has been locked for safety. Please try again in ${countDown} seconds`, 403));
   }
 
   // 5. Initialize or reset login attempt count
@@ -144,7 +132,7 @@ exports.twoFactor = catchAsync(async (req, res, next) => {
   await sendMail(
     user.email,
     "Two-Factor Authentication Code",
-    `Your verification code is: ${faCode}. This code will expire in 10 minutes.`
+    `Your verification code is: ${faCode}. This code will expire in 10 minutes.`,
   );
 
   res.status(200).json({
@@ -157,9 +145,7 @@ exports.validateFACode = catchAsync(async (req, res, next) => {
   // Check if user provide email and FACode
   const { email, yourFACode } = req.body;
   if (!email || !yourFACode) {
-    return next(
-      new AppError("Please provide email and verification code.", 400)
-    );
+    return next(new AppError("Please provide email and verification code.", 400));
   }
 
   // Get verification code which is stored in redis
@@ -167,19 +153,12 @@ exports.validateFACode = catchAsync(async (req, res, next) => {
 
   // If verification code expired
   if (storedCode === null) {
-    return next(
-      new AppError(
-        "Verification code expired. Please resend verification code again",
-        400
-      )
-    );
+    return next(new AppError("Verification code expired. Please resend verification code again", 400));
   }
 
   // Comparing verification co
   if (yourFACode !== storedCode) {
-    return next(
-      new AppError("Verification code invalid. Please try again", 400)
-    );
+    return next(new AppError("Verification code invalid. Please try again", 400));
   }
 
   // Delete Verification code in redis
@@ -213,9 +192,7 @@ exports.forgetPassword = catchAsync(async (req, res, next) => {
     await sendMail(
       "test1@gmail.com",
       "test email",
-      `${req.protocol}://${req.get(
-        "host"
-      )}/api/v1/users/resetPassword/${resetToken}`
+      `${req.protocol}://${req.get("host")}/api/v1/users/resetPassword/${resetToken}`,
     );
 
     res.status(200).send("Token sent to email!");
@@ -224,12 +201,7 @@ exports.forgetPassword = catchAsync(async (req, res, next) => {
     user.passwordResetExpires = undefined;
     await user.save({ validateBeforeSave: false });
 
-    return next(
-      new AppError(
-        "Something wrong when sending email! Please try again later!",
-        500
-      )
-    );
+    return next(new AppError("Something wrong when sending email! Please try again later!", 500));
   }
 });
 
@@ -275,10 +247,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user._id).select("+password");
 
   if (!(await user.correctPassword(req.body.passwordCurrent, user.password)))
-    return next(
-      new AppError("Your current password is incorrect! Please try again!"),
-      401
-    );
+    return next(new AppError("Your current password is incorrect! Please try again!"), 401);
   // Check if req.body contains valid password and passwordConfirm
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
@@ -292,19 +261,14 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 exports.protect = catchAsync(async (req, res, next) => {
   let token;
   // 1) Get and check if token existed in headers
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
-  ) {
+  if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
     token = req.headers.authorization.split(" ")[1];
   } else if (req.cookies.jwt) {
     token = req.cookies.jwt;
   }
 
   if (!token) {
-    return next(
-      new AppError("You're not logged in! Please log in to get access!", 401)
-    );
+    return next(new AppError("You're not logged in! Please log in to get access!", 401));
   }
 
   // 2) Verification token
@@ -313,9 +277,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   // 3) If user still exist
   const currentUser = await User.findById(payload.id);
   if (!currentUser) {
-    return next(
-      new AppError("The user of this token is no-longer exist.", 401)
-    );
+    return next(new AppError("The user of this token is no-longer exist.", 401));
   }
   // 4) if user changed password
   if (currentUser.changedPasswordAfter(payload.iat)) {
@@ -330,10 +292,37 @@ exports.protect = catchAsync(async (req, res, next) => {
   next();
 });
 
+// Only for rendered pages
+exports.isLoggedIn = async (req, res, next) => {
+  if (req.cookies.jwt) {
+    try {
+      // 1) verify token
+      const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
+
+      // 2) Check if user still exists
+      const currentUser = await User.findById(decoded.id);
+      if (!currentUser) {
+        return next();
+      }
+
+      // 3) Check if user changed password after the token was issued
+      if (currentUser.changedPasswordAfter(decoded.iat)) {
+        return next();
+      }
+
+      // THERE IS A LOGGED IN USER
+      res.locals.user = currentUser;
+      return next();
+    } catch (err) {
+      return next();
+    }
+  }
+  next();
+};
+
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
-    if (!roles.includes(req.user.role))
-      return next(new AppError("Your don't have permission to this api!", 403));
+    if (!roles.includes(req.user.role)) return next(new AppError("Your don't have permission to this api!", 403));
 
     next();
   };
