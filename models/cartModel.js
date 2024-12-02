@@ -30,17 +30,24 @@ const cartSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-  }, // Virtual Property
+  },
   {
     // When using toJSON and toObject, VP will be included.
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
-  }
+  },
 );
 
 // Virtual property
 cartSchema.virtual("isEmpty").get(function () {
   return !this.items || this.items.length === 0 ? "empty" : false;
+});
+
+// Virtual Populate
+cartSchema.virtual("productsInCart", {
+  ref: "Product", // 關聯的模型名稱
+  foreignField: "_id", // Product 模型中的欄位
+  localField: "items.product", // Cart.items.product 中的欄位
 });
 
 // Middleware
