@@ -26,8 +26,8 @@ const createSendToken = (user, statusCode, req, res) => {
     httpOnly: true,
     // Cookie can only be sent over HTTPS, enhancing cookie security
     secure: true,
-    // Cookie will be signed to prevent tampering (requires cookieParser)
-    signed: true,
+    // Cookie will be signed to prevent tampering (requires cookieParser: app.use(cookieParser("secret"));)
+    // signed: true,
   });
 
   // Remove password from output
@@ -136,7 +136,7 @@ exports.twoFactor = catchAsync(async (req, res, next) => {
   );
 
   res.status(200).json({
-    status: "success.",
+    status: "success",
     message: `Verification code has been send to ${req.body.email}. This code will expire in 10 minutes.`,
   });
 });
@@ -169,13 +169,15 @@ exports.validateFACode = catchAsync(async (req, res, next) => {
   createSendToken(user, 200, req, res);
 });
 
-exports.logOut = catchAsync(async (req, res, next) => {
-  res.clearCookie("jwt");
-  res.status(200).json({
-    status: "success.",
-    message: "Logged out.",
+exports.logout = (req, res) => {
+  // 以新 cookie "loggedout"，覆蓋 cookie "jwt"
+  res.cookie("jwt", "loggedout", {
+    // 10 秒後失效
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
   });
-});
+  res.status(200).json({ status: "success" });
+};
 
 exports.forgetPassword = catchAsync(async (req, res, next) => {
   // 1) Use email to confirm user
