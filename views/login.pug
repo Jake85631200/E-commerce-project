@@ -3,9 +3,16 @@ extends base
 block content
   main
     .login-container(style="text-align: center")
-      h1(style="margin: 40px 0") Login
-      form.login-form(action="http://127.0.0.1:8000/api/v1/users/login", method="POST")
-        input(type="email", name="email", placeholder="Email", required)
-        input(type="password", name="password", placeholder="••••••••", required)
-        button.btn.btn-outline-warning(type="submit") Login
-      a.btn.btn-outline-info(href="/forget-password") Forget password?
+      h1(style="padding: 40px 0") Login
+      form.login-form
+        input#email(type="email", name="email", placeholder="Email", autocomplete="username", required)
+        input#password(
+          type="password",
+          name="password",
+          placeholder="••••••••",
+          minlength="8",
+          autocomplete="current-password",
+          required
+        )
+        button.login-btn.btn.btn-outline-warning(type="submit") Login
+      a.forget-password-btn.btn.btn-outline-info(href="/forget-password") Forget password?
