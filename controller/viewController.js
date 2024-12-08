@@ -1,11 +1,12 @@
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
 const Products = require("../models/productModel");
-const User = require("../models/userModel");
-const Cart = require("../models/cartModel");
+const Users = require("../models/userModel");
+const Carts = require("../models/cartModel");
+const Reviews = require("../models/reviewModel");
 const Orders = require("../models/orderModel");
 
-exports.OverView = catchAsync(async (req, res, next) => {
+exports.Overview = catchAsync(async (req, res, next) => {
   const products = await Products.find();
 
   res.status(200).render("overview", {
@@ -14,10 +15,32 @@ exports.OverView = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.MyCart = catchAsync(async (req, res, next) => {
-  const cart = await Cart.findById("652e10e9fc13ae2b026747c6").populate({
+exports.myProfile = catchAsync(async (req, res, next) => {
+  const user = await Users.findById(req.user._id);
+
+  res.status(200).render("account", {
+    title: "My Profile",
+    user,
+  });
+});
+
+exports.checkProd = catchAsync(async (req, res, next) => {
+  const product = await Products.findById(req.params.id).populate({
+    path: "reviewsInProd",
+  });
+
+  if (!product) return next(new AppError("Can't find product with that ID!", 404));
+
+  res.status(200).render("product", {
+    title: `${product.product_name}`,
+    product,
+    reviews: product.reviewsInProd || [],
+  });
+});
+
+exports.myCart = catchAsync(async (req, res, next) => {
+  const cart = await Carts.findById(req.user.cart).populate({
     path: "productsInCart",
-    fields: "image product_name price ",
   });
 
   res.status(200).render("cart", {
@@ -29,7 +52,7 @@ exports.MyCart = catchAsync(async (req, res, next) => {
 exports.addToCart = catchAsync(async (req, res, next) => {
   // Get product id from URL
   const product = await Products.findById(req.params.id);
-  const cart = await Cart.findById(req.user.cart._id);
+  const cart = await Carts.findById(req.user.cart._id);
   console.log(req.params.id);
   if (!req.user.id)
     return next(new AppError("You're not logged in or authorization expired, please login again.", 401));
@@ -43,6 +66,8 @@ exports.addToCart = catchAsync(async (req, res, next) => {
   } else {
     cart.items.push({
       product: req.params.id,
+      product_name: product.product_name,
+      image: product.image,
       quantity: 1,
       price: product.price,
       total: product.price,
@@ -52,7 +77,7 @@ exports.addToCart = catchAsync(async (req, res, next) => {
   await cart.save();
 
   res.status(200).json({
-    status: "success.",
+    status: "success",
     message: "This item has been added into your cart!",
     data: {
       cart,

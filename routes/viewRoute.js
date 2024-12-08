@@ -1,15 +1,27 @@
 const express = require("express");
 const router = express.Router();
 
-const { OverView, MyCart, addToCart, getLoginForm } = require("../controller/viewController");
+const {
+  Overview,
+  myProfile,
+  getProdReviews,
+  checkProd,
+  myCart,
+  addToCart,
+  getLoginForm,
+} = require("../controller/viewController");
 
 const { restrictTo, protect, isLoggedIn } = require("../controller/authController");
 
-router.route("/").get(OverView);
+router.get("/", isLoggedIn, Overview);
 
-router.route("/my-cart").get(MyCart);
+router.get("/profile", protect, isLoggedIn, myProfile);
 
-router.route("/add-to-cart/:id").post(protect, addToCart);
+router.get("/product/:id", protect, isLoggedIn, checkProd);
+
+router.get("/my-cart", protect, isLoggedIn, myCart);
+
+router.post("/add-to-cart/:id", protect, addToCart);
 
 router.get("/login", isLoggedIn, getLoginForm);
 
