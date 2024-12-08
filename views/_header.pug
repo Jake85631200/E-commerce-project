@@ -1,32 +1,43 @@
-nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top(style="padding: 8px 16px")
-  .container-fluid(style="padding: 0px")
-    a.navbar-brand(style="margin: 0px", href="#") E-commerce
-    button.navbar-toggler(
-      type="button",
-      data-bs-toggle="collapse",
-      data-bs-target="#navbarSupportedContent",
-      aria-controls="navbarSupportedContent",
-      aria-expanded="false",
-      aria-label="Toggle navigation"
-    )
-      span.navbar-toggler-icon
-    #navbarSupportedContent.collapse.navbar-collapse
-      ul.navbar-nav.me-auto.mb-2.mb-lg-0
-        //- if user
-          a.nav-link.text-warning(style="padding: 8px 16px", href="#")
-            i(aria-hidden="true") login
-          a.nav__el(href="/me")
-            img.nav__user-img(src=`/img/users/${user.photo}`, alt=`Photo of ${user.name}`)
-            span= user.name.split(" ")[0]
-        //- else
-          a.nav__el(href="/login") Log in
-          a.n.nav__el.nav__el--cta(href="#") Sign up
-      form.d-flex(role="search")
-        input.form-control.mr-sm-2(style="margin-right: 8px", type="search", placeholder="Search", aria-label="Search")
-        button.btn.btn-outline-light(type="submit") Search
-      a.nav-link.text-warning(style="padding: 8px 0px 8px 16px", href="#")
-        i.fas.fa-shopping-cart(aria-hidden="true")
-        |
-        | Cart
-      a.nav-link.text-warning(style="padding: 8px 0px 8px 16px", href="#")
-        i(style="font-style: normal", aria-hidden="true") login
+header.header
+  nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top(style="padding: 8px 16px")
+    .container-fluid(style="padding: 0px")
+      a.navbar-brand(style="margin: 0px; padding: 8px 16px 8px 0px", href="/") E-commerce
+      if user
+        a.nav-profile.nav__el.text-light(href="/profile")
+          img.nav__user-img(src=`${user.image}`, alt=`Photo of ${user.name}`)
+          span(style="padding: 8px 0px 8px 16px")= user.name.split(" ")[0]
+      button.navbar-toggler(
+        type="button",
+        data-bs-toggle="collapse",
+        data-bs-target="#navbarSupportedContent",
+        aria-controls="navbarSupportedContent",
+        aria-expanded="false",
+        aria-label="Toggle navigation"
+      )
+        span.navbar-toggler-icon
+      #navbarSupportedContent.collapse.navbar-collapse
+        ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        form.d-flex(role="search")
+          input.form-control.mr-sm-2(
+            style="margin-right: 8px",
+            type="search",
+            placeholder="Search",
+            aria-label="Search"
+          )
+          button.btn.btn-outline-light(type="submit") Search
+        .nav-guides
+          a.nav-cart.nav-link.text-warning(style="padding: 8px 0px 8px 16px", href="/my-cart")
+            i.fas.fa-shopping-cart(aria-hidden="true")
+            i(style="font-style: normal") Cart
+          if user
+            a.nav-logout-btn.nav-link.text-warning(style="padding: 8px 0px 8px 16px", href="#")
+              i(style="font-style: normal", aria-hidden="true") Logout
+          else
+            a.nav-login-page.nav-link.text-warning(
+              style="font-style: normal; padding: 8px 0px 8px 16px",
+              aria-hidden="true",
+              href="/login"
+            )
+              i(style="font-style: normal") Login
+            a.nav-link.text-warning(style="font-style: normal; padding: 8px 0px 8px 16px", aria-hidden="true")
+              i(style="font-style: normal") Sign up
