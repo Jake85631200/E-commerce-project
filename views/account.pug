@@ -1,151 +1,57 @@
-doctype html
-head
-  meta(charset="UTF-8")
-  meta(name="viewport", content="width=device-width, initial-scale=1.0")
-  title My account
-  // Import Bootstrap CSS
-  link(
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css",
-    rel="stylesheet"
-  )
-  link(href="/public/css/account.css", rel="stylesheet")
-header
-  // Nav-bar
-  .container
-    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
-      a.navbar-brand(href="#") E-commerce
-      button.navbar-toggler(
-        type="button",
-        data-toggle="collapse",
-        data-target="#navbarNav",
-        aria-controls="navbarNav",
-        aria-expanded="false",
-        aria-label="Toggle navigation"
-      )
-        span.navbar-toggler-icon
-      #navbarNav.collapse.navbar-collapse
-        ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a.nav-link(href="#")
-              | Home
-              span.sr-only (current)
-          li.nav-item.dropdown
-            a#navbarDropdown.nav-link.dropdown-toggle(
-              href="#",
-              role="button",
-              data-toggle="dropdown",
-              aria-haspopup="true",
-              aria-expanded="false"
-            )
-              | More
-            .dropdown-menu(aria-labelledby="navbarDropdown")
-              a.dropdown-item(href="#") Account
-              a.dropdown-item(href="#") Change password
-              a.dropdown-item(href="#") Setting
-              .dropdown-divider
-              a.dropdown-item(href="#") Login/Logout
-        // Search-bar
-        form.form-inline.my-2.my-lg-0
-          input.form-control.mr-sm-2(
-            type="search",
-            placeholder="Search",
-            aria-label="Search"
-          )
-          button.btn.btn-outline-light.my-2.my-sm-0(type="submit")
-            | Search
-        // Cart-icon
-        a.nav-link.text-warning(href="#")
-          i.fas.fa-shopping-cart
-          |
-          | Cart
-main
-  h2 My account
-  h4 Profile
-  .profile-container
-    .profile
-      form.user-info-form(style="padding-right: 40px")
-        table.user-info
-          tr
-            td.info-title Name
-            td.info-container
-              input.name(style="width: 100%", type="text", value="Jake")
-          tr
-            td.info-title Email
-            td.info-container
-              span ja**********@gmail.com
-              button.btn.info-edit-btn.btn-primary.btn-sm(type="button")
-                | Edit
-          tr
-            td.info-title Phone number
-            td.info-container
-              span **********25
-              button.btn.info-edit-btn.btn-primary.btn-sm(type="button")
-                | Edit
-          tr
-            td.info-title Address
-            td.info-container
-              span Some where some place
-              button.btn.info-edit-btn.btn-primary.btn-sm(type="button")
-                | Edit
-          tr
-            td.info-title Gender
-            td.info-container
-              label(style="margin-bottom: 0px")
-                input(type="radio", name="gender", value="male")
-                |
-                | Male
-              label(style="margin-bottom: 0px; padding-left: 15px")
-                input(type="radio", name="gender", value="female")
-                |
-                | Female
-              label(style="margin-bottom: 0px; padding-left: 15px")
-                input(type="radio", name="gender", value="other")
-                |
-                | Other
-          tr
-            td.info-title Birthday
-            td.info-container
-              span.birthday **/04/19**
-              button.btn.info-edit-btn.btn-primary.btn-sm(type="button")
-                | Edit
-          tr
-            td
-            td
-              a.btn.btn-warning.custom-cart-btn(
-                style="margin-left: 20px",
-                href="#"
-              ) Save
-      .avatar-container(style="width: 20%")
-        img.user-photo(
-          src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png",
-          alt="User photo"
-        )
-        input#photo(
-          style="display: none",
-          type="file",
-          accept="image/*",
-          name="photo"
-        )
-        label(
-          for="photo",
-          style="\
-                                                          display: inline-block;\
-                                                          margin-top: 40px;\
-                                                          padding: 10px 20px;\
-                                                          border: 1px solid rgb(219, 219, 219);\
-                                                          background-color: #f8f9fa;\
-                                                          cursor: pointer;\
-                                                          text-align: center;\
-                                                          border-radius: 5px;\
-                                                          "
-        )
-          | Choose new photo
-// Import Bootstrap, FontAwesome JavaScript
-script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
-script(
-  src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
-)
-script(
-  src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-)
-script(src="https://kit.fontawesome.com/a076d05399.js")
+extends base
+
+block content
+  main
+    if user
+      .profile.mt-5.ml-5.pt-5
+        .profile-container
+          h2 My account
+          h4 Profile
+          .profile-form
+            form.user-info-form(style="padding-right: 40px")
+              table.user-info
+                tr
+                  td.info-title Name
+                  td.info-container
+                    input.name(style="width: 100%", type="text", value=`${user.name}`)
+                tr
+                  td.info-title Email
+                  td.info-container
+                    span= `${user.email}`
+                    button.btn.info-edit-btn.btn-primary.btn-sm(type="button")
+                      | Edit
+                tr
+                  td.info-title Phone number
+                  td.info-container
+                    span= `${user.phone_number}`
+                    button.btn.info-edit-btn.btn-primary.btn-sm(type="button")
+                      | Edit
+                tr
+                  td.info-title Address
+                  td.info-container
+                    span= `${user.address}`
+                    button.btn.info-edit-btn.btn-primary.btn-sm(type="button")
+                      | Edit
+                tr
+                  td.info-title Gender
+                  td.info-container
+                    label(style="margin-bottom: 0px")
+                      input(type="radio", name="gender", value="male", checked=user.gender === "male")
+                      |
+                      | Male
+                    label(style="margin-bottom: 0px; padding-left: 15px")
+                      input(type="radio", name="gender", value="female", checked=user.gender === "female")
+                      |
+                      | Female
+                    label(style="margin-bottom: 0px; padding-left: 15px")
+                      input(type="radio", name="gender", value="other", checked=user.gender === "other")
+                      |
+                      | Other
+                tr
+                  td
+                    a.btn.btn-warning.custom-cart-btn(style="margin-left: 20px", href="#") Save
+            .avatar-container(style="width: 20%")
+              img.user-photo(src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png", alt="User photo")
+              input#photo(style="display: none", type="file", accept="image/*", name="photo")
+              label.choose-photo(for="photo")
+                | Choose new photo
