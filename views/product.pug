@@ -1,295 +1,166 @@
-doctype html
-head
-  meta(charset="UTF-8")
-  meta(name="viewport", content="width=device-width, initial-scale=1.0")
-  title Product
-  // Import Bootstrap CSS
-  link(
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css",
-    rel="stylesheet"
-  )
-  link(href="/public/css/product.css", rel="stylesheet")
-  link(
-    rel="stylesheet",
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-  )
-// Nav-bar
-header
-  .container
-    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
-      a.navbar-brand(href="#") E-commerce
-      button.navbar-toggler(
-        type="button",
-        data-toggle="collapse",
-        data-target="#navbarNav",
-        aria-controls="navbarNav",
-        aria-expanded="false",
-        aria-label="Toggle navigation"
-      )
-        span.navbar-toggler-icon
-      #navbarNav.collapse.navbar-collapse
-        ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a.nav-link(href="#")
-              | Home
-              span.sr-only (current)
-          li.nav-item.dropdown
-            a#navbarDropdown.nav-link.dropdown-toggle(
-              href="#",
-              role="button",
-              data-toggle="dropdown",
-              aria-haspopup="true",
-              aria-expanded="false"
-            )
-              | More
-            .dropdown-menu(aria-labelledby="navbarDropdown")
-              a.dropdown-item(href="#") Account
-              a.dropdown-item(href="#") Change password
-              a.dropdown-item(href="#") Setting
-              .dropdown-divider
-              a.dropdown-item(href="#") Login/Logout
-        // Search-bar
-        form.form-inline.my-2.my-lg-0
-          input.form-control.mr-sm-2(
-            type="search",
-            placeholder="Search",
-            aria-label="Search"
-          )
-          button.btn.btn-outline-light.my-2.my-sm-0(type="submit")
-            | Search
-        // Cart-icon
-        a.nav-link.text-warning(href="#")
-          i.fas.fa-shopping-cart
-          |
-          | Cart
-main
-  .product-container.mt-5.mb-4.pt-5
-    // Product-image
-    img.card-img-top.image-block(
-      src="/public/img/product-1.jpg",
-      alt="Product Image"
-    )
-    .product-details.mt-2
-      h1(style="margin-bottom: 1rem") Smartphone - Model X
-      p(style="margin-bottom: 1rem") Category: Electronics
-      // Price
-      h4.price(style="margin-bottom: 1rem")
-        | Price: $799.99
-      // Product-description
-      // Rating
-      .rating(style="margin-bottom: 1rem")
-        p.mt-2.mb-2 Rating: &starf;&starf;&starf;&starf;&star; (4.5/5)
-      // Purchase/Add to cart
-      .prod-action(style="margin-bottom: 1rem")
-        a.btn.btn-outline-dark.mr-2(href="#") purchase
-        a.btn.btn-warning.custom-cart-btn(href="#") Add to cart
-  .prod-description.m-3
-    h3 Description:
-    |
-    | The latest smartphone model with a powerful processor and high-definition display.The latest smartphone model with
-    |
-    | a powerful processor and high-definition display.
-  // User-reviews
-  div
-    h2.m-3 Reviews
-    .review-container
-      .user-reviews.m-3
-        .review
-          .review-content
-            .user-info
-              img.user-photo(
-                src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png",
-                alt="User-photo"
-              )
-              .ml-3(style="display: flex; flex-direction: column")
-                h4.user-name Username
-                p.user-rating Rating: &starf;&starf;&starf;&starf;&star;
-            p.user-comment
-              | Tempus curabitur faucibus auctor bibendum duis gravida tincidunt litora himenaeos facilisis vivamus
-              | vehicula potenti semper fusce suspendisse sagittis! litora himenaeos facilisis vivamus vehicula potenti
-              | semper fusce suspendisse sagittis!Tempus curabitur faucibus auctor bibendum duis gravida tincidunt
-              | litora himenaeos facilisis vivamus vehicula potenti semper fusce suspendisse sagittis! litora himenaeos
-              | facilisis vivamus vehicula potenti semper fusce suspendisse sagittis!
-            // Expand/Fold button
-            .toggle-block
-              button.btn.toggle-button(onclick="toggleText(this)")
-                | (Expand comment)
-        .review
-          .review-content
-            .user-info
-              img.user-photo(
-                src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png",
-                alt="User-photo"
-              )
-              .ml-3(style="display: flex; flex-direction: column")
-                h4.user-name Username
-                p.user-rating Rating: &starf;&starf;&starf;&starf;&star;
-            p.user-comment Tempus curabitur faucibus
-            // Expand/Fold button
-            .toggle-block
-              button.btn.toggle-button(onclick="toggleText(this)")
-                | (Expand comment)
-        .review
-          .review-content
-            .user-info
-              img.user-photo(
-                src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png",
-                alt="User-photo"
-              )
-              .ml-3(style="display: flex; flex-direction: column")
-                h4.user-name Username
-                p.user-rating Rating: &starf;&starf;&starf;&starf;&star;
-            p.user-comment
-              | Tempus curabitur faucibus auctor bibendum duis gravida tincidunt litora himenaeos facilisis vivamus
-              | vehicula potenti semper fusce suspendisse sagittis! litora himenaeos facilisis vivamus vehicula potenti
-              | semper fusce suspendisse sagittis!Tempus curabitur faucibus auctor bibendum duis gravida tincidunt
-              | litora himenaeos facilisis vivamus vehicula potenti semper fusce suspendisse sagittis! litora himenaeos
-              | facilisis vivamus vehicula potenti semper fusce suspendisse sagittis!
-            // Expand/Fold button
-            .toggle-block
-              button.btn.toggle-button(onclick="toggleText(this)")
-                | (Expand comment)
-        .review
-          .review-content
-            .user-info
-              img.user-photo(
-                src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png",
-                alt="User-photo"
-              )
-              .ml-3(style="display: flex; flex-direction: column")
-                h4.user-name Username
-                p.user-rating Rating: &starf;&starf;&starf;&starf;&star;
-            p.user-comment
-              | Tempus curabitur faucibus auctor bibendum duis gravida tincidunt litora himenaeos facilisis vivamus
-              | vehicula potenti semper fusce suspendisse sagittis! litora himenaeos facilisis vivamus vehicula potenti
-              | semper fusce suspendisse sagittis!Tempus curabitur faucibus auctor bibendum duis gravida tincidunt
-              | litora himenaeos facilisis vivamus vehicula potenti semper fusce suspendisse sagittis! litora himenaeos
-              | facilisis vivamus vehicula potenti semper fusce suspendisse sagittis!
-            // Expand/Fold button
-            .toggle-block
-              button.btn.toggle-button(onclick="toggleText(this)")
-                | (Expand comment)
-      .leave-comment.m-3
-        // Leave a comment
-        .comment-container
-          textarea.comment-textarea(placeholder="Leave a comment")
-          .submit-section
-            // Ratings Stars
-            span Your Rating:
-            .star-rating
-              script.
-                for (let i = 1; i <= 5; i++) {
-                  document.write(`
-                <div class="star fa-regular fa-star fa-2xl m-2" style="color: #FFD43B;" data-value="${i}">
-                <span class="span-box">
-                <span class="span-left"></span>
-                <span class="span-right"></span>
-                </span>
-                </div>
-                `);
-                }
-            span.rating-value(
-              style="margin-left: 10px; width: 68px; text-align: center"
-            ) (0 / 5)
-            input#rating(type="hidden", name="rating", value="0")
-            button.btn.btn-warning(style="margin-left: 10px")
-              | Submit
-// Import Bootstrap, FontAwesome, JavaScript
-script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
-script(
-  src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
-)
-script(
-  src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-)
-script(src="https://kit.fontawesome.com/a076d05399.js")
-script.
-  // Expand/Fold review text
-  // 1) Show expand button when review is overflowed
-  document.addEventListener("DOMContentLoaded", function () {
-    // select all "review"
-    const reviews = document.querySelectorAll(".review");
-    reviews.forEach((review) => {
-      // select "user-comment" and "toggle-button" in each review
-      const comment = review.querySelector(".user-comment");
-      const button = review.querySelector(".toggle-button");
-      // check if review is overflowed
-      if (comment.scrollHeight > comment.clientHeight) {
-        // if overflowed, show expand button
-        button.style.display = "block";
-      } else {
-        // if not overflowed, hide expand button
-        button.style.display = "none";
+extends base
+
+block content
+  main
+    if product
+      .product.mt-5.pt-5
+        .product-container
+          //- Product-image
+          img.card-img-top.image-block(src=`${product.image}`, alt="Product Image")
+          .product-details.mt-2
+            h1(style="margin-bottom: 1rem")= `${product.product_name}`
+            p(style="margin-bottom: 1rem")= `${product.category}`
+            // Price
+            h4.price(style="margin-bottom: 1rem")= `Price: $${product.price}`
+            // Product-description
+            // Rating
+            .rating(style="margin-bottom: 1rem; display: flex; align-items: baseline")
+              p.mt-2.mb-2 Rating: &starf;&starf;&starf;&starf;&star;
+              p= `(${product.ratings_average}/5)`
+            // Purchase/Add to cart
+            .prod-action(style="margin-bottom: 1rem")
+              a.btn.btn-outline-dark.mr-2(href="#") purchase
+              a.btn.btn-warning.custom-cart-btn(href="#") Add to cart
+
+        //- Product-description
+        .prod-description
+          h3 Description:
+          span= `${product.description}`
+
+        //- User-reviews
+        .prod-reviews
+          h2 Reviews
+          .review-container
+            .reviews
+              each review in reviews
+                .user-reviews.m-3
+                  .review
+                    .review-content
+                      .user-info
+                        img.user-photo(
+                          src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png",
+                          alt="User-photo"
+                        )
+                        .ml-3(style="display: flex; flex-direction: column")
+                          h4.user-name= `${review.user.name}`
+                          .rating(style="display: flex; align-items: baseline")
+                            p.user-rating Rating: &starf;&starf;&starf;&starf;&star;
+                            p= `(${product.ratings_average}/5)`
+                      p.user-comment= `${review.comment}`
+                      .toggle-block
+                        button.btn.toggle-button(onclick="toggleText(this)")
+                          | (Expand comment)
+            .leave-comment.m-3
+              // Leave a comment
+              .comment-container
+                textarea.comment-textarea(placeholder="Leave a comment")
+                .submit-section
+                  // Ratings Stars
+                  span Your Rating:
+                  .star-rating
+                    script.
+                      for (let i = 1; i <= 5; i++) {
+                        document.write(`
+                      <div class="star fa-regular fa-star fa-2xl m-2" style="color: #FFD43B;" data-value="${i}">
+                      <span class="span-box">
+                      <span class="span-left"></span>
+                      <span class="span-right"></span>
+                      </span>
+                      </div>
+                      `);
+                      }
+                  span.rating-value(style="margin-left: 10px; width: 68px; text-align: center") (0 / 5)
+                  input#rating(type="hidden", name="rating", value="0")
+                  button.btn.btn-warning(style="margin-left: 10px")
+                    | Submit
+
+    script.
+      // Expand/Fold review text
+      // 1) Show expand button when review is overflowed
+      document.addEventListener("DOMContentLoaded", function () {
+        // select all "review"
+        const reviews = document.querySelectorAll(".review");
+        reviews.forEach((review) => {
+          // select "user-comment" and "toggle-button" in each review
+          const comment = review.querySelector(".user-comment");
+          const button = review.querySelector(".toggle-button");
+          // check if review is overflowed
+          if (comment.scrollHeight > comment.clientHeight) {
+            // if overflowed, show expand button
+            button.style.display = "block";
+          } else {
+            // if not overflowed, hide expand button
+            button.style.display = "none";
+          }
+        });
+      });
+      // 2)Toggle review text (expand/fold)
+      function toggleText(button) {
+        // select button's previous sibling (review)
+        const comment = button.parentElement.previousElementSibling;
+        // check if review is expanded
+        if (comment.classList.contains("expanded")) {
+          // if expanded, fold review and change button text
+          comment.classList.remove("expanded");
+          button.textContent = "Expand Comment";
+        } else {
+          // if not expanded, expand review and change button text
+          comment.classList.add("expanded");
+          button.textContent = "(Fold)";
+        }
       }
-    });
-  });
-  // 2)Toggle review text (expand/fold)
-  function toggleText(button) {
-    // select button's previous sibling (review)
-    const comment = button.parentElement.previousElementSibling;
-    // check if review is expanded
-    if (comment.classList.contains("expanded")) {
-      // if expanded, fold review and change button text
-      comment.classList.remove("expanded");
-      button.textContent = "Expand Comment";
-    } else {
-      // if not expanded, expand review and change button text
-      comment.classList.add("expanded");
-      button.textContent = "(Fold)";
-    }
-  }
-  // Rating stars
-  document.addEventListener("DOMContentLoaded", function () {
-    // 1) select all stars, rating input, rating value
-    const stars = document.querySelectorAll(".fa-star");
-    const ratingInput = document.getElementById("rating");
-    const ratingValue = document.querySelector(".rating-value");
-    // 2) add listener to each star
-    stars.forEach((star) => {
-      // select star left and right half
-      const spanLeft = star.querySelector(".span-left");
-      const spanRight = star.querySelector(".span-right");
-      // 3) set value when left and  half mouseover
-      // a) when left half mouseover
-      spanLeft.addEventListener("mouseover", function () {
-        // rating value = data-value - 0.5 (ex: 4.5 - 0.5 = 4)
-        const value = parseFloat(star.getAttribute("data-value")) - 0.5;
-        // update rating input value
-        ratingInput.value = value;
-        ratingValue.textContent = `(${value} / 5)`;
-        // update stars display
-        updateStars(stars, value);
-      });
-      // b) when right half mouseover
-      spanRight.addEventListener("mouseover", function () {
-        // rating value = data-value
-        const value = parseFloat(star.getAttribute("data-value"));
-        // update rating input
-        ratingInput.value = value;
-        ratingValue.textContent = `(${value} / 5)`;
-        // update stars display
-        updateStars(stars, value);
-      });
-    });
-    // 4) update stars display
-    function updateStars(stars, selectedValue) {
-      stars.forEach((star) => {
-        const value = parseFloat(star.getAttribute("data-value"));
-        // if star value <= selected rating value, display as solid
-        if (value <= selectedValue) {
-          star.classList.add("fa-solid");
-          star.classList.remove("fa-regular", "fa-star-half-stroke");
-        }
-        // if star value - 0.5 = selected rating value, display as half star
-        else if (value - 0.5 === selectedValue) {
-          star.classList.add("fa-regular", "fa-star-half-stroke");
-          star.classList.remove("fa-solid");
-        }
-        // display as empty
-        else {
-          star.classList.remove("fa-solid", "fa-star-half-stroke");
-          star.classList.add("fa-regular");
+      // Rating stars
+      document.addEventListener("DOMContentLoaded", function () {
+        // 1) select all stars, rating input, rating value
+        const stars = document.querySelectorAll(".fa-star");
+        const ratingInput = document.getElementById("rating");
+        const ratingValue = document.querySelector(".rating-value");
+        // 2) add listener to each star
+        stars.forEach((star) => {
+          // select star left and right half
+          const spanLeft = star.querySelector(".span-left");
+          const spanRight = star.querySelector(".span-right");
+          // 3) set value when left and  half mouseover
+          // a) when left half mouseover
+          spanLeft.addEventListener("mouseover", function () {
+            // rating value = data-value - 0.5 (ex: 4.5 - 0.5 = 4)
+            const value = parseFloat(star.getAttribute("data-value")) - 0.5;
+            // update rating input value
+            ratingInput.value = value;
+            ratingValue.textContent = `(${value} / 5)`;
+            // update stars display
+            updateStars(stars, value);
+          });
+          // b) when right half mouseover
+          spanRight.addEventListener("mouseover", function () {
+            // rating value = data-value
+            const value = parseFloat(star.getAttribute("data-value"));
+            // update rating input
+            ratingInput.value = value;
+            ratingValue.textContent = `(${value} / 5)`;
+            // update stars display
+            updateStars(stars, value);
+          });
+        });
+        // 4) update stars display
+        function updateStars(stars, selectedValue) {
+          stars.forEach((star) => {
+            const value = parseFloat(star.getAttribute("data-value"));
+            // if star value <= selected rating value, display as solid
+            if (value <= selectedValue) {
+              star.classList.add("fa-solid");
+              star.classList.remove("fa-regular", "fa-star-half-stroke");
+            }
+            // if star value - 0.5 = selected rating value, display as half star
+            else if (value - 0.5 === selectedValue) {
+              star.classList.add("fa-regular", "fa-star-half-stroke");
+              star.classList.remove("fa-solid");
+            }
+            // display as empty
+            else {
+              star.classList.remove("fa-solid", "fa-star-half-stroke");
+              star.classList.add("fa-regular");
+            }
+          });
         }
       });
-    }
-  });
