@@ -1,19 +1,18 @@
 html,
 body {
-  /* max-width: 1200px; */
   margin: 0 auto;
   height: 100%;
 }
 
 main {
-  /* max-width: 1200px; */
   margin: auto;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.969);
   border-radius: 3px;
-  height: 100%;
+  min-height: 100vh;
 }
 
 .navbar {
+  height: 70px;
   color: black;
   position: fixed;
   top: 0;
@@ -22,26 +21,47 @@ main {
   z-index: 1030;
 }
 
-.profile-container {
+.nav-divine {
+  border-left: 2px solid #f7f4f4;
+  height: 100%;
+}
+
+.nav-guides {
   display: flex;
-  padding-top: 40px;
-  padding-left: 0px;
+  align-items: baseline;
+}
+
+.nav-profile {
+  text-decoration: none;
+  padding: 8px 0px 8px 16px;
+  border-left: 2px solid rgba(255, 255, 255, 0.476);
+}
+
+.nav__user-img {
+  width: 38px;
+  height: 38px;
+  border-radius: 90px;
+}
+
+.profile {
+  width: 1200px;
+  height: 100%;
+  margin: 0 auto;
 }
 
 .profile-card {
   display: flex;
 }
 
-.profile {
+.profile-form {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   width: 100%;
+  margin-top: 50px;
 }
 
 .user-info {
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
   width: 500px;
 }
 
@@ -75,10 +95,22 @@ main {
   width: 60px;
   height: 60px;
   border-radius: 90px;
+  margin-right: 20px;
 }
 
 .user-photo.large {
   height: 120px;
+}
+
+.choose-photo {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 10px 20px;
+  border: 1px solid rgb(219, 219, 219);
+  background-color: #f8f9fa;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 5px;
 }
 
 .carts {
@@ -168,9 +200,6 @@ main {
   margin: 0 10px;
 }
 
-.checkout-summary {
-}
-
 .item-selected {
   width: 76%;
 }
@@ -191,19 +220,35 @@ main {
   margin-left: 10px;
 }
 
+.alert {
+  position: absolute;
+  top: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+}
+
+.bi {
+  width: 16px;
+  height: 16px;
+}
+
 .login-container {
   display: flex;
   text-align: center;
   flex-direction: column;
   align-items: center;
   margin-top: 130px;
+  max-width: 100%;
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 28%;
+  width: 15%;
   height: auto;
   margin-bottom: 20px;
 }
@@ -229,9 +274,40 @@ main {
   padding-left: 10px;
 }
 
+.product {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .product-container {
   display: flex;
   justify-content: space-around;
+  width: 1200px;
+  margin: 0 auto;
+  margin-top: 80px;
+  margin-bottom: 20px;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  /* max-width: 50%;
+  width: 100%; */
+  justify-content: space-evenly;
+}
+
+.prod-description {
+  display: flex;
+  flex-direction: column;
+  width: 1200px;
+  margin-bottom: 20px;
+}
+
+.prod-reviews {
+  width: 1200px;
+  margin-bottom: 20px;
 }
 
 .image-block {
@@ -239,16 +315,15 @@ main {
   height: auto;
 }
 
-.product-details {
-  display: flex;
-  flex-direction: column;
-  max-width: 50%;
-  width: 100%;
-  justify-content: space-evenly;
-}
-
 .review-container {
   display: flex;
+  justify-content: space-between;
+}
+
+.reviews {
+  max-width: 45%;
+  display: flex;
+  flex-direction: column;
 }
 
 .user-reviews {
@@ -256,7 +331,7 @@ main {
   flex-direction: column;
   align-content: space-around;
   justify-content: space-between;
-  width: 50%;
+  width: 100%;
 }
 
 .review {
@@ -302,7 +377,7 @@ main {
 }
 
 .leave-comment {
-  width: 50%;
+  width: 45%;
 }
 
 .comment-container {
@@ -360,37 +435,42 @@ main {
   padding: 0px;
 }
 
-/* .container-fluid {
+.main-container {
   margin-top: 56px;
   background-color: #ffd700;
-} */
+}
 
 .card {
+  cursor: pointer;
+  max-width: 259px;
   height: 430px;
 }
 
-.card-container {
-  max-height: 430px;
+.main-content {
+  height: 100%;
+  margin: 0 auto;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+.card-img-container {
+  width: 259px;
+  height: 259px;
 }
 
 .card-img-top {
-  width: 253px;
-  height: 253px;
-  border-bottom: 1px solid rgba(199, 199, 199, 0.846);
+  width: 259px;
+  height: 259px;
+  /* border-bottom: 1px solid rgba(199, 199, 199, 0.846); */
 }
 
 .card-body {
+  width: 259px;
   display: flex;
   flex-direction: column;
-}
-
-.card-buttons {
-  position: absolute;
-  bottom: 5px;
-}
-
-.product-rating {
-  margin-bottom: 1rem;
+  justify-content: space-between;
 }
 
 .btn-outline-dark {

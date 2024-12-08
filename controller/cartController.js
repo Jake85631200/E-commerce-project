@@ -10,7 +10,7 @@ exports.checkAllCart = catchAsync(async (req, res, next) => {
   const carts = await Cart.find();
 
   res.status(200).json({
-    status: "success.",
+    status: "success",
     result: carts.length,
     data: {
       carts,
@@ -21,11 +21,10 @@ exports.checkAllCart = catchAsync(async (req, res, next) => {
 exports.checkMyCart = catchAsync(async (req, res, next) => {
   const cart = await Cart.findById(req.user.cart).populate({
     path: "productsInCart",
-    select: "image product_name price ",
   });
 
   res.status(200).json({
-    status: "success.",
+    status: "success",
     data: {
       cart,
     },
@@ -49,6 +48,8 @@ exports.addToCart = catchAsync(async (req, res, next) => {
   } else {
     cart.items.push({
       product: req.params.id,
+      product_name: product.product_name,
+      image: product.image,
       quantity: 1,
       price: product.price,
       total: product.price,
@@ -58,7 +59,7 @@ exports.addToCart = catchAsync(async (req, res, next) => {
   await cart.save();
 
   res.status(200).json({
-    status: "success.",
+    status: "success",
     message: "This item has been added into your cart!",
     data: {
       cart,
@@ -87,7 +88,7 @@ exports.removeFormCart = catchAsync(async (req, res, next) => {
   await cart.save();
 
   res.status(200).json({
-    status: "success.",
+    status: "success",
     message: "This item has been removed from your cart!",
     data: {
       cart,

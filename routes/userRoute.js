@@ -5,7 +5,7 @@ const { getAllUsers, getUser, deleteUser, updateUser, disableMe, getProfile } = 
 
 const {
   login,
-  logOut,
+  logout,
   signUp,
   forgetPassword,
   resetPassword,
@@ -18,7 +18,7 @@ const {
 
 router.post("/signUp", signUp);
 router.post("/login", login);
-router.post("/logout", logOut);
+router.get("/logout", logout);
 router.post("/forgetPassword", forgetPassword);
 router.patch("/resetPassword/:token", resetPassword);
 router.post("/twoFactor", twoFactor);

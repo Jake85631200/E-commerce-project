@@ -3,10 +3,14 @@ const Product = require("./productModel");
 
 const reviewSchema = new mongoose.Schema(
   {
-    review: {
+    _id: {
+      type: mongoose.Schema.Types.ObjectId,
+      auto: true,
+    },
+    comment: {
       type: String,
-      require: [true, "A review must have content."],
-      maxlength: [50, "A review must less or equal to 50 characters."],
+      require: [true, "A comment must have content."],
+      maxlength: [50, "A comment must less or equal to 50 characters."],
     },
     rating: {
       type: Number,
@@ -32,7 +36,7 @@ const reviewSchema = new mongoose.Schema(
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
-  }
+  },
 );
 
 // Each combination of product and user has always to be unique

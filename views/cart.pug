@@ -18,7 +18,7 @@ block content
         //- Cart Items
         .item-info
 
-        each item in cart.productsInCart
+        each item in cart.items
           .item
             .item-group-1
               .checkbox-container
@@ -31,10 +31,10 @@ block content
               .item-price= item.price.toFixed(2)
               .item-quantity
                 i.decrease-btn.fa-solid.fa-minus
-                input.qt-input(type="text", value="1", oninput=`updateTotal(${item.price}, this)`)
+                input.qt-input(type="text", value=`${item.quantity || 1}`, oninput=`updateTotal(${item.price}, this)`)
                 i.increase-btn.fa-solid.fa-plus
               // 初始顯示為 item.price
-              .item-total= item.price.toFixed(2) || 0
+              .item-total= item.total || item.price.toFixed(2)
               .btn.item-delete delete
 
       section.checkout-summary.fixed-bottom

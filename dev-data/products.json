@@ -7,7 +7,7 @@
     "description": "The latest smartphone model with a powerful processor and high-definition display.",
     "quantity": 500,
     "release_date": "10/10/2023",
-    "ratings_average": 4.2,
+    "ratings_average": 4.5,
     "ratings_quantity": 150,
     "customer_reviews": 200,
     "seller": {
@@ -25,7 +25,7 @@
     "description": "High-performance blender suitable for making various juices and smoothies.",
     "quantity": 300,
     "release_date": "9/15/2023",
-    "ratings_average": 3.8,
+    "ratings_average": 3.5,
     "ratings_quantity": 80,
     "customer_reviews": 100,
     "seller": {
@@ -43,7 +43,7 @@
     "description": "Comfortable running shoes providing excellent support and cushioning.",
     "quantity": 200,
     "release_date": "8/20/2023",
-    "ratings_average": 4.1,
+    "ratings_average": 4.0,
     "ratings_quantity": 220,
     "customer_reviews": 250,
     "seller": {
@@ -79,7 +79,7 @@
     "description": "Eco-friendly yoga mat providing excellent grip and comfort.",
     "quantity": 600,
     "release_date": "6/25/2023",
-    "ratings_average": 4.3,
+    "ratings_average": 4.0,
     "ratings_quantity": 180,
     "customer_reviews": 220,
     "seller": {
@@ -97,7 +97,7 @@
     "description": "Nonstick cookware set suitable for various cooking needs.",
     "quantity": 400,
     "release_date": "5/10/2023",
-    "ratings_average": 4.1,
+    "ratings_average": 4.0,
     "ratings_quantity": 200,
     "customer_reviews": 250,
     "seller": {
@@ -115,7 +115,7 @@
     "description": "21-speed mountain bike suitable for various terrains.",
     "quantity": 150,
     "release_date": "4/5/2023",
-    "ratings_average": 4.4,
+    "ratings_average": 4.0,
     "ratings_quantity": 100,
     "customer_reviews": 120,
     "seller": {
@@ -133,7 +133,7 @@
     "description": "Strategy board game suitable for family and friends gatherings.",
     "quantity": 700,
     "release_date": "3/15/2023",
-    "ratings_average": 3.9,
+    "ratings_average": 4.0,
     "ratings_quantity": 150,
     "customer_reviews": 200,
     "seller": {
@@ -151,7 +151,7 @@
     "description": "Portable car vacuum cleaner for maintaining interior cleanliness.",
     "quantity": 350,
     "release_date": "2/20/2023",
-    "ratings_average": 3.7,
+    "ratings_average": 4.0,
     "ratings_quantity": 90,
     "customer_reviews": 100,
     "seller": {
@@ -169,7 +169,7 @@
     "description": "Hardcover notebook suitable for daily notes and work.",
     "quantity": 1000,
     "release_date": "1/10/2023",
-    "ratings_average": 3.8,
+    "ratings_average": 3.5,
     "ratings_quantity": 50,
     "customer_reviews": 70,
     "seller": {
@@ -187,7 +187,7 @@
     "description": "Premium dog food providing complete nutrition.",
     "quantity": 600,
     "release_date": "12/5/2022",
-    "ratings_average": 4.2,
+    "ratings_average": 4.0,
     "ratings_quantity": 200,
     "customer_reviews": 250,
     "seller": {
@@ -205,7 +205,7 @@
     "description": "Modern design sofa, comfortable and stylish.",
     "quantity": 50,
     "release_date": "11/20/2022",
-    "ratings_average": 4.3,
+    "ratings_average": 2.5,
     "ratings_quantity": 30,
     "customer_reviews": 40,
     "seller": {
@@ -223,7 +223,7 @@
     "description": "Gold plated necklace, exquisite and elegant.",
     "quantity": 300,
     "release_date": "10/15/2022",
-    "ratings_average": 4.0,
+    "ratings_average": 3.0,
     "ratings_quantity": 120,
     "customer_reviews": 150,
     "seller": {
@@ -259,7 +259,7 @@
     "description": "Wireless earbuds with clear sound quality and comfortable fit.",
     "quantity": 400,
     "release_date": "8/10/2022",
-    "ratings_average": 4.1,
+    "ratings_average": 1.0,
     "ratings_quantity": 350,
     "customer_reviews": 400,
     "seller": {
@@ -277,7 +277,7 @@
     "description": "Electric kettle, fast heating, safe and reliable.",
     "quantity": 500,
     "release_date": "7/5/2022",
-    "ratings_average": 3.9,
+    "ratings_average": 1.5,
     "ratings_quantity": 150,
     "customer_reviews": 200,
     "seller": {
@@ -295,7 +295,7 @@
     "description": "Leather jacket, classic design, durable and stylish.",
     "quantity": 150,
     "release_date": "6/1/2022",
-    "ratings_average": 4.2,
+    "ratings_average": 3.0,
     "ratings_quantity": 180,
     "customer_reviews": 200,
     "seller": {
@@ -313,7 +313,7 @@
     "description": "Anti-aging face cream, moisturizes skin and reduces fine lines.",
     "quantity": 700,
     "release_date": "5/15/2022",
-    "ratings_average": 4.3,
+    "ratings_average": 4.5,
     "ratings_quantity": 400,
     "customer_reviews": 450,
     "seller": {
@@ -331,7 +331,7 @@
     "description": "4-person tent suitable for camping and outdoor activities.",
     "quantity": 100,
     "release_date": "4/1/2022",
-    "ratings_average": 4.4,
+    "ratings_average": 4.5,
     "ratings_quantity": 250,
     "customer_reviews": 300,
     "seller": {
@@ -349,7 +349,7 @@
     "description": "1000-piece puzzle, challenge your intelligence and patience.",
     "quantity": 900,
     "release_date": "3/10/2022",
-    "ratings_average": 4.0,
+    "ratings_average": 3.5,
     "ratings_quantity": 600,
     "customer_reviews": 700,
     "seller": {
