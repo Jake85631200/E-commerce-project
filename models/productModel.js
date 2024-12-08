@@ -8,23 +8,23 @@ const productSchema = new mongoose.Schema({
   },
   product_name: {
     type: String,
-    require: [true, "Product must have a name."],
+    required: [true, "Product must have a name."],
     minlength: [8, "Product name must at least 8 characters long."],
     maxlength: [100, "Product name must less than 100 characters long."],
   },
   slug: String,
   image: {
     type: String,
-    require: [true, "Please provide a image of the product."],
+    required: [true, "Please provide an image of the product."],
   },
   price: {
     type: Number,
-    require: [true, "Product must have a price."],
+    required: [true, "Product must have a price."],
     min: [1, "Price must be more than 0"],
   },
   description: {
     type: String,
-    require: [true, "Product must have a description"],
+    required: [true, "Product must have a description"],
     minlength: [20, "Product description must at least 20 characters long."],
     maxlength: [500, "Product description must less than 100 characters long."],
   },
@@ -50,7 +50,7 @@ const productSchema = new mongoose.Schema({
   },
   quantity: {
     type: Number,
-    require: [true, "Please provide available quantity."],
+    required: [true, "Please provide available quantity."],
   },
   release_date: {
     type: Date,
@@ -65,9 +65,6 @@ const productSchema = new mongoose.Schema({
   ratings_quantity: {
     type: Number,
   },
-  customer_reviews: {
-    type: Number,
-  },
   seller: {
     _id: {
       type: mongoose.Schema.Types.ObjectId,
@@ -79,14 +76,18 @@ const productSchema = new mongoose.Schema({
       required: true,
     },
   },
-  seller_rating: {
-    type: Number,
-  },
   isAvailable: {
     type: Boolean,
     default: true,
-    // select: false,
   },
+});
+
+// Virtual Populate
+// NOT suitable to put review collection into productSchema, because reviews tends to be a MANY collection, using Virtual Populate
+productSchema.virtual("reviewsInProd", {
+  ref: "Review", // 關聯的模型名稱
+  foreignField: "product", // Review 模型中的關聯欄位
+  localField: "_id", // Product 模型的主鍵欄位
 });
 
 productSchema.pre(/^find/, function (next) {

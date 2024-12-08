@@ -10,7 +10,7 @@ exports.getAllProducts = catchAsync(async (req, res, next) => {
   const products = await APIFeatures.query;
 
   res.status(200).json({
-    status: "success.",
+    status: "success",
     result: products.length,
     data: {
       products,
@@ -19,14 +19,17 @@ exports.getAllProducts = catchAsync(async (req, res, next) => {
 });
 
 exports.getProduct = catchAsync(async (req, res, next) => {
-  const product = await Products.findById(req.params.id);
+  const product = await Products.findById(req.params.id).populate({
+    path: "reviewsInProd",
+  });
 
   if (!product) return next(new AppError("Can't find product with that ID!", 404));
 
   res.status(200).json({
-    status: "success.",
+    status: "success",
     data: {
       product,
+      reviews: product.reviewsInProd || [],
     },
   });
 });
@@ -41,7 +44,7 @@ exports.getMyProduct = catchAsync(async (req, res, next) => {
   }
 
   res.status(200).json({
-    status: "success.",
+    status: "success",
     result: products.length,
     data: {
       products,
@@ -57,7 +60,7 @@ exports.updateProduct = catchAsync(async (req, res, next) => {
   if (!product) return next(new AppError("Can't find product with that ID!", 404));
 
   res.status(200).json({
-    status: "success.",
+    status: "success",
     data: {
       product,
     },
@@ -85,7 +88,7 @@ exports.createProduct = catchAsync(async (req, res, next) => {
     });
 
     res.status(201).json({
-      status: "success.",
+      status: "success",
       data: {
         product,
       },
@@ -103,7 +106,7 @@ exports.disableProd = catchAsync(async (req, res, next) => {
   if (!product) return next(new AppError("Can't find product with that ID!", 404));
 
   res.status(204).json({
-    status: "success.",
+    status: "success",
     data: null,
   });
 });
@@ -114,7 +117,7 @@ exports.deleteProduct = catchAsync(async (req, res, next) => {
   if (!product) return next(new AppError("Can't find product with that ID!", 404));
 
   res.status(204).json({
-    status: "success.",
+    status: "success",
     data: null,
   });
 });
@@ -141,7 +144,7 @@ exports.productStats = catchAsync(async (req, res, next) => {
     ]);
 
     res.status(200).json({
-      status: "success.",
+      status: "success",
       data: {
         list,
       },
