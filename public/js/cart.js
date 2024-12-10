@@ -1,17 +1,16 @@
 import axios from "axios";
 import { showAlert } from "./alerts";
 
-export const addToCart = async (productUrl) => {
+export const myCart = async () => {
   try {
-    const res = await axios({
-      method: "POST",
-      url: productUrl,
+    await axios({
+      method: "GET",
+      url: "/my-cart",
     });
-
-    if (res.status === "success") {
-      showAlert("success", "Added to your cart!");
-    }
-  } catch (error) {
-    showAlert("error", `${err.response.data.message}`);
+  } catch (err) {
+    showAlert("error", "Please login first!");
+    window.setTimeout(() => {
+      location.assign("/login");
+    }, 1500);
   }
 };
