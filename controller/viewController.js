@@ -6,12 +6,27 @@ const Carts = require("../models/cartModel");
 const Reviews = require("../models/reviewModel");
 const Orders = require("../models/orderModel");
 
-exports.Overview = catchAsync(async (req, res, next) => {
+exports.overview = catchAsync(async (req, res, next) => {
   const products = await Products.find();
 
   res.status(200).render("overview", {
     title: "All Products",
     products,
+  });
+});
+
+exports.search = catchAsync(async (req, res, next) => {
+  const query = req.query.keyword.trim();
+  const products = await Products.find({ product_name: new RegExp(query, "i") });
+
+  console.log(products);
+
+  if (products.length === 0) {
+    return next(new AppError("No related products found!", 404));
+  }
+
+  res.render("product-partial", { products, query }, (err, html) => {
+    res.status(200).send(html);
   });
 });
 

@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  Overview,
+  overview,
+  search,
   myProfile,
   getProdReviews,
   checkProd,
@@ -13,7 +14,9 @@ const {
 
 const { restrictTo, protect, isLoggedIn } = require("../controller/authController");
 
-router.get("/", isLoggedIn, Overview);
+router.get("/", isLoggedIn, overview);
+
+router.get("/search", search); 
 
 router.get("/profile", protect, isLoggedIn, myProfile);
 
