@@ -49,6 +49,10 @@ class GetAllProductsFeature {
     }
     return this;
   }
+
+  search() {
+    
+  }
 }
 
 module.exports = GetAllProductsFeature;

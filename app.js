@@ -15,6 +15,7 @@ const viewRoute = require("./routes/viewRoute.js");
 
 const app = express();
 
+app.use(morgan("combined"));
 // app.use(express.static("views"));
 app.use(express.static(path.join(__dirname, "public")));
 
