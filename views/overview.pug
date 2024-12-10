@@ -8,18 +8,14 @@ block content
         h1 Welcome!
         p An e-commerce site, not much goods!
 
+      form.search-bar-form.d-flex.justify-content-center(style="margin-top: 20px", role="search")
+        input.form-input.mr-sm-2(
+          style="margin-right: 10px; width: 500px",
+          type="search",
+          placeholder="Search",
+          aria-label="Search"
+        )
+        button.btn.btn-warning(type="submit") Search
       //- Product-container
       .container.mt-4
-        .row(style="display: flex")
-          //- Product-card
-          each product in products
-            .col-12.col-sm-6.col-md-4.col-lg-3.mb-4
-              a.card(href=`/product/${product._id}`)
-                .card-img-container
-                  img.card-img-top.img-fluid(src=`${product.image}`, alt="Product Image")
-                .card-body
-                  h5.card-title
-                    span= product.product_name
-                  .product-rating.mb-2
-                    span.rating-value 4.5
-                    span.stars &starf;&starf;&starf;&starf;&star;
+        include product-partial.pug
