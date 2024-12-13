@@ -4,54 +4,71 @@ block content
   main
     if user
       .profile.mt-5.ml-5.pt-5
+        h2 My account
+        h4 Profile
         .profile-container
-          h2 My account
-          h4 Profile
           .profile-form
-            form.user-info-form(style="padding-right: 40px")
-              table.user-info
-                tr
-                  td.info-title Name
-                  td.info-container
-                    input.name(style="width: 100%", type="text", value=`${user.name}`)
-                tr
-                  td.info-title Email
-                  td.info-container
-                    span= `${user.email}`
-                    button.btn.info-edit-btn.btn-primary.btn-sm(type="button")
-                      | Edit
-                tr
-                  td.info-title Phone number
-                  td.info-container
-                    span= `${user.phone_number}`
-                    button.btn.info-edit-btn.btn-primary.btn-sm(type="button")
-                      | Edit
-                tr
-                  td.info-title Address
-                  td.info-container
-                    span= `${user.address}`
-                    button.btn.info-edit-btn.btn-primary.btn-sm(type="button")
-                      | Edit
-                tr
-                  td.info-title Gender
-                  td.info-container
-                    label(style="margin-bottom: 0px")
-                      input(type="radio", name="gender", value="male", checked=user.gender === "male")
-                      |
-                      | Male
-                    label(style="margin-bottom: 0px; padding-left: 15px")
-                      input(type="radio", name="gender", value="female", checked=user.gender === "female")
-                      |
-                      | Female
-                    label(style="margin-bottom: 0px; padding-left: 15px")
-                      input(type="radio", name="gender", value="other", checked=user.gender === "other")
-                      |
-                      | Other
-                tr
-                  td
-                    a.btn.btn-warning.custom-cart-btn(style="margin-left: 20px", href="#") Save
-            .avatar-container(style="width: 20%")
-              img.user-photo(src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png", alt="User photo")
-              input#photo(style="display: none", type="file", accept="image/*", name="photo")
-              label.choose-photo(for="photo")
-                | Choose new photo
+            form.user-info-form
+              .form-group
+                label.info-title(for="name") Name
+                input#name.info-content(type="text", name="name", value=user.name)
+              .form-group
+                label.info-title(for="email") Email
+                input#email.info-content(type="email", name="email", value=user.email)
+              .form-group
+                label.info-title(for="phone_number") Phone number
+                input#phone_number.info-content(type="text", name="phone_number", value=user.phone_number)
+              .form-group
+                label.info-title(for="address") Address
+                input#address.info-content(type="text", name="address", value=user.address)
+              .form-group
+                label.info-title Gender
+                .info-content
+                  label(style="margin-bottom: 0px")
+                    input.gender(type="radio", name="gender", value="male", checked=user.gender === "male")
+                    | Male
+                  label(style="margin-bottom: 0px; padding-left: 15px")
+                    input.gender(type="radio", name="gender", value="female", checked=user.gender === "female")
+                    | Female
+                  label(style="margin-bottom: 0px; padding-left: 15px")
+                    input.gender(type="radio", name="gender", value="other", checked=user.gender === "other")
+                    | Other
+              .form-actions
+                button.save-info.btn.btn-warning.custom-cart-btn(type="submit") Save
+
+            form.user-password-form
+              .form-group
+                label.security-title.label.form__label(for="password-current") Current password
+                input#password-current.security-content.form__input(
+                  type="password",
+                  placeholder="••••••••",
+                  autocomplete="off",
+                  required,
+                  minlength="8"
+                )
+              .form-group
+                label.security-title.label.form__label(for="password") New password
+                input#password.security-content.form__input(
+                  type="password",
+                  placeholder="••••••••",
+                  autocomplete="off",
+                  required,
+                  minlength="8"
+                )
+              .form-group
+                label.security-title.label.form__label(for="password-confirm") Confirm password
+                input#password-confirm.security-content.form__input(
+                  type="password",
+                  placeholder="••••••••",
+                  autocomplete="off",
+                  required,
+                  minlength="8"
+                )
+              .form-actions
+                button.save-password.btn.btn-warning.custom-cart-btn(type="submit") Save
+
+          .user-info-form.avatar-container(style="width: 20%")
+            img.user-image(src=`${user.image}`, alt="User image")
+            input#image.info-content(style="display: none", type="file", name="image", accept="image/*")
+            label.choose-image(for="image")
+              | Choose new image
