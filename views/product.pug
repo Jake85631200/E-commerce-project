@@ -36,12 +36,13 @@ block content
                 .user-reviews.m-3
                   .review
                     .review-content
-                      .user-info
-                        img.user-photo(
-                          src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png",
+                      .user-info(style="display: flex")
+                        img(
+                          style="width: 60px; height: 60px; border-radius: 90px",
+                          src=`${review.user.image}`,
                           alt="User-photo"
                         )
-                        .ml-3(style="display: flex; flex-direction: column")
+                        .ml-3(style="display: flex; flex-direction: column; margin-left: 20px")
                           h4.user-name= `${review.user.name}`
                           .rating(style="display: flex; align-items: baseline")
                             p.user-rating Rating: &starf;&starf;&starf;&starf;&star;

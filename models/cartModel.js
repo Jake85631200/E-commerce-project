@@ -2,13 +2,13 @@ const mongoose = require("mongoose");
 
 const cartSchema = new mongoose.Schema(
   {
-    // put every item-in-cart collection in cartSchema, suitable for FEW collection （反例：見 productModel 中的 reviews） 
+    // put every item-in-cart collection in cartSchema, suitable for FEW collection （反例：見 productModel 中的 reviews）
     items: [
       {
         _id: false,
         product: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "Products",
+          ref: "Product",
           required: true,
         },
         product_name: {

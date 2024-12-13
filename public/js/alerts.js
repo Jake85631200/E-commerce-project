@@ -3,7 +3,7 @@ export const hideAlert = () => {
   if (el) el.parentElement.removeChild(el);
 };
 
-export const showAlert = (type, msg) => {
+export const showAlert = (type, msg, t = 5) => {
   // 清除舊的 alert
   hideAlert();
   let alert;
@@ -24,5 +24,5 @@ export const showAlert = (type, msg) => {
     </div>`;
   }
   document.querySelector("body").insertAdjacentHTML("afterbegin", alert);
-  window.setTimeout(hideAlert, 5 * 1000);
+  window.setTimeout(hideAlert, t * 1000);
 };

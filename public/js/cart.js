@@ -7,6 +7,7 @@ export const myCart = async () => {
       method: "GET",
       url: "/my-cart",
     });
+    location.assign("/my-cart");
   } catch (err) {
     showAlert("error", "Please login first!");
     window.setTimeout(() => {

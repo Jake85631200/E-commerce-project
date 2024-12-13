@@ -1,7 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-const { getAllUsers, getUser, deleteUser, updateUser, disableMe, getProfile } = require("../controller/userController");
+const {
+  getAllUsers,
+  getUser,
+  deleteUser,
+  uploadUserImage,
+  updateMe,
+  disableMe,
+  getProfile,
+} = require("../controller/userController");
 
 const {
   login,
@@ -30,13 +38,13 @@ router.get("/profile", getProfile);
 
 router.patch("/updatePassword", updatePassword);
 
-router.route("/").get(getAllUsers);
-
 router.patch("/disableMe", disableMe);
 
-router.route("/:id").patch(updateUser);
+router.patch("/updateMe", uploadUserImage, updateMe);
 
 router.use(restrictTo("admin"));
+
+router.route("/").get(getAllUsers);
 
 router.route("/:id").get(getUser).delete(deleteUser);
 
