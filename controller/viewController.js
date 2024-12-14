@@ -25,7 +25,7 @@ exports.search = catchAsync(async (req, res, next) => {
     return next(new AppError("No related products found!", 404));
   }
 
-  res.render("product-partial", { products, query }, (err, html) => {
+  res.render("product_partial", { products, query }, (err, html) => {
     res.status(200).send(html);
   });
 });
@@ -103,5 +103,11 @@ exports.addToCart = catchAsync(async (req, res, next) => {
 exports.getLoginForm = async (req, res) => {
   res.status(200).render("login", {
     title: "Log into your account",
+  });
+};
+
+exports.TwoFACode = async (req, res) => {
+  res.status(200).render("two_factor", {
+    title: "Forget password",
   });
 };
