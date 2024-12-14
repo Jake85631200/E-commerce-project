@@ -132,7 +132,8 @@ exports.twoFactor = catchAsync(async (req, res, next) => {
 
   // Send verification code to email
   await sendMail(
-    user.email,
+    // user.email
+    "test1@gmail.com", // test email by Mailtrap
     "Two-Factor Authentication Code",
     `Your verification code is: ${faCode}. This code will expire in 10 minutes.`,
   );
@@ -143,10 +144,10 @@ exports.twoFactor = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.validateFACode = catchAsync(async (req, res, next) => {
+exports.verifyFACode = catchAsync(async (req, res, next) => {
   // Check if user provide email and FACode
-  const { email, yourFACode } = req.body;
-  if (!email || !yourFACode) {
+  const { email, verifyCode } = req.body;
+  if (!email || !verifyCode) {
     return next(new AppError("Please provide email and verification code.", 400));
   }
 
@@ -159,7 +160,7 @@ exports.validateFACode = catchAsync(async (req, res, next) => {
   }
 
   // Comparing verification co
-  if (yourFACode !== storedCode) {
+  if (verifyCode !== storedCode) {
     return next(new AppError("Verification code invalid. Please try again", 400));
   }
 

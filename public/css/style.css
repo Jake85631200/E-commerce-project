@@ -251,8 +251,8 @@ main {
   text-align: center;
   flex-direction: column;
   align-items: center;
-  margin-top: 130px;
-  max-width: 100%;
+  width: auto;
+  margin: 130px auto;
 }
 
 .login-form {
@@ -262,6 +262,18 @@ main {
   width: 15%;
   height: auto;
   margin-bottom: 20px;
+}
+
+.send-email-form,
+.send-verify-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.reset-password-btn {
+  margin: 10px 0px;
+  width: 20%;
 }
 
 .checkbox-container {
