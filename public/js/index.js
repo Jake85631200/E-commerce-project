@@ -1,8 +1,9 @@
+import { showAlert } from "./alerts";
 import { login, logout } from "./login";
+import { checkTwoFACode, sendTwoFACode } from "./twoFactorVerify";
 import { myCart } from "./cart";
 import { search } from "./search";
 import { updateSettings } from "./updateSettings";
-import { showAlert } from "./alerts";
 
 const loginForm = document.querySelector(".login-form");
 const logOutBtn = document.querySelector(".nav-logout-btn");
@@ -12,6 +13,8 @@ const searchInput = document.querySelector(".form-input");
 const myCartBtn = document.querySelector(".nav-cart");
 const userDataForm = document.querySelector(".user-info-form");
 const userPasswordForm = document.querySelector(".user-password-form");
+const sendEmailForm = document.querySelector(".send-email-form");
+const sendVerifyForm = document.querySelector(".send-verify-form");
 
 if (loginForm) {
   loginForm.addEventListener("submit", (e) => {
@@ -58,7 +61,7 @@ if (userDataForm) {
     if (selectedGender) {
       form.append("gender", selectedGender.value);
     }
-    
+
     const selectedImage = document.getElementById("image").files[0];
     if (selectedImage) {
       form.append("image", document.getElementById("image").files[0]);
@@ -82,6 +85,29 @@ if (userPasswordForm) {
     document.getElementById("password-current").value = "";
     document.getElementById("password").value = "";
     document.getElementById("password-confirm").value = "";
+  });
+}
+
+if (sendEmailForm) {
+  sendEmailForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    document.querySelector(".send-verification").textContent = "Sending...";
+    const email = document.getElementById("email").value;
+    await sendTwoFACode(email);
+    document.getElementById("send-verify").style.display = "none";
+    document.getElementById("verify-email").style.display = "";
+  });
+}
+
+if (sendVerifyForm) {
+  sendVerifyForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    document.querySelector(".code-verifying").textContent = "Verifying...";
+    const email = document.getElementById("email").value;
+    const verifyCode = document.getElementById("verify-code").value;
+    await checkTwoFACode(email, verifyCode);
+    document.getElementById("verify-email").style.display = "none";
+    document.getElementById("verify-successful").style.display = "";
   });
 }
 

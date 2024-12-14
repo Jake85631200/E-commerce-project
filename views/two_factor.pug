@@ -1,0 +1,28 @@
+extends base
+
+block content
+  main
+    .login-container(style="text-align: center")
+      #send-verify
+        h3(style="padding: 40px 0") Forgot Password?
+        form.send-email-form
+          input#email(type="email", name="email", placeholder="Email", autocomplete="username", required)
+          button.send-verification.login-btn.btn.btn-warning(style="margin: 10px 0px", type="submit") Send verification code
+
+      #verify-email(style="display: none")
+        h3(style="padding: 40px 0") Check verification code in your email<br>This code will expire in 10 minutes
+        form.send-verify-form
+          input#verify-code(
+            type="text",
+            name="code",
+            placeholder="Your Verification Code",
+            autocomplete="username",
+            required
+          )
+          button.code-verifying.login-btn.btn.btn-warning(style="margin: 10px 0px", type="submit") Verify
+
+      #verify-successful(style="display: none")
+        h3(style="padding: 40px 0") For your account security,<br> we suggest you change the password!
+        .buttons
+          a.confirm-btn.btn.btn-outline-info(style="margin: 10px 10px", name="deny", type="click", href="/") Maybe next time
+          a.confirm-btn.btn.btn-warning(style="margin: 10px 10px", name="accept", type="click", href="/profile") Change password
