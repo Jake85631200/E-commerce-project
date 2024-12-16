@@ -1,6 +1,6 @@
 import { showAlert } from "./alerts";
 import { login, logout } from "./login";
-import { checkTwoFACode, sendTwoFACode } from "./twoFactorVerify";
+import { checkTwoFACode, sendTwoFACode, resetPassword } from "./twoFactorVerify";
 import { myCart } from "./cart";
 import { search } from "./search";
 import { updateSettings } from "./updateSettings";
@@ -15,6 +15,11 @@ const userDataForm = document.querySelector(".user-info-form");
 const userPasswordForm = document.querySelector(".user-password-form");
 const sendEmailForm = document.querySelector(".send-email-form");
 const sendVerifyForm = document.querySelector(".send-verify-form");
+const resetPasswordForm = document.querySelector(".reset-password-form");
+
+const updateButtonText = (selector, text) => {
+  document.querySelector(selector).textContent = text;
+};
 
 if (loginForm) {
   loginForm.addEventListener("submit", (e) => {
@@ -41,13 +46,13 @@ if (myCartBtn) {
 if (searchBarForm) {
   searchBarForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    console.log(searchInput.value.toLowerCase());
     const products = await search(searchInput.value.toLowerCase());
     if (products) {
       productContainer.innerHTML = products;
     }
   });
 }
+
 if (userDataForm) {
   userDataForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -74,40 +79,61 @@ if (userDataForm) {
 if (userPasswordForm) {
   userPasswordForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    document.querySelector(".save-password").textContent = "Updating...";
+
+    updateButtonText(".save-password", "Updating...");
 
     const passwordCurrent = document.getElementById("password-current").value;
     const password = document.getElementById("password").value;
     const passwordConfirm = document.getElementById("password-confirm").value;
     await updateSettings({ passwordCurrent, password, passwordConfirm }, "password");
 
-    document.querySelector(".save-password").textContent = "Save password";
+    updateButtonText(".save-password", "Save password");
     document.getElementById("password-current").value = "";
     document.getElementById("password").value = "";
     document.getElementById("password-confirm").value = "";
   });
 }
 
+// Send verification code to email
 if (sendEmailForm) {
   sendEmailForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    document.querySelector(".send-verification").textContent = "Sending...";
+    updateButtonText(".send-verification", "Sending...");
     const email = document.getElementById("email").value;
-    await sendTwoFACode(email);
-    document.getElementById("send-verify").style.display = "none";
-    document.getElementById("verify-email").style.display = "";
+    if ((await sendTwoFACode(email)) === "success") {
+      document.getElementById("send-verify").style.display = "none";
+      document.getElementById("verify-email").style.display = "";
+    }
+    updateButtonText(".send-verification", "Send verification code");
   });
 }
 
+// Confirm code form email
 if (sendVerifyForm) {
   sendVerifyForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    document.querySelector(".code-verifying").textContent = "Verifying...";
+    updateButtonText(".code-verifying", "Verifying...");
     const email = document.getElementById("email").value;
     const verifyCode = document.getElementById("verify-code").value;
-    await checkTwoFACode(email, verifyCode);
-    document.getElementById("verify-email").style.display = "none";
-    document.getElementById("verify-successful").style.display = "";
+
+    // If verification successful
+    if ((await checkTwoFACode(email, verifyCode)) === "success") {
+      document.getElementById("verify-email").style.display = "none";
+      document.getElementById("reset-password").style.display = "";
+    }
+    updateButtonText(".code-verifying", "Verify");
+  });
+}
+
+// Reset password
+if (resetPasswordForm) {
+  resetPasswordForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const newPassword = document.getElementById("new-password").value;
+    const passwordConfirm = document.getElementById("password-confirm").value;
+
+    resetPassword(email, newPassword, passwordConfirm);
   });
 }
 
