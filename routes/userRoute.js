@@ -15,7 +15,6 @@ const {
   login,
   logout,
   signUp,
-  forgetPassword,
   resetPassword,
   updatePassword,
   twoFactor,
@@ -27,8 +26,7 @@ const {
 router.post("/signUp", signUp);
 router.post("/login", login);
 router.get("/logout", logout);
-router.post("/forgetPassword", forgetPassword);
-router.patch("/resetPassword/:token", resetPassword);
+router.patch("/resetPassword", resetPassword);
 router.post("/twoFactor", twoFactor);
 router.post("/verifyFACode", verifyFACode);
 

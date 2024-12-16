@@ -21,8 +21,35 @@ block content
           )
           button.code-verifying.login-btn.btn.btn-warning(style="margin: 10px 0px", type="submit") Verify
 
-      #verify-successful(style="display: none")
-        h3(style="padding: 40px 0") For your account security,<br> we suggest you change the password!
-        .buttons
-          a.confirm-btn.btn.btn-outline-info(style="margin: 10px 10px", name="deny", type="click", href="/") Maybe next time
-          a.confirm-btn.btn.btn-warning(style="margin: 10px 10px", name="accept", type="click", href="/profile") Change password
+      //- #verify-successful(style="display: none")
+      //-   h3(style="padding: 40px 0") For your account security,<br> we suggest you change the password!
+      //-   .buttons
+      //-     a.confirm-btn.btn.btn-outline-info(style="margin: 10px 10px", name="deny", type="click", href="/") Maybe next time
+      //-     a.confirm-btn.btn.btn-warning(style="margin: 10px 10px", name="accept", type="click", href="/profile") Change password
+
+      #reset-password(style="display: none")
+        h3(style="padding: 40px 0") For your account security,<br> please set a new password
+        form.reset-password-form(style="")
+          .form-set-password(style="display: flex; width: 500px; margin: 20px; flex-direction: column")
+            label.security-title.label.form__label(style="padding-bottom: 10px", for="password") New password
+            input#new-password(
+              type="password",
+              name="password",
+              placeholder="••••••••",
+              autocomplete="off",
+              required,
+              minlength="8"
+            )
+          .form-set-password(style="display: flex; width: 500px; margin: 20px; flex-direction: column")
+            label.security-title.label.form__label(style="padding-bottom: 10px", for="password") Confirm password
+            input#password-confirm(
+              type="password",
+              name="password",
+              placeholder="••••••••",
+              autocomplete="off",
+              required,
+              minlength="8"
+            )
+
+          .form-actions
+            button.save-password.btn.btn-warning.custom-cart-btn(type="submit") Confirm

@@ -6169,7 +6169,7 @@ var logout = exports.logout = /*#__PURE__*/function () {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.sendTwoFACode = exports.checkTwoFACode = void 0;
+exports.sendTwoFACode = exports.resetPassword = exports.checkTwoFACode = void 0;
 var _axios = _interopRequireDefault(require("axios"));
 var _alerts = require("./alerts");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -6198,17 +6198,16 @@ var sendTwoFACode = exports.sendTwoFACode = /*#__PURE__*/function () {
           if (res.data.status === "success") {
             (0, _alerts.showAlert)("success", "Verification code send! Check your email!");
           }
-          _context.next = 10;
-          break;
-        case 7:
-          _context.prev = 7;
+          return _context.abrupt("return", res.data.status);
+        case 8:
+          _context.prev = 8;
           _context.t0 = _context["catch"](0);
           (0, _alerts.showAlert)("error", _context.t0.response.data.message);
-        case 10:
+        case 11:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[0, 7]]);
+    }, _callee, null, [[0, 8]]);
   }));
   return function sendTwoFACode(_x) {
     return _ref.apply(this, arguments);
@@ -6232,11 +6231,7 @@ var checkTwoFACode = exports.checkTwoFACode = /*#__PURE__*/function () {
           });
         case 3:
           res = _context2.sent;
-          if (res.data.status === "success") {
-            (0, _alerts.showAlert)("success", "You have logged in!");
-          }
-          _context2.next = 10;
-          break;
+          return _context2.abrupt("return", res.data.status);
         case 7:
           _context2.prev = 7;
           _context2.t0 = _context2["catch"](0);
@@ -6251,22 +6246,46 @@ var checkTwoFACode = exports.checkTwoFACode = /*#__PURE__*/function () {
     return _ref2.apply(this, arguments);
   };
 }();
-
-// export const suggestion = async (code) => {
-//   try {
-//     const res = await axios({
-//       method: "POST",
-//       url: "/api/v1/users/verifyFACode",
-//       data: { code },
-//     });
-//     if (res.data.status === "success") {
-//       showAlert("success", res.data.message);
-//       location.assign("/verify-successful");
-//     }
-//   } catch (err) {
-//     showAlert("error", err.response.data.message);
-//   }
-// };
+var resetPassword = exports.resetPassword = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(email, newPassword, passwordConfirm) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.prev = 0;
+          _context3.next = 3;
+          return (0, _axios.default)({
+            method: "PATCH",
+            url: "/api/v1/users/resetPassword",
+            data: {
+              email: email,
+              newPassword: newPassword,
+              passwordConfirm: passwordConfirm
+            }
+          });
+        case 3:
+          res = _context3.sent;
+          if (res.data.status === "success") {
+            (0, _alerts.showAlert)("success", "Password reset successful! Redirecting...");
+            window.setTimeout(function () {
+              location.assign("/");
+            }, 1500);
+          }
+          return _context3.abrupt("return", res.data.status);
+        case 8:
+          _context3.prev = 8;
+          _context3.t0 = _context3["catch"](0);
+          (0, _alerts.showAlert)("error", _context3.t0.response.data.message);
+        case 11:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3, null, [[0, 8]]);
+  }));
+  return function resetPassword(_x4, _x5, _x6) {
+    return _ref3.apply(this, arguments);
+  };
+}();
 },{"axios":"../../node_modules/axios/index.js","./alerts":"alerts.js"}],"cart.js":[function(require,module,exports) {
 "use strict";
 
@@ -6429,6 +6448,10 @@ var userDataForm = document.querySelector(".user-info-form");
 var userPasswordForm = document.querySelector(".user-password-form");
 var sendEmailForm = document.querySelector(".send-email-form");
 var sendVerifyForm = document.querySelector(".send-verify-form");
+var resetPasswordForm = document.querySelector(".reset-password-form");
+var updateButtonText = function updateButtonText(selector, text) {
+  document.querySelector(selector).textContent = text;
+};
 if (loginForm) {
   loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -6456,15 +6479,14 @@ if (searchBarForm) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             e.preventDefault();
-            console.log(searchInput.value.toLowerCase());
-            _context.next = 4;
+            _context.next = 3;
             return (0, _search.search)(searchInput.value.toLowerCase());
-          case 4:
+          case 3:
             products = _context.sent;
             if (products) {
               productContainer.innerHTML = products;
             }
-          case 6:
+          case 5:
           case "end":
             return _context.stop();
         }
@@ -6502,7 +6524,7 @@ if (userPasswordForm) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
             e.preventDefault();
-            document.querySelector(".save-password").textContent = "Updating...";
+            updateButtonText(".save-password", "Updating...");
             passwordCurrent = document.getElementById("password-current").value;
             password = document.getElementById("password").value;
             passwordConfirm = document.getElementById("password-confirm").value;
@@ -6513,7 +6535,7 @@ if (userPasswordForm) {
               passwordConfirm: passwordConfirm
             }, "password");
           case 7:
-            document.querySelector(".save-password").textContent = "Save password";
+            updateButtonText(".save-password", "Save password");
             document.getElementById("password-current").value = "";
             document.getElementById("password").value = "";
             document.getElementById("password-confirm").value = "";
@@ -6528,6 +6550,8 @@ if (userPasswordForm) {
     };
   }());
 }
+
+// Send verification code to email
 if (sendEmailForm) {
   sendEmailForm.addEventListener("submit", /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(e) {
@@ -6536,14 +6560,21 @@ if (sendEmailForm) {
         while (1) switch (_context3.prev = _context3.next) {
           case 0:
             e.preventDefault();
-            document.querySelector(".send-verification").textContent = "Sending...";
+            updateButtonText(".send-verification", "Sending...");
             email = document.getElementById("email").value;
             _context3.next = 5;
             return (0, _twoFactorVerify.sendTwoFACode)(email);
           case 5:
+            _context3.t0 = _context3.sent;
+            if (!(_context3.t0 === "success")) {
+              _context3.next = 9;
+              break;
+            }
             document.getElementById("send-verify").style.display = "none";
             document.getElementById("verify-email").style.display = "";
-          case 7:
+          case 9:
+            updateButtonText(".send-verification", "Send verification code");
+          case 10:
           case "end":
             return _context3.stop();
         }
@@ -6554,6 +6585,8 @@ if (sendEmailForm) {
     };
   }());
 }
+
+// Confirm code form email
 if (sendVerifyForm) {
   sendVerifyForm.addEventListener("submit", /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(e) {
@@ -6562,15 +6595,22 @@ if (sendVerifyForm) {
         while (1) switch (_context4.prev = _context4.next) {
           case 0:
             e.preventDefault();
-            document.querySelector(".code-verifying").textContent = "Verifying...";
+            updateButtonText(".code-verifying", "Verifying...");
             email = document.getElementById("email").value;
-            verifyCode = document.getElementById("verify-code").value;
+            verifyCode = document.getElementById("verify-code").value; // If verification successful
             _context4.next = 6;
             return (0, _twoFactorVerify.checkTwoFACode)(email, verifyCode);
           case 6:
+            _context4.t0 = _context4.sent;
+            if (!(_context4.t0 === "success")) {
+              _context4.next = 10;
+              break;
+            }
             document.getElementById("verify-email").style.display = "none";
-            document.getElementById("verify-successful").style.display = "";
-          case 8:
+            document.getElementById("reset-password").style.display = "";
+          case 10:
+            updateButtonText(".code-verifying", "Verify");
+          case 11:
           case "end":
             return _context4.stop();
         }
@@ -6580,6 +6620,17 @@ if (sendVerifyForm) {
       return _ref4.apply(this, arguments);
     };
   }());
+}
+
+// Reset password
+if (resetPasswordForm) {
+  resetPasswordForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var email = document.getElementById("email").value;
+    var newPassword = document.getElementById("new-password").value;
+    var passwordConfirm = document.getElementById("password-confirm").value;
+    (0, _twoFactorVerify.resetPassword)(email, newPassword, passwordConfirm);
+  });
 }
 
 // IF dateset-alert = alert, showAlert
@@ -6610,7 +6661,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55110" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56056" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

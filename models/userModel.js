@@ -77,8 +77,8 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-// correctPassword method: Compare the password with the DB password during login
-userSchema.methods.correctPassword = async function (
+// comparePassword method: Compare the password with the DB password during login
+userSchema.methods.comparePassword = async function (
   candidatePassword,
   userPassword
 ) {
@@ -100,21 +100,6 @@ userSchema.methods.changePasswordAfter = function (JWTTimeStamp) {
   return false;
 };
 
-// resetPassword method: Used to create a resetToken needed by the forgetPassword function
-userSchema.methods.createPasswordResetToken = function () {
-  const resetToken = crypto.randomBytes(32).toString("hex");
-
-  // Encrypted and store resetToken into DB
-  this.passwordResetToken = crypto
-    .createHash("sha256")
-    .update(resetToken)
-    .digest("hex");
-
-  // Set expiration for this resetToken
-  this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
-
-  return resetToken;
-};
 
 // Middleware
 // Encrypt password when save
