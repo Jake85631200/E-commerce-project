@@ -17,29 +17,32 @@ block content
               .title-delete delete
         //- Cart Items
         .item-info
-
-        each item in cart.items
-          .item
-            .item-group-1
-              .checkbox-container
-                .checkbox
-                  input.item-checkbox(type="checkbox", tabindex="0", role="checkbox")
-              .img-container
-                img.prod-img(src=`${item.image}`, alt="Product Image")
-              .item-name= item.product_name
-            .item-group-2
-              .item-price= item.price.toFixed(2)
-              .item-quantity
-                i.decrease-btn.fa-solid.fa-minus
-                input.qt-input(type="text", value=`${item.quantity || 1}`, oninput=`updateTotal(${item.price}, this)`)
-                i.increase-btn.fa-solid.fa-plus
-              // 初始顯示為 item.price
-              .item-total= item.total || item.price.toFixed(2)
-              .btn.item-delete delete
+          each item in cart.items
+            .item
+              .item-group-1
+                .checkbox-container
+                  .checkbox
+                    input.item-checkbox(type="checkbox", tabindex="0", role="checkbox")
+                .img-container
+                  img.prod-img(src=`${item.image}`, alt="Product Image")
+                .item-name= item.product_name
+              .item-group-2
+                .item-price= item.price.toFixed(2)
+                .item-quantity
+                  i.decrease-btn.fa-solid.fa-minus
+                  input.qt-input(
+                    type="text",
+                    value=`${item.quantity || 1}`,
+                    oninput=`updateTotal(${item.price}, this)`
+                  )
+                  i.increase-btn.fa-solid.fa-plus
+                // 初始顯示為 item.price
+                .item-total= item.total || item.price.toFixed(2)
+                .btn.item-delete delete
 
       section.checkout-summary.fixed-bottom
         .cart-overview
-          .item-titles
+          .checkout-titles
             .checkbox-container
               .checkbox
                 input.all-checkbox(type="checkbox", tabindex="0", role="checkbox")
@@ -51,121 +54,121 @@ block content
               a.btn.btn-warning.custom-cart-btn(href="#") Checkout
     script.
       // update single item price total
-      function updateTotal(inputElement) {
-        const quantity = parseInt(inputElement.value) || 0;
-        // closest price element
-        const price = parseFloat(inputElement.closest(".item-group-2").querySelector(".item-price").textContent);
-        const total = price * quantity;
-        const itemTotalElement = inputElement.closest(".item-group-2").querySelector(".item-total");
-        itemTotalElement.textContent = total.toFixed(2);
-      }
+      //- function updateTotal(inputElement) {
+      //-   const quantity = parseInt(inputElement.value) || 0;
+      //-   // closest price element
+      //-   const price = parseFloat(inputElement.closest(".item-group-2").querySelector(".item-price").textContent);
+      //-   const total = price * quantity;
+      //-   const itemTotalElement = inputElement.closest(".item-group-2").querySelector(".item-total");
+      //-   itemTotalElement.textContent = total.toFixed(2);
+      //- }
 
       // set item quantity and update total price
-      function setQuantity(buttonElement, increment) {
-        // closest input
-        const input = buttonElement.closest(".item-quantity").querySelector(".qt-input");
-        const currentValue = parseInt(input.value) || 1;
-        const quantity = Math.max(1, currentValue + increment);
-        input.value = quantity;
-        updateTotal(input);
-        if (buttonElement.closest(".item").querySelector(".item-checkbox").checked) {
-          calCheckout();
-        }
-      }
+      //- function setQuantity(buttonElement, increment) {
+      //-   // closest input
+      //-   const input = buttonElement.closest(".item-quantity").querySelector(".qt-input");
+      //-   const currentValue = parseInt(input.value) || 1;
+      //-   const quantity = Math.max(1, currentValue + increment);
+      //-   input.value = quantity;
+      //-   updateTotal(input);
+      //-   if (buttonElement.closest(".item").querySelector(".item-checkbox").checked) {
+      //-     calCheckout();
+      //-   }
+      //- }
 
       // update checkout total
-      const calCheckout = () => {
-        const itemCheckbox = document.querySelectorAll(".item-checkbox");
-        const selectedItems = document.querySelector(".selected-item");
-        const priceTotal = document.querySelector(".price-total");
+      //- const calCheckout = () => {
+      //-   const itemCheckbox = document.querySelectorAll(".item-checkbox");
+      //-   const selectedItems = document.querySelector(".selected-item");
+      //-   const priceTotal = document.querySelector(".price-total");
 
-        let selected = 0; // Qty of selected item
-        let total = 0; // total price of all selected item
+      //-   let selected = 0; // Qty of selected item
+      //-   let total = 0; // total price of all selected item
 
-        itemCheckbox.forEach((item) => {
-          // closest item-total element
-          const itemTotal = parseFloat(item.closest(".item").querySelector(".item-total").textContent.trim());
-          if (item.checked) {
-            selected += 1;
-            total += itemTotal;
-          }
-        });
+      //-   itemCheckbox.forEach((item) => {
+      //-     // closest item-total element
+      //-     const itemTotal = parseFloat(item.closest(".item").querySelector(".item-total").textContent.trim());
+      //-     if (item.checked) {
+      //-       selected += 1;
+      //-       total += itemTotal;
+      //-     }
+      //-   });
 
-        // update checkout area
-        selectedItems.innerText = `Total price (${selected} item) :`;
-        priceTotal.innerText = `$${total.toFixed(2)}`;
-      };
+      //-   // update checkout area
+      //-   selectedItems.innerText = `Total price (${selected} item) :`;
+      //-   priceTotal.innerText = `$${total.toFixed(2)}`;
+      //- };
 
       // update all checkbox
-      const updateAllCheckbox = () => {
-        const itemCheckbox = document.querySelectorAll(".item-checkbox");
-        const allCheckbox = document.querySelector(".all-checkbox");
+      //- const updateAllCheckbox = () => {
+      //-   const itemCheckbox = document.querySelectorAll(".item-checkbox");
+      //-   const allCheckbox = document.querySelector(".all-checkbox");
 
-        //- .every(fn) return true or false
-        //- if all item-checkbox checked, set all-checkbox to checked
-        const allChecked = Array.from(itemCheckbox).every((checkbox) => checkbox.checked);
-        allCheckbox.checked = allChecked;
-        allCheckbox.classList.toggle("checked", allChecked);
-      };
+      //-   //- .every(fn) return true or false
+      //-   //- if all item-checkbox checked, set all-checkbox to checked
+      //-   const allChecked = Array.from(itemCheckbox).every((checkbox) => checkbox.checked);
+      //-   allCheckbox.checked = allChecked;
+      //-   allCheckbox.classList.toggle("checked", allChecked);
+      //- };
 
-      const itemCheckboxListeners = () => {
-        const itemCheckbox = document.querySelectorAll(".item-checkbox");
-        itemCheckbox.forEach((item) => {
-          item.addEventListener("change", () => {
-            item.classList.toggle("checked", item.checked);
+      //- const itemCheckboxListeners = () => {
+      //-   const itemCheckbox = document.querySelectorAll(".item-checkbox");
+      //-   itemCheckbox.forEach((item) => {
+      //-     item.addEventListener("change", () => {
+      //-       item.classList.toggle("checked", item.checked);
 
-            //- update checkout area and all-checkbox statement
-            calCheckout();
-            updateAllCheckbox();
-          });
-        });
-      };
+      //-       //- update checkout area and all-checkbox statement
+      //-       calCheckout();
+      //-       updateAllCheckbox();
+      //-     });
+      //-   });
+      //- };
 
-      const allCheckboxListener = () => {
-        const allCheckbox = document.querySelector(".all-checkbox");
-        const itemCheckbox = document.querySelectorAll(".item-checkbox");
+      //- const allCheckboxListener = () => {
+      //-   const allCheckbox = document.querySelector(".all-checkbox");
+      //-   const itemCheckbox = document.querySelectorAll(".item-checkbox");
 
-        allCheckbox.addEventListener("change", () => {
-          //- classList.toggle("addedClass", Boolean)
-          const isChecked = allCheckbox.checked;
-          allCheckbox.classList.toggle("checked", isChecked);
+      //-   allCheckbox.addEventListener("change", () => {
+      //-     //- classList.toggle("addedClass", Boolean)
+      //-     const isChecked = allCheckbox.checked;
+      //-     allCheckbox.classList.toggle("checked", isChecked);
 
-          itemCheckbox.forEach((item) => {
-            item.checked = isChecked;
-            item.classList.toggle("checked", isChecked);
-          });
-          calCheckout();
-        });
-      };
+      //-     itemCheckbox.forEach((item) => {
+      //-       item.checked = isChecked;
+      //-       item.classList.toggle("checked", isChecked);
+      //-     });
+      //-     calCheckout();
+      //-   });
+      //- };
 
-      const quantityButtons = () => {
-        const decreaseBtns = document.querySelectorAll(".decrease-btn");
-        const increaseBtns = document.querySelectorAll(".increase-btn");
+      //- const quantityButtons = () => {
+      //-   const decreaseBtns = document.querySelectorAll(".decrease-btn");
+      //-   const increaseBtns = document.querySelectorAll(".increase-btn");
 
-        decreaseBtns.forEach((button) => {
-          button.addEventListener("click", () => setQuantity(button, -1));
-        });
+      //-   decreaseBtns.forEach((button) => {
+      //-     button.addEventListener("click", () => setQuantity(button, -1));
+      //-   });
 
-        increaseBtns.forEach((button) => {
-          button.addEventListener("click", () => setQuantity(button, 1));
-        });
-      };
+      //-   increaseBtns.forEach((button) => {
+      //-     button.addEventListener("click", () => setQuantity(button, 1));
+      //-   });
+      //- };
 
-      function deleteItem(buttonElement) {
-        const itemElement = buttonElement.closest(".item");
-        itemElement.remove(); // remove item
-        calCheckout();
-        updateAllCheckbox();
-      }
+      //- function deleteItem(buttonElement) {
+      //-   const itemElement = buttonElement.closest(".item");
+      //-   itemElement.remove(); // remove item
+      //-   calCheckout();
+      //-   updateAllCheckbox();
+      //- }
 
-      document.addEventListener("DOMContentLoaded", () => {
-        itemCheckboxListeners();
-        allCheckboxListener();
-        quantityButtons();
+      //- document.addEventListener("DOMContentLoaded", () => {
+      //-   itemCheckboxListeners();
+      //-   allCheckboxListener();
+      //-   quantityButtons();
 
-        document.addEventListener("click", (event) => {
-          if (event.target.matches(".item-delete")) {
-            deleteItem(event.target);
-          }
-        });
-      });
+      //-   document.addEventListener("click", (event) => {
+      //-     if (event.target.matches(".item-delete")) {
+      //-       deleteItem(event.target);
+      //-     }
+      //-   });
+      //- });

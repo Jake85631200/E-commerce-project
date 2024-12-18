@@ -22,7 +22,7 @@ router.get("/search", search);
 
 router.get("/profile", protect, isLoggedIn, myProfile);
 
-router.get("/product/:id", protect, isLoggedIn, checkProd);
+router.get("/product/:id", isLoggedIn, checkProd);
 
 router.get("/my-cart", protect, isLoggedIn, myCart);
 

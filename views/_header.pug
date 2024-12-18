@@ -18,13 +18,16 @@ header.header
       #navbarSupportedContent.collapse.navbar-collapse
         ul.navbar-nav.me-auto.mb-2.mb-lg-0
         .nav-guides
-          a.nav-cart.nav-link.text-warning(style="padding: 8px 0px 8px 16px", href="#")
-            i.fas.fa-shopping-cart(aria-hidden="true")
-            i(style="font-style: normal") Cart
           if user
+            a.nav-cart.nav-link.text-warning(style="padding: 8px 0px 8px 16px", href="/my-cart")
+              i.fas.fa-shopping-cart
+              i(style="font-style: normal") Cart
             a.nav-logout-btn.nav-link.text-warning(style="padding: 8px 0px 8px 16px", href="#")
               i(style="font-style: normal", aria-hidden="true") Logout
           else
+            a.nav-cart.nav-link.text-warning(style="padding: 8px 0px 8px 16px", href="/login")
+              i.fas.fa-shopping-cart
+              i(style="font-style: normal") Cart
             a.nav-login-page.nav-link.text-warning(
               style="font-style: normal; padding: 8px 0px 8px 16px",
               aria-hidden="true",

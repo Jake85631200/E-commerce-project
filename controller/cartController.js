@@ -36,7 +36,7 @@ exports.addToCart = catchAsync(async (req, res, next) => {
   // Get product id from URL
   const product = await Products.findById(req.params.id);
   const cart = await Cart.findById(req.user.cart._id);
-  console.log(product);
+  
   if (!req.user.id)
     return next(new AppError("You're not logged in or authorization expired, please login again.", 401));
 
