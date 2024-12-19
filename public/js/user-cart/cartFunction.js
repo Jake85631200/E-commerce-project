@@ -1,16 +1,6 @@
 import axios from "axios";
 import { showAlert } from "../utils/alerts";
 
-// UPDATE SINGLE ITEM PRICE TOTAL
-const updateTotal = (inputElement) => {
-  const quantity = parseInt(inputElement.value) || 0;
-  // closest price element
-  const price = parseFloat(inputElement.closest(".item-group-2").querySelector(".item-price").textContent);
-  const total = price * quantity;
-  const itemTotalElement = inputElement.closest(".item-group-2").querySelector(".item-total");
-  itemTotalElement.textContent = total.toFixed(2);
-};
-
 export const addToCartRequest = async (productId) => {
   try {
     const res = await axios({
@@ -23,6 +13,21 @@ export const addToCartRequest = async (productId) => {
   }
 };
 
+export const deleteItem = async (productId) => {
+  try {
+    const res = await axios({
+      method: "DELETE",
+      url: `/api/v1/carts`,
+      data: {
+        productId,
+      },
+    });
+    if (res.data.status === "success") showAlert("success", "Item removed form your cart!");
+  } catch (err) {
+    showAlert("error", err.response.data.message);
+  }
+};
+
 // SET ITEM QUANTITY AND UPDATE TOTAL PRICE
 export const setQuantity = (buttonElement, increment) => {
   // closest input
@@ -30,10 +35,25 @@ export const setQuantity = (buttonElement, increment) => {
   const currentValue = parseInt(input.value) || 1;
   const quantity = Math.max(1, currentValue + increment);
   input.value = quantity;
+
+  const event = new Event("input", { bubbles: true }); // 加上 bubbles 使事件能冒泡
+  input.dispatchEvent(event); // 手動觸發 input 事件
+
+  console.log(input.value);
   updateTotal(input);
   if (buttonElement.closest(".item").querySelector(".item-checkbox").checked) {
     calCheckout();
   }
+};
+
+// UPDATE SINGLE ITEM PRICE TOTAL
+const updateTotal = (inputElement) => {
+  const quantity = parseInt(inputElement.value) || 0;
+  // closest price element
+  const price = parseFloat(inputElement.closest(".item-group-2").querySelector(".item-price").textContent);
+  const total = price * quantity;
+  const itemTotalElement = inputElement.closest(".item-group-2").querySelector(".item-total");
+  itemTotalElement.textContent = total.toFixed(2);
 };
 
 // UPDATE CHECKOUT TOTAL
@@ -70,9 +90,14 @@ export const updateAllCheckbox = () => {
   allCheckbox.classList.toggle("checked", allChecked);
 };
 
-export const deleteItem = (buttonElement) => {
-  const itemElement = buttonElement.closest(".item");
-  itemElement.remove(); // remove item
-  calCheckout();
-  updateAllCheckbox();
+// 將 .checked 的 item 加入 checkedItemArray，取消 .checked 則移除
+export const getCheckedItem = (checkedItems, checkedItem) => {
+  const productId = checkedItem.closest(".item").dataset.productId;
+
+  if (checkedItem.classList.contains("checked")) {
+    checkedItems.push(productId);
+  } else {
+    let productIndex = checkedItems.indexOf(productId);
+    checkedItems.splice(productIndex, 1);
+  }
 };
