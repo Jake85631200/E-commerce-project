@@ -52,13 +52,6 @@ cartSchema.virtual("isEmpty").get(function () {
   return !this.items || this.items.length === 0 ? "empty" : false;
 });
 
-// Virtual Populate
-cartSchema.virtual("productsInCart", {
-  ref: "Product", // 關聯的模型名稱
-  foreignField: "_id", // Product 模型中的欄位
-  localField: "items.product", // Cart.items.product 中的欄位
-});
-
 // Middleware
 cartSchema.pre("save", function (next) {
   this.items.forEach((item) => {
