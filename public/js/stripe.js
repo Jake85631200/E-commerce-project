@@ -23,4 +23,3 @@ export const orderProducts = async (productsId, productsQty) => {
     showAlert("error", err.response.data.message);
   }
 };
-

@@ -7,7 +7,7 @@ const { restrictTo, protect } = require("../controller/authController");
 
 router.use(protect);
 
-router.get("/checkout-session/:productId", getCheckoutSession);
+router.post("/checkout-session", getCheckoutSession);
 
 router.get("/", getAllOrders);
 
