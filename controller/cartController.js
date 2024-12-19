@@ -19,9 +19,7 @@ exports.checkAllCart = catchAsync(async (req, res, next) => {
 });
 
 exports.checkMyCart = catchAsync(async (req, res, next) => {
-  const cart = await Cart.findById(req.user.cart).populate({
-    path: "productsInCart",
-  });
+  const cart = await Cart.findById(req.user.cart);
 
   res.status(200).json({
     status: "success",
@@ -36,7 +34,7 @@ exports.addToCart = catchAsync(async (req, res, next) => {
   // Get product id from URL
   const product = await Products.findById(req.params.id);
   const cart = await Cart.findById(req.user.cart._id);
-  
+
   if (!req.user.id)
     return next(new AppError("You're not logged in or authorization expired, please login again.", 401));
 
@@ -69,7 +67,7 @@ exports.addToCart = catchAsync(async (req, res, next) => {
 
 // Remove product from cart
 exports.removeFormCart = catchAsync(async (req, res, next) => {
-  const product = await Products.findById(req.params.id);
+  const product = await Products.findById({ _id: req.body.productId });
   const cart = await Cart.findById(req.user.cart._id);
 
   if (!req.user.id)
@@ -77,12 +75,12 @@ exports.removeFormCart = catchAsync(async (req, res, next) => {
 
   if (!product) return next(new AppError("Product not found.", 404));
 
-  const existingItem = cart.items.find((item) => item.product.toString() === req.params.id);
+  const existingItem = cart.items.find((item) => item.product.toString() === req.body.productId);
 
   if (existingItem && existingItem.quantity > 1) {
     existingItem.quantity -= 1;
   } else {
-    cart.items = cart.items.filter((item) => item.product.toString() !== req.params.id);
+    cart.items = cart.items.filter((item) => item.product.toString() !== req.body.productId);
   }
 
   await cart.save();

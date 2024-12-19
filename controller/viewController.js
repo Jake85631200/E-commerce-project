@@ -54,9 +54,7 @@ exports.checkProd = catchAsync(async (req, res, next) => {
 });
 
 exports.myCart = catchAsync(async (req, res, next) => {
-  const cart = await Carts.findById(req.user.cart).populate({
-    path: "productsInCart",
-  });
+  const cart = await Carts.findById(req.user.cart)
 
   res.status(200).render("cart", {
     title: "My Cart",
