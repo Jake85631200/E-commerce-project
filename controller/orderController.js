@@ -10,35 +10,43 @@ exports.getAllOrders = catchAsync(async (req, res, next) => {});
 exports.getOrder = catchAsync(async (req, res, next) => {});
 
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
-  // 1) get currently booked product
-  const product = await Products.findById(req.params.productId);
-  if (!product || !product.product_name) {
-    return next(new AppError("Product not found or product name is null", 404));
+  const { productsId, productsQty } = req.body;
+
+  const products = await Products.find({ _id: productsId });
+
+  if (!products || !products.length === 0) {
+    return next(new AppError("No products found.", 404));
   }
+
+  products.forEach((product, index) => {
+    product.quantity = productsQty[index];
+  });
+
+  const lineItems = products.map((product) => ({
+    price_data: {
+      currency: "usd",
+      unit_amount: product.price * 100,
+      product_data: {
+        name: product.product_name,
+        description: product.description,
+        images: [product.image],
+      },
+    },
+    quantity: product.quantity,
+  }));
   // 2) create checkout session
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     success_url: `${req.protocol}://${req.get("host")}/`,
-    cancel_url: `${req.protocol}://${req.get("host")}/product/${product.slug}`,
+    cancel_url: `${req.protocol}://${req.get("host")}/my-cart`,
     customer_email: req.user.email,
-    client_reference_id: req.params.productId,
+    client_reference_id: req.user.id,
     mode: "payment",
-    line_items: [
-      {
-        price_data: {
-          currency: "usd",
-          unit_amount: product.price * 100,
-          product_data: {
-            name: product.product_name,
-            description: product.description,
-            images: [product.image],
-          },
-        },
-        quantity: 1,
-      },
-    ],
+    line_items: lineItems,
   });
-
+  lineItems.forEach((item) => {
+    console.log(item.price_data.product_data.images);
+  });
   // 3) create session as response
   res.status(200).json({
     status: "success",
@@ -60,11 +68,7 @@ exports.webhookCheckout = async (req, res, next) => {
 
   let event;
   try {
-    event = stripe.webhooks.constructEvent(
-      req.body,
-      signature,
-      process.env.STRIPE_WEBHOOK_SECRET
-    );
+    event = stripe.webhooks.constructEvent(req.body, signature, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
     return res.status(400).send(`Webhook error: ${err.message}`);
   }
@@ -77,7 +81,7 @@ exports.webhookCheckout = async (req, res, next) => {
 
 exports.getAllOrders = catchAsync(async (req, res, next) => {
   const orders = await Orders.find();
-  
+
   res.status(200).json({
     status: "success",
     orders,
@@ -90,5 +94,5 @@ exports.getMyOrder = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     orders,
-  }); 
+  });
 });
