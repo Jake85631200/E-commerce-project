@@ -5,7 +5,6 @@ const jwtSecret = process.env.JWT_SECRET;
 const { promisify } = require("util");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
-const crypto = require("crypto");
 const sendMail = require("../utils/Email");
 const redis = require("../utils/redis");
 

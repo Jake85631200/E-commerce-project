@@ -49,6 +49,12 @@ main {
   margin: 0 auto;
 }
 
+.sign-up-container {
+  width: 540px;
+  height: 100%;
+  margin: 0 auto;
+}
+
 .profile-card {
   display: flex;
 }
@@ -59,6 +65,7 @@ main {
   justify-content: center;
 }
 
+.user-signup-form,
 .user-info-form,
 .user-password-form {
   width: 100%;
