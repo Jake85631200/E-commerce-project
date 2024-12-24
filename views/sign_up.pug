@@ -1,0 +1,53 @@
+extends base
+
+block content
+  main
+    .sign-up-container.mt-5.ml-5.pt-5
+      h2 Sign up
+      form.user-signup-form.mt-5(style="margin: 0 auto")
+        .form-group
+          label.info-title(for="name") Name
+          input#name.info-content(type="text", name="name", placeholder="your name")
+        .form-group
+          label.info-title(for="email") Email
+          input#email.info-content(type="email", name="email", placeholder="email")
+        .form-group
+          label.security-title.label.form__label(for="password") New password
+          input#password.security-content.form__input(
+            type="password",
+            name="password",
+            placeholder="••••••••",
+            autocomplete="off",
+            required,
+            minlength="8"
+          )
+        .form-group
+          label.security-title.label.form__label(for="password-confirm") Confirm password
+          input#password-confirm.security-content.form__input(
+            type="password",
+            name="password-confirm",
+            placeholder="••••••••",
+            autocomplete="off",
+            required,
+            minlength="8"
+          )
+        .form-group
+          label.info-title(for="phone_number") Phone number
+          input#phone_number.info-content(type="text", name="phone_number", placeholder="phone number")
+        .form-group
+          label.info-title(for="address") Address
+          input#address.info-content(type="text", name="address", placeholder="address")
+        .form-group
+          label.info-title Gender
+          .info-content
+            label(style="margin-bottom: 0px")
+              input.gender(type="radio", name="gender", value="male")
+              | Male
+            label(style="margin-bottom: 0px; padding-left: 15px")
+              input.gender(type="radio", name="gender", value="female")
+              | Female
+            label(style="margin-bottom: 0px; padding-left: 15px")
+              input.gender(type="radio", name="gender", value="other")
+              | Other
+        .form-actions
+          button.sign-up-commit.btn.btn-warning.custom-cart-btn(type="submit") Commit

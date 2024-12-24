@@ -9,9 +9,8 @@ const {
   myCart,
   addToCart,
   getLoginForm,
+  getSignupForm,
   TwoFACode,
-  verifyFACode,
-  verifySuccessful,
 } = require("../controller/viewController");
 
 const { restrictTo, protect, isLoggedIn } = require("../controller/authController");
@@ -26,9 +25,9 @@ router.get("/product/:id", isLoggedIn, checkProd);
 
 router.get("/my-cart", protect, isLoggedIn, myCart);
 
-router.post("/add-to-cart/:id", protect, addToCart);
-
 router.get("/login", isLoggedIn, getLoginForm);
+
+router.get("/signup", isLoggedIn, getSignupForm);
 
 router.get("/two-factor", isLoggedIn, TwoFACode);
 

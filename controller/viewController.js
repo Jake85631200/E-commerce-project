@@ -104,6 +104,12 @@ exports.getLoginForm = async (req, res) => {
   });
 };
 
+exports.getSignupForm = async (req, res) => {
+  res.status(200).render("sign_up", {
+    title: "Sign up for an account",
+  });
+};
+
 exports.TwoFACode = async (req, res) => {
   res.status(200).render("two_factor", {
     title: "Forget password",
