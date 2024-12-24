@@ -5,13 +5,8 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const Users = require("../models/userModel");
 const Orders = require("../models/orderModel");
 
-exports.getAllOrders = catchAsync(async (req, res, next) => {});
-
-exports.getOrder = catchAsync(async (req, res, next) => {});
-
 exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   const { productsId, productsQty } = req.body;
-
   const products = await Products.find({ _id: productsId });
 
   if (!products || !products.length === 0) {
@@ -30,24 +25,23 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
         name: product.product_name,
         description: product.description,
         images: [product.image],
+        metadata: {
+          id: JSON.stringify(products.map((product) => product._id)), // 將 product 陣列轉成 JSON
+        },
       },
     },
     quantity: product.quantity,
   }));
-  // 2) create checkout session
+
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     success_url: `${req.protocol}://${req.get("host")}/`,
     cancel_url: `${req.protocol}://${req.get("host")}/my-cart`,
     customer_email: req.user.email,
-    client_reference_id: req.user.id,
     mode: "payment",
     line_items: lineItems,
   });
-  lineItems.forEach((item) => {
-    console.log(item.price_data.product_data.images);
-  });
-  // 3) create session as response
+
   res.status(200).json({
     status: "success",
     session,
@@ -56,11 +50,19 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 
 const createOrderCheckout = async (session) => {
   // Find product, user, price in the session
-  const product = session.client_reference_id;
   const user = (await Users.findOne({ email: session.customer_email }))._id;
-  const price = session.amount_total;
-  // Create new order
-  await Orders.create({ product, user, price });
+  // const products = JSON.parse(session.metadata.products);
+
+  const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
+
+  const orderedItems = lineItems.data.map((lineItem) => ({
+    item: session.metadata.id,
+    name: lineItem.description,
+    quantity: lineItem.quantity,
+    price: lineItem.amount_total / 100,
+  }));
+
+  await Orders.create({ user, orderedItems });
 };
 
 exports.webhookCheckout = async (req, res, next) => {
@@ -69,12 +71,15 @@ exports.webhookCheckout = async (req, res, next) => {
   let event;
   try {
     event = stripe.webhooks.constructEvent(req.body, signature, process.env.STRIPE_WEBHOOK_SECRET);
+    console.log("event.type");
   } catch (err) {
     return res.status(400).send(`Webhook error: ${err.message}`);
   }
 
   if (event.type === "checkout.session.completed") {
-    createOrderCheckout(event.data.object);
+    const session = event.data.object;
+
+    createOrderCheckout(session);
   }
   res.status(200).json({ received: true });
 };
