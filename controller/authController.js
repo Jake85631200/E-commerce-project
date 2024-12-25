@@ -52,11 +52,11 @@ const handleFailedLogin = async (user, endOfDay, attempts) => {
     const ttl = 10;
     await redis.setex(`locked_${user._id}`, ttl, "locked");
 
-    throw new AppError(`Due to failed login attempts, your account has been locked for ${ttl} seconds.`, 403);
+    throw new AppError(`Due to failed login attempts, your account has been locked for ${ttl} seconds.`, 429);
   }
 
   // 3. If lock condition is not met, throw general login failure error
-  throw new AppError("Incorrect email or password", 401);
+  throw new AppError("Incorrect email or password", 400);
 };
 
 exports.signUp = catchAsync(async (req, res, next) => {
@@ -95,7 +95,7 @@ exports.login = catchAsync(async (req, res, next) => {
   // 2. Confirm user exists
   const user = await User.findOne({ email }).select("+password");
   if (!user) {
-    return next(new AppError("Incorrect email or password", 401));
+    return next(new AppError("Incorrect email or password", 400));
   }
 
   // 3. Initialize time and attempt count related variables
@@ -130,7 +130,7 @@ exports.twoFactor = catchAsync(async (req, res, next) => {
   // Check if user exist by email
   const user = await User.findOne({ email: req.body.email });
   if (!user) {
-    return next(new AppError("User not existed or invalid email", 401));
+    return next(new AppError("User not existed or invalid email", 400));
   }
 
   // Generate verification code and set expiration to 10 minutes
@@ -185,10 +185,10 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email }).select("+password");
 
   if (req.body.newPassword !== req.body.passwordConfirm)
-    return next(new AppError("Confirm password is not the same with password! Please try again!"), 401);
+    return next(new AppError("Confirm password is not the same with password! Please try again!"), 400);
 
   if (await user.comparePassword(req.body.newPassword, user.password))
-    return next(new AppError("New password can't be the same as current password! Please try new one!"), 401);
+    return next(new AppError("New password can't be the same as current password! Please try new one!"), 400);
 
   user.password = req.body.newPassword;
   user.passwordConfirm = req.body.passwordConfirm;
@@ -205,7 +205,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user._id).select("+password");
 
   if (!(await user.comparePassword(req.body.passwordCurrent, user.password)))
-    return next(new AppError("Your current password is incorrect! Please try again!"), 401);
+    return next(new AppError("Your current password is incorrect! Please try again!"), 400);
   // Check if req.body contains valid password and passwordConfirm
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
