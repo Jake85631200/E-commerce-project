@@ -45,13 +45,15 @@ const createSendToken = (user, statusCode, req, res) => {
 const handleFailedLogin = async (user, endOfDay, attempts) => {
   attempts = attempts + 1;
   // 1. Update attempt count
-  await redis.setex(`loginAttempts_${user._id}`, endOfDay, attempts);
-
+  await redis.set(`loginAttempts_${user._id}`, attempts, {
+    EX: endOfDay,
+  });
   // 2. Check if lock condition is met
   if (attempts >= 3) {
     const ttl = 10;
-    await redis.setex(`locked_${user._id}`, ttl, "locked");
-
+    await redis.set(`locked_${user._id}`, "locked", {
+      EX: ttl,
+    });
     throw new AppError(`Due to failed login attempts, your account has been locked for ${ttl} seconds.`, 429);
   }
 
@@ -113,7 +115,9 @@ exports.login = catchAsync(async (req, res, next) => {
   if (attempts >= 3 && !lockUntil) {
     // Reset login attempts when lock expires
     attempts = 0;
-    await redis.setex(`loginAttempts_${user._id}`, endOfDay, attempts);
+    await redis.set(`loginAttempts_${user._id}`, attempts, {
+      EX: endOfDay,
+    });
   }
 
   // 6. Validate password
@@ -122,7 +126,9 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   // 7. Login success processing
-  await redis.setex(`loginAttempts_${user._id}`, endOfDay, 0);
+  await redis.set(`loginAttempts_${user._id}`, attempts, {
+    EX: endOfDay,
+  });
   createSendToken(user, 200, req, res);
 });
 
@@ -137,8 +143,10 @@ exports.twoFactor = catchAsync(async (req, res, next) => {
   const faCode = Math.floor(100000 + Math.random() * 899999).toString();
 
   // Set verification code inside redis
-  await redis.setex(`2fa_${user.email}`, 600, faCode);
-
+  await redis.set(`2fa_${user.email}`, faCode, {
+    EX: 600,
+  });
+  const storedCode = await redis.get(`2fa_${user.email}`);
   // Send verification code to email
   await sendMail(
     // user.email

@@ -6410,7 +6410,7 @@ var initForgetPassword = exports.initForgetPassword = function initForgetPasswor
             case 0:
               e.preventDefault();
               (0, _updateButtonText.updateButtonText)(".send-verification", "Sending...");
-              email = document.getElementById("email").value;
+              email = document.getElementById("email").value.toLowerCase();
               _context4.next = 5;
               return sendTwoFACode(email);
             case 5:
@@ -6445,7 +6445,7 @@ var initForgetPassword = exports.initForgetPassword = function initForgetPasswor
             case 0:
               e.preventDefault();
               (0, _updateButtonText.updateButtonText)(".code-verifying", "Verifying...");
-              email = document.getElementById("email").value;
+              email = document.getElementById("email").value.toLowerCase();
               verifyCode = document.getElementById("verify-code").value;
               _context5.next = 6;
               return checkTwoFACode(email, verifyCode);
@@ -7026,7 +7026,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51203" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64945" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
