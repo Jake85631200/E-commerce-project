@@ -6,6 +6,7 @@ import { initForgetPassword } from "./user-auth/twoFactorVerify";
 import { initSearch } from "./search-item/search";
 import { initUpdateSetting } from "./user-account/updateSettings";
 import { initCart } from "./user-cart/cart";
+import { initReview } from "./product-review/review";
 
 document.addEventListener("DOMContentLoaded", () => {
   initLoginOut();
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initSearch();
   initUpdateSetting();
   initCart();
+  initReview();
 });
 
 // IF dateset-alert = alert, showAlert

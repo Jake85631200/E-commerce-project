@@ -146,7 +146,6 @@ exports.twoFactor = catchAsync(async (req, res, next) => {
   await redis.set(`2fa_${user.email}`, faCode, {
     EX: 600,
   });
-  const storedCode = await redis.get(`2fa_${user.email}`);
   // Send verification code to email
   await sendMail(
     // user.email

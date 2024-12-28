@@ -18,7 +18,7 @@ async function main() {
   await redis.connect();
 
   // 設置並獲取資料
-  await redis.set("foo", "bar");
+  await redis.set("foo", "Redis connection successful!");
   const result = await redis.get("foo");
   console.log(result); // >>> bar
 }

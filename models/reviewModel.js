@@ -7,10 +7,10 @@ const reviewSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       auto: true,
     },
-    comment: {
+    review: {
       type: String,
-      require: [true, "A comment must have content."],
-      maxlength: [50, "A comment must less or equal to 50 characters."],
+      require: [true, "A review must have content."],
+      maxlength: [1000, "A review must less or equal to 1000 characters."],
     },
     rating: {
       type: Number,

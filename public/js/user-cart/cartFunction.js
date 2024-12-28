@@ -7,7 +7,9 @@ export const addToCartRequest = async (productId) => {
       method: "POST",
       url: `/api/v1/carts/${productId}`,
     });
-    if (res.data.status === "success") showAlert("success", "Item added into your cart!");
+    if (res.data.status === "success") {
+      showAlert("success", res.data.message);
+    }
   } catch (err) {
     showAlert("error", err.response.data.message);
   }
@@ -22,7 +24,9 @@ export const deleteItem = async (productId) => {
         productId,
       },
     });
-    if (res.data.status === "success") showAlert("success", "Item removed form your cart!");
+    if (res.data.status === "success") {
+      showAlert("success", response.data.message);
+    }
   } catch (err) {
     showAlert("error", err.response.data.message);
   }

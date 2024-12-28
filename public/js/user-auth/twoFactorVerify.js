@@ -10,7 +10,7 @@ const sendTwoFACode = async (email) => {
       data: { email },
     });
     if (res.data.status === "success") {
-      showAlert("success", "Verification code send! Check your email!");
+      showAlert("success", res.data.message, 3);
     }
     return res.data.status;
   } catch (err) {
@@ -93,7 +93,7 @@ export const initForgetPassword = () => {
   if (resetPasswordForm) {
     resetPasswordForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      
+
       const email = document.getElementById("email").value;
       const newPassword = document.getElementById("new-password").value;
       const passwordConfirm = document.getElementById("password-confirm").value;

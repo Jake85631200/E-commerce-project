@@ -46,14 +46,14 @@ block content
                           .rating(style="display: flex; align-items: baseline")
                             p.user-rating Rating: &starf;&starf;&starf;&starf;&star;
                             p= `(${product.ratings_average}/5)`
-                      p.user-comment= `${review.comment}`
+                      p.user-review= `${review.review}`
                       .toggle-block
                         button.btn.toggle-button(onclick="toggleText(this)")
-                          | (Expand comment)
-            .leave-comment.m-3
-              // Leave a comment
-              .comment-container
-                textarea.comment-textarea(placeholder="Leave a comment")
+                          | (Expand review)
+            .leave-review.m-3
+              // Leave a review
+              .review-container
+                textarea#review-textarea(name="review", placeholder="Leave a review")
                 .submit-section
                   // Ratings Stars
                   span Your Rating:
@@ -71,7 +71,7 @@ block content
                       }
                   span.rating-value(style="margin-left: 10px; width: 68px; text-align: center") (0 / 5)
                   input#rating(type="hidden", name="rating", value="0")
-                  button.btn.btn-warning(style="margin-left: 10px")
+                  button#review-submit.btn.btn-warning(style="margin-left: 10px", type="submit")
                     | Submit
 
     script.
@@ -81,11 +81,11 @@ block content
         // select all "review"
         const reviews = document.querySelectorAll(".review");
         reviews.forEach((review) => {
-          // select "user-comment" and "toggle-button" in each review
-          const comment = review.querySelector(".user-comment");
+          // select "user-review" and "toggle-button" in each review
+          const userReview = review.querySelector(".user-review");
           const button = review.querySelector(".toggle-button");
           // check if review is overflowed
-          if (comment.scrollHeight > comment.clientHeight) {
+          if (userReview.scrollHeight > userReview.clientHeight) {
             // if overflowed, show expand button
             button.style.display = "block";
           } else {
@@ -97,15 +97,15 @@ block content
       // 2)Toggle review text (expand/fold)
       function toggleText(button) {
         // select button's previous sibling (review)
-        const comment = button.parentElement.previousElementSibling;
-        // check if review is expanded
-        if (comment.classList.contains("expanded")) {
-          // if expanded, fold review and change button text
-          comment.classList.remove("expanded");
-          button.textContent = "Expand Comment";
+        const foldedReview = button.parentElement.previousElementSibling;
+        // check if foldedReview is expanded
+        if (foldedReview.classList.contains("expanded")) {
+          // if expanded, fold foldedReview and change button text
+          foldedReview.classList.remove("expanded");
+          button.textContent = "Expand Review";
         } else {
-          // if not expanded, expand review and change button text
-          comment.classList.add("expanded");
+          // if not expanded, expand foldedReview and change button text
+          foldedReview.classList.add("expanded");
           button.textContent = "(Fold)";
         }
       }
