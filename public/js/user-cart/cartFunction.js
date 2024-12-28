@@ -9,7 +9,7 @@ export const addToCartRequest = async (productId) => {
     });
     if (res.data.status === "success") showAlert("success", "Item added into your cart!");
   } catch (err) {
-    showAlert("error", err.response.data.message);
+    showAlert("error", `${err.response.data.message}`);
   }
 };
 
@@ -24,7 +24,7 @@ export const deleteItem = async (productId) => {
     });
     if (res.data.status === "success") showAlert("success", "Item removed form your cart!");
   } catch (err) {
-    showAlert("error", err.response.data.message);
+    showAlert("error", `${err.response.data.message}`);
   }
 };
 

@@ -14,7 +14,7 @@ const sendTwoFACode = async (email) => {
     }
     return res.data.status;
   } catch (err) {
-    showAlert("error", err.response.data.message);
+    showAlert("error", `${err.response.data.message}`);
   }
 };
 
@@ -27,7 +27,7 @@ const checkTwoFACode = async (email, verifyCode) => {
     });
     return res.data.status;
   } catch (err) {
-    showAlert("error", err.response.data.message);
+    showAlert("error", `${err.response.data.message}`);
   }
 };
 
@@ -46,7 +46,7 @@ const resetPassword = async (email, newPassword, passwordConfirm) => {
     }
     return res.data.status;
   } catch (err) {
-    showAlert("error", err.response.data.message);
+    showAlert("error", `${err.response.data.message}`);
   }
 };
 

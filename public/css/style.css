@@ -390,7 +390,7 @@ main {
   margin-bottom: 5px;
 }
 
-.user-comment {
+.user-review {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -402,7 +402,7 @@ main {
   margin-bottom: 0px;
 }
 
-.user-comment.expanded {
+.user-review.expanded {
   display: block;
   -webkit-line-clamp: unset;
 }
@@ -417,16 +417,17 @@ main {
   margin: 0px;
 }
 
-.leave-comment {
+.leave-review {
   width: 45%;
 }
 
-.comment-container {
+.review-container {
   height: 200px;
   margin-top: 20px;
+  flex-wrap: wrap;
 }
 
-.comment-textarea {
+#review-textarea {
   border: 1px solid black;
   border-radius: 5px;
   width: 100%;

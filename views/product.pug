@@ -44,123 +44,26 @@ block content
                         .ml-3(style="display: flex; flex-direction: column; margin-left: 20px")
                           h4.user-name= `${review.user.name}`
                           .rating(style="display: flex; align-items: baseline")
-                            p.user-rating Rating: &starf;&starf;&starf;&starf;&star;
-                            p= `(${product.ratings_average}/5)`
-                      p.user-comment= `${review.comment}`
+                            p.user-rating Rating:
+                            .review-rating-star
+                              // render stars placeholder
+
+                            p.rating-in-review= `(${review.rating}/5)`
+                      p.user-review= `${review.review}`
                       .toggle-block
-                        button.btn.toggle-button(onclick="toggleText(this)")
-                          | (Expand comment)
-            .leave-comment.m-3
-              // Leave a comment
-              .comment-container
-                textarea.comment-textarea(placeholder="Leave a comment")
+                        button.toggle-button.btn
+                          | (Expand review)
+            .leave-review.m-3
+              // Leave a review
+              .review-container
+                textarea#review-textarea(placeholder="Leave a review")
                 .submit-section
                   // Ratings Stars
                   span Your Rating:
                   .star-rating
-                    script.
-                      for (let i = 1; i <= 5; i++) {
-                        document.write(`
-                      <div class="star fa-regular fa-star fa-2xl m-2" style="color: #FFD43B;" data-value="${i}">
-                      <span class="span-box">
-                      <span class="span-left"></span>
-                      <span class="span-right"></span>
-                      </span>
-                      </div>
-                      `);
-                      }
+                    // render stars placeholder 
+
                   span.rating-value(style="margin-left: 10px; width: 68px; text-align: center") (0 / 5)
                   input#rating(type="hidden", name="rating", value="0")
-                  button.btn.btn-warning(style="margin-left: 10px")
+                  button#review-submit.btn.btn-warning(style="margin-left: 10px", type="submit")
                     | Submit
-
-    script.
-      // Expand/Fold review text
-      // 1) Show expand button when review is overflowed
-      document.addEventListener("DOMContentLoaded", function () {
-        // select all "review"
-        const reviews = document.querySelectorAll(".review");
-        reviews.forEach((review) => {
-          // select "user-comment" and "toggle-button" in each review
-          const comment = review.querySelector(".user-comment");
-          const button = review.querySelector(".toggle-button");
-          // check if review is overflowed
-          if (comment.scrollHeight > comment.clientHeight) {
-            // if overflowed, show expand button
-            button.style.display = "block";
-          } else {
-            // if not overflowed, hide expand button
-            button.style.display = "none";
-          }
-        });
-      });
-      // 2)Toggle review text (expand/fold)
-      function toggleText(button) {
-        // select button's previous sibling (review)
-        const comment = button.parentElement.previousElementSibling;
-        // check if review is expanded
-        if (comment.classList.contains("expanded")) {
-          // if expanded, fold review and change button text
-          comment.classList.remove("expanded");
-          button.textContent = "Expand Comment";
-        } else {
-          // if not expanded, expand review and change button text
-          comment.classList.add("expanded");
-          button.textContent = "(Fold)";
-        }
-      }
-      // Rating stars
-      document.addEventListener("DOMContentLoaded", function () {
-        // 1) select all stars, rating input, rating value
-        const stars = document.querySelectorAll(".fa-star");
-        const ratingInput = document.getElementById("rating");
-        const ratingValue = document.querySelector(".rating-value");
-        // 2) add listener to each star
-        stars.forEach((star) => {
-          // select star left and right half
-          const spanLeft = star.querySelector(".span-left");
-          const spanRight = star.querySelector(".span-right");
-          // 3) set value when left and  half mouseover
-          // a) when left half mouseover
-          spanLeft.addEventListener("mouseover", function () {
-            // rating value = data-value - 0.5 (ex: 4.5 - 0.5 = 4)
-            const value = parseFloat(star.getAttribute("data-value")) - 0.5;
-            // update rating input value
-            ratingInput.value = value;
-            ratingValue.textContent = `(${value} / 5)`;
-            // update stars display
-            updateStars(stars, value);
-          });
-          // b) when right half mouseover
-          spanRight.addEventListener("mouseover", function () {
-            // rating value = data-value
-            const value = parseFloat(star.getAttribute("data-value"));
-            // update rating input
-            ratingInput.value = value;
-            ratingValue.textContent = `(${value} / 5)`;
-            // update stars display
-            updateStars(stars, value);
-          });
-        });
-        // 4) update stars display
-        function updateStars(stars, selectedValue) {
-          stars.forEach((star) => {
-            const value = parseFloat(star.getAttribute("data-value"));
-            // if star value <= selected rating value, display as solid
-            if (value <= selectedValue) {
-              star.classList.add("fa-solid");
-              star.classList.remove("fa-regular", "fa-star-half-stroke");
-            }
-            // if star value - 0.5 = selected rating value, display as half star
-            else if (value - 0.5 === selectedValue) {
-              star.classList.add("fa-regular", "fa-star-half-stroke");
-              star.classList.remove("fa-solid");
-            }
-            // display as empty
-            else {
-              star.classList.remove("fa-solid", "fa-star-half-stroke");
-              star.classList.add("fa-regular");
-            }
-          });
-        }
-      });

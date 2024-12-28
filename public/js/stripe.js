@@ -20,6 +20,6 @@ export const orderProducts = async (productsId, productsQty) => {
       sessionId: session.data.session.id,
     });
   } catch (err) {
-    showAlert("error", err.response.data.message);
+    showAlert("error", `${err.response.data.message}`);
   }
 };

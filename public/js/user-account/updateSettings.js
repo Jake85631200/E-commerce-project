@@ -19,7 +19,7 @@ const updateSettings = async (data, type) => {
       }, 1500);
     }
   } catch (err) {
-    showAlert("error", err.response.data.message);
+    showAlert("error", `${err.response.data.message}`);
   }
 };
 

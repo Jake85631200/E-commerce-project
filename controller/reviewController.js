@@ -39,6 +39,10 @@ exports.createReview = catchAsync(async (req, res, next) => {
   const product = await Products.findById(req.params.id);
   if (!product) return next(new AppError("Product not found.", 404));
 
+  const reviewExist = await Reviews.findOne({ product: req.params.id, user: req.user._id });
+
+  if (reviewExist) return next(new AppError("You've already reviewed this product, please update your review.", 400));
+
   const review = await Reviews.create({
     review: req.body.review,
     rating: req.body.rating,
