@@ -1,7 +1,7 @@
 {
-  "name": "e-commerce",
+  "name": "PowMart",
   "version": "1.0.0",
-  "description": "building E-commerce website",
+  "description": "building PowMart website",
   "main": "app.js",
   "scripts": {
     "start": "nodemon server.js",

@@ -2,17 +2,11 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My account</title>
   <!-- Import Bootstrap CSS-->
-  <link
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    rel="stylesheet" />
-  <link
-    href="/public/css/account.css"
-    rel="stylesheet" />
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/public/css/account.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -20,11 +14,7 @@
     <!-- Nav-bar -->
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <a
-          class="navbar-brand"
-          href="#"
-          >E-commerce</a
-        >
+        <a class="navbar-brand" href="#">PowMart</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -32,19 +22,14 @@
           data-target="#navbarNav"
           aria-controls="navbarNav"
           aria-expanded="false"
-          aria-label="Toggle navigation">
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div
-          class="collapse navbar-collapse"
-          id="navbarNav">
+        <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a
-                class="nav-link"
-                href="#"
-                >Home<span class="sr-only">(current)</span>
-              </a>
+              <a class="nav-link" href="#">Home<span class="sr-only">(current)</span> </a>
             </li>
             <li class="nav-item dropdown">
               <a
@@ -57,51 +42,21 @@
                 aria-expanded="false"
                 >More
               </a>
-              <div
-                class="dropdown-menu"
-                aria-labelledby="navbarDropdown">
-                <a
-                  class="dropdown-item"
-                  href="#"
-                  >Account</a
-                >
-                <a
-                  class="dropdown-item"
-                  href="#"
-                  >Change password</a
-                >
-                <a
-                  class="dropdown-item"
-                  href="#"
-                  >Setting</a
-                >
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Account</a>
+                <a class="dropdown-item" href="#">Change password</a>
+                <a class="dropdown-item" href="#">Setting</a>
                 <div class="dropdown-divider"></div>
-                <a
-                  class="dropdown-item"
-                  href="#"
-                  >Login/Logout</a
-                >
+                <a class="dropdown-item" href="#">Login/Logout</a>
               </div>
             </li>
           </ul>
           <!-- Search-bar -->
           <form class="form-inline my-2 my-lg-0">
-            <input
-              class="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search" />
-            <button
-              class="btn btn-outline-light my-2 my-sm-0"
-              type="submit">
-              Search
-            </button>
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
           </form>
-          <!-- Cart-icon --><a
-            class="nav-link text-warning"
-            href="#"
-            ><i class="fas fa-shopping-cart"></i> Cart</a
-          >
+          <!-- Cart-icon --><a class="nav-link text-warning" href="#"><i class="fas fa-shopping-cart"></i> Cart</a>
         </div>
       </nav>
     </div>
@@ -111,75 +66,48 @@
     <h4>Profile</h4>
     <div class="profile-container">
       <div class="profile">
-        <form
-          class="user-info-form"
-          style="padding-right: 40px">
+        <form class="user-info-form" style="padding-right: 40px">
           <table class="user-info">
             <tr>
               <td class="info-title">Name</td>
               <td class="info-container">
-                <input
-                  style="width: 100%"
-                  type="text"
-                  class="name"
-                  value="Jake" />
+                <input style="width: 100%" type="text" class="name" value="Jake" />
               </td>
             </tr>
             <tr>
               <td class="info-title">Email</td>
               <td class="info-container">
                 <span>ja**********@gmail.com</span>
-                <button
-                  type="button"
-                  class="btn info-edit-btn btn-primary btn-sm">
-                  Edit
-                </button>
+                <button type="button" class="btn info-edit-btn btn-primary btn-sm">Edit</button>
               </td>
             </tr>
             <tr>
               <td class="info-title">Phone number</td>
               <td class="info-container">
                 <span>**********25</span>
-                <button
-                  type="button"
-                  class="btn info-edit-btn btn-primary btn-sm">
-                  Edit
-                </button>
+                <button type="button" class="btn info-edit-btn btn-primary btn-sm">Edit</button>
               </td>
             </tr>
             <tr>
               <td class="info-title">Address</td>
               <td class="info-container">
                 <span>Some where some place</span>
-                <button
-                  type="button"
-                  class="btn info-edit-btn btn-primary btn-sm">
-                  Edit
-                </button>
+                <button type="button" class="btn info-edit-btn btn-primary btn-sm">Edit</button>
               </td>
             </tr>
             <tr>
               <td class="info-title">Gender</td>
               <td class="info-container">
                 <label style="margin-bottom: 0px">
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="male" />
+                  <input type="radio" name="gender" value="male" />
                   Male
                 </label>
                 <label style="margin-bottom: 0px; padding-left: 15px">
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="female" />
+                  <input type="radio" name="gender" value="female" />
                   Female
                 </label>
                 <label style="margin-bottom: 0px; padding-left: 15px">
-                  <input
-                    type="radio"
-                    name="gender"
-                    value="other" />
+                  <input type="radio" name="gender" value="other" />
                   Other
                 </label>
               </td>
@@ -188,39 +116,20 @@
               <td class="info-title">Birthday</td>
               <td class="info-container">
                 <span class="birthday">**/04/19**</span>
-                <button
-                  type="button"
-                  class="btn info-edit-btn btn-primary btn-sm">
-                  Edit
-                </button>
+                <button type="button" class="btn info-edit-btn btn-primary btn-sm">Edit</button>
               </td>
             </tr>
             <tr>
               <td></td>
               <td>
-                <a
-                  style="margin-left: 20px"
-                  class="btn btn-warning custom-cart-btn"
-                  href="#"
-                  >Save</a
-                >
+                <a style="margin-left: 20px" class="btn btn-warning custom-cart-btn" href="#">Save</a>
               </td>
             </tr>
           </table>
         </form>
-        <div
-          style="width: 20%"
-          class="avatar-container">
-          <img
-            src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png"
-            alt="User photo"
-            class="user-photo" />
-          <input
-            style="display: none"
-            type="file"
-            accept="image/*"
-            id="photo"
-            name="photo" />
+        <div style="width: 20%" class="avatar-container">
+          <img src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png" alt="User photo" class="user-photo" />
+          <input style="display: none" type="file" accept="image/*" id="photo" name="photo" />
           <label
             for="photo"
             style="
@@ -232,7 +141,8 @@
               cursor: pointer;
               text-align: center;
               border-radius: 5px;
-            ">
+            "
+          >
             Choose new photo
           </label>
         </div>
