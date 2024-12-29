@@ -21,7 +21,6 @@ const cartRoute = require("./routes/cartRoute.js");
 const reviewRoute = require("./routes/reviewRoute.js");
 const orderRoute = require("./routes/orderRoute.js");
 const viewRoute = require("./routes/viewRoute.js");
-const { c } = require("docker/src/languages.js");
 
 // app.use(morgan("combined"));
 
@@ -45,7 +44,7 @@ app.use(
       defaultSrc: ["'self'"], // allowed source
       connectSrc: [
         "'self'",
-        "https://jack-PowMart-75ebcc27b086.herokuapp.com/", // allowed url
+        "https://jack-e-commerce-75ebcc27b086.herokuapp.com/", // allowed url
       ],
       scriptSrc: [
         "'self'", // 當前網域的腳本
