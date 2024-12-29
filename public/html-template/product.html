@@ -113,51 +113,6 @@
                 </div>
               </div>
               <p class="user-review">
-                Tempus curabitur faucibus auctor bibendum duis gravida tincidunt litora himenaeos facilisis vivamus
-                vehicula potenti semper fusce suspendisse sagittis! litora himenaeos facilisis vivamus vehicula potenti
-                semper fusce suspendisse sagittis!Tempus curabitur faucibus auctor bibendum duis gravida tincidunt
-                litora himenaeos facilisis vivamus vehicula potenti semper fusce suspendisse sagittis! litora himenaeos
-                facilisis vivamus vehicula potenti semper fusce suspendisse sagittis!
-              </p>
-              <!-- Expand/Fold button -->
-              <div class="toggle-block">
-                <button class="btn toggle-button" onclick="toggleText(this)">(Expand review)</button>
-              </div>
-            </div>
-          </div>
-          <div class="review">
-            <div class="review-content">
-              <div class="user-info">
-                <img
-                  src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png"
-                  alt="User-photo"
-                  class="user-photo"
-                />
-                <div class="ml-3" style="display: flex; flex-direction: column">
-                  <h4 class="user-name">Username</h4>
-                  <p class="user-rating">Rating: ★★★★☆</p>
-                </div>
-              </div>
-              <p class="user-review">Tempus curabitur faucibus</p>
-              <!-- Expand/Fold button -->
-              <div class="toggle-block">
-                <button class="btn toggle-button" onclick="toggleText(this)">(Expand review)</button>
-              </div>
-            </div>
-          </div>
-          <div class="review">
-            <div class="review-content">
-              <div class="user-info">
-                <img
-                  src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png"
-                  alt="User-photo"
-                  class="user-photo"
-                />
-                <div class="ml-3" style="display: flex; flex-direction: column">
-                  <h4 class="user-name">Username</h4>
-                  <p class="user-rating">Rating: ★★★★☆</p>
-                </div>
-              </div>
               <p class="user-review">
                 Tempus curabitur faucibus auctor bibendum duis gravida tincidunt litora himenaeos facilisis vivamus
                 vehicula potenti semper fusce suspendisse sagittis! litora himenaeos facilisis vivamus vehicula potenti
@@ -184,6 +139,55 @@
                   <p class="user-rating">Rating: ★★★★☆</p>
                 </div>
               </div>
+              <p class="user-review">Tempus curabitur faucibus</p>
+              <p class="user-review">Tempus curabitur faucibus</p>
+              <!-- Expand/Fold button -->
+              <div class="toggle-block">
+                <button class="btn toggle-button" onclick="toggleText(this)">(Expand review)</button>
+              </div>
+            </div>
+          </div>
+          <div class="review">
+            <div class="review-content">
+              <div class="user-info">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png"
+                  alt="User-photo"
+                  class="user-photo"
+                />
+                <div class="ml-3" style="display: flex; flex-direction: column">
+                  <h4 class="user-name">Username</h4>
+                  <p class="user-rating">Rating: ★★★★☆</p>
+                </div>
+              </div>
+              <p class="user-review">
+              <p class="user-review">
+                Tempus curabitur faucibus auctor bibendum duis gravida tincidunt litora himenaeos facilisis vivamus
+                vehicula potenti semper fusce suspendisse sagittis! litora himenaeos facilisis vivamus vehicula potenti
+                semper fusce suspendisse sagittis!Tempus curabitur faucibus auctor bibendum duis gravida tincidunt
+                litora himenaeos facilisis vivamus vehicula potenti semper fusce suspendisse sagittis! litora himenaeos
+                facilisis vivamus vehicula potenti semper fusce suspendisse sagittis!
+              </p>
+              <!-- Expand/Fold button -->
+              <div class="toggle-block">
+                <button class="btn toggle-button" onclick="toggleText(this)">(Expand review)</button>
+              </div>
+            </div>
+          </div>
+          <div class="review">
+            <div class="review-content">
+              <div class="user-info">
+                <img
+                  src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/notion_8.png"
+                  alt="User-photo"
+                  class="user-photo"
+                />
+                <div class="ml-3" style="display: flex; flex-direction: column">
+                  <h4 class="user-name">Username</h4>
+                  <p class="user-rating">Rating: ★★★★☆</p>
+                </div>
+              </div>
+              <p class="user-review">
               <p class="user-review">
                 Tempus curabitur faucibus auctor bibendum duis gravida tincidunt litora himenaeos facilisis vivamus
                 vehicula potenti semper fusce suspendisse sagittis! litora himenaeos facilisis vivamus vehicula potenti
@@ -244,9 +248,12 @@
       reviews.forEach((review) => {
         // select "user-review" and "toggle-button" in each review
         const review = review.querySelector(".user-review");
+        // select "user-review" and "toggle-button" in each review
+        const review = review.querySelector(".user-review");
         const button = review.querySelector(".toggle-button");
 
         // check if review is overflowed
+        if (review.scrollHeight > review.clientHeight) {
         if (review.scrollHeight > review.clientHeight) {
           // if overflowed, show expand button
           button.style.display = "block";
@@ -261,13 +268,18 @@
     function toggleText(button) {
       // select button's previous sibling (review)
       const review = button.parentElement.previousElementSibling;
+      const review = button.parentElement.previousElementSibling;
       // check if review is expanded
+      if (review.classList.contains("expanded")) {
       if (review.classList.contains("expanded")) {
         // if expanded, fold review and change button text
         review.classList.remove("expanded");
         button.textContent = "Expand Review";
+        review.classList.remove("expanded");
+        button.textContent = "Expand Review";
       } else {
         // if not expanded, expand review and change button text
+        review.classList.add("expanded");
         review.classList.add("expanded");
         button.textContent = "(Fold)";
       }

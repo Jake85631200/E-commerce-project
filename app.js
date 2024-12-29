@@ -44,7 +44,7 @@ app.use(
       defaultSrc: ["'self'"], // allowed source
       connectSrc: [
         "'self'",
-        "https://jack-e-commerce-75ebcc27b086.herokuapp.com/", // allowed url
+        "https://jack-PowMart-75ebcc27b086.herokuapp.com/", // allowed url
       ],
       scriptSrc: [
         "'self'", // 當前網域的腳本

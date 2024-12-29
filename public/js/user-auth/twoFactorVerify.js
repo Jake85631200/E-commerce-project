@@ -10,7 +10,7 @@ const sendTwoFACode = async (email) => {
       data: { email },
     });
     if (res.data.status === "success") {
-      showAlert("success", "Verification code send! Check your email!");
+      showAlert("success", res.data.message, 3);
     }
     return res.data.status;
   } catch (err) {
@@ -60,7 +60,7 @@ export const initForgetPassword = () => {
     sendEmailForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       updateButtonText(".send-verification", "Sending...");
-      const email = document.getElementById("email").value;
+      const email = document.getElementById("email").value.toLowerCase();
       if ((await sendTwoFACode(email)) === "success") {
         document.getElementById("send-verify").style.display = "none";
         document.getElementById("verify-email").style.display = "";
@@ -75,7 +75,7 @@ export const initForgetPassword = () => {
       e.preventDefault();
       updateButtonText(".code-verifying", "Verifying...");
 
-      const email = document.getElementById("email").value;
+      const email = document.getElementById("email").value.toLowerCase();
       const verifyCode = document.getElementById("verify-code").value;
 
       const result = await checkTwoFACode(email, verifyCode);
@@ -93,6 +93,7 @@ export const initForgetPassword = () => {
   if (resetPasswordForm) {
     resetPasswordForm.addEventListener("submit", (e) => {
       e.preventDefault();
+
       const email = document.getElementById("email").value;
       const newPassword = document.getElementById("new-password").value;
       const passwordConfirm = document.getElementById("password-confirm").value;

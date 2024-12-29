@@ -6305,7 +6305,7 @@ var sendTwoFACode = /*#__PURE__*/function () {
         case 3:
           res = _context.sent;
           if (res.data.status === "success") {
-            (0, _alerts.showAlert)("success", "Verification code send! Check your email!");
+            (0, _alerts.showAlert)("success", res.data.message, 3);
           }
           return _context.abrupt("return", res.data.status);
         case 8:
@@ -6410,7 +6410,7 @@ var initForgetPassword = exports.initForgetPassword = function initForgetPasswor
             case 0:
               e.preventDefault();
               (0, _updateButtonText.updateButtonText)(".send-verification", "Sending...");
-              email = document.getElementById("email").value;
+              email = document.getElementById("email").value.toLowerCase();
               _context4.next = 5;
               return sendTwoFACode(email);
             case 5:
@@ -6445,7 +6445,7 @@ var initForgetPassword = exports.initForgetPassword = function initForgetPasswor
             case 0:
               e.preventDefault();
               (0, _updateButtonText.updateButtonText)(".code-verifying", "Verifying...");
-              email = document.getElementById("email").value;
+              email = document.getElementById("email").value.toLowerCase();
               verifyCode = document.getElementById("verify-code").value;
               _context5.next = 6;
               return checkTwoFACode(email, verifyCode);
@@ -6693,7 +6693,9 @@ var addToCartRequest = exports.addToCartRequest = /*#__PURE__*/function () {
           });
         case 3:
           res = _context.sent;
-          if (res.data.status === "success") (0, _alerts.showAlert)("success", "Item added into your cart!");
+          if (res.data.status === "success") {
+            (0, _alerts.showAlert)("success", res.data.message);
+          }
           _context.next = 10;
           break;
         case 7:
@@ -6727,7 +6729,9 @@ var deleteItem = exports.deleteItem = /*#__PURE__*/function () {
           });
         case 3:
           res = _context2.sent;
-          if (res.data.status === "success") (0, _alerts.showAlert)("success", "Item removed form your cart!");
+          if (res.data.status === "success") {
+            (0, _alerts.showAlert)("success", response.data.message);
+          }
           _context2.next = 10;
           break;
         case 7:
@@ -7270,7 +7274,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64945" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57019" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

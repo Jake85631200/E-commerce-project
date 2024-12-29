@@ -38,6 +38,7 @@ exports.createReview = catchAsync(async (req, res, next) => {
 
   const product = await Products.findById(req.params.id);
   if (!product) return next(new AppError("Product not found.", 404));
+  console.log("req.body.review");
 
   const reviewExist = await Reviews.findOne({ product: req.params.id, user: req.user._id });
 
@@ -49,7 +50,6 @@ exports.createReview = catchAsync(async (req, res, next) => {
     product: req.params.id,
     user: req.user._id,
   });
-
   res.status(200).json({
     status: "success",
     message: "Thanks for your advice!",

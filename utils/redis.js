@@ -1,36 +1,29 @@
-const Redis = require("ioredis");
+const { createClient } = require("redis");
 
-const redis = new Redis({
-  host: process.env.REDIS_HOST || "localhost",
-  port: process.env.REDIS_PORT || 6379,
-
-  // retry when redis connection failed
-  retryStrategy(times) {
-    const delay = Math.min(times * 50, 2000);
-    return delay;
+// 創建 Redis 客戶端
+const redis = createClient({
+  username: process.env.REDIS_ENDPOINT_USERNAME,
+  password: process.env.REDIS_ENDPOINT_PASSWORD,
+  socket: {
+    host: process.env.REDIS_ENDPOINT_URI,
+    port: process.env.REDIS_ENDPOINT_PORT,
   },
-
-  maxRetriesPerRequest: 3,
 });
 
-redis.on("connect", () => {
-  console.log("Redis connecting successfully!");
-});
+// 錯誤處理
+redis.on("error", (err) => console.log("Redis Client Error", err));
 
-redis.on("error", (err) => {
-  console.error("❌Redis error:", err);
-});
+// 連接到 Redis
+async function main() {
+  await redis.connect();
 
-// // 測試
-// const testRedisConnection = async () => {
-//   try {
-//     const result = await redis.ping();
-//     console.log('Redis 測試結果:', result);
-//   } catch (error) {
-//     console.error('Redis 測試失敗:', error);
-//   }
-// };
+  // 設置並獲取資料
+  await redis.set("foo", "Redis connection successful!");
+  const result = await redis.get("foo");
+  console.log(result); // >>> bar
+}
 
-// testRedisConnection();
+main().catch(console.error);
 
+// 匯出 redis 客戶端
 module.exports = redis;
