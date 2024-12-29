@@ -82,14 +82,14 @@ export const reviewToggleAndRatingStars = () => {
       const spanRight = document.createElement("span");
       spanRight.classList.add("span-right");
 
-      // 將 span 內部的元素添加到 spanBox 中
+      // 將 span 內元素加到 spanBox 中
       spanBox.appendChild(spanLeft);
       spanBox.appendChild(spanRight);
 
-      // 將 spanBox 添加到 star 中
+      // 將 spanBox 加到 star 中
       star.appendChild(spanBox);
 
-      // 最後將 star 添加到 .star-rating 容器中
+      // 最後將 star 加到 .star-rating 中
       container.appendChild(star);
     }
   }

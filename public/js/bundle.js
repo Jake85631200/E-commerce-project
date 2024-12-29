@@ -7067,14 +7067,14 @@ var reviewToggleAndRatingStars = exports.reviewToggleAndRatingStars = function r
       var spanRight = document.createElement("span");
       spanRight.classList.add("span-right");
 
-      // 將 span 內部的元素添加到 spanBox 中
+      // 將 span 內元素加到 spanBox 中
       spanBox.appendChild(spanLeft);
       spanBox.appendChild(spanRight);
 
-      // 將 spanBox 添加到 star 中
+      // 將 spanBox 加到 star 中
       star.appendChild(spanBox);
 
-      // 最後將 star 添加到 .star-rating 容器中
+      // 最後將 star 加到 .star-rating 中
       container.appendChild(star);
     }
   }
@@ -7193,11 +7193,14 @@ var leaveReview = /*#__PURE__*/function () {
 }();
 var initReview = exports.initReview = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-    var reviewBtn;
+    var productReview, reviewBtn;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          (0, _reviewRender.reviewToggleAndRatingStars)();
+          productReview = document.querySelector(".product-review");
+          if (productReview) {
+            (0, _reviewRender.reviewToggleAndRatingStars)();
+          }
           reviewBtn = document.getElementById("review-submit");
           if (reviewBtn) {
             reviewBtn.addEventListener("click", function (e) {
@@ -7212,7 +7215,7 @@ var initReview = exports.initReview = /*#__PURE__*/function () {
               leaveReview(productId, newReview, rating);
             });
           }
-        case 3:
+        case 4:
         case "end":
           return _context2.stop();
       }

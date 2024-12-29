@@ -24,7 +24,11 @@ const leaveReview = async (productId, review, rating) => {
 };
 
 export const initReview = async () => {
-  reviewToggleAndRatingStars();
+  const productReview = document.querySelector(".product-review");
+  if (productReview) {
+    reviewToggleAndRatingStars();
+  }
+
   const reviewBtn = document.getElementById("review-submit");
 
   if (reviewBtn) {
