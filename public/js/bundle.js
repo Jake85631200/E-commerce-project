@@ -7055,8 +7055,7 @@ var reviewToggleAndRatingStars = exports.reviewToggleAndRatingStars = function r
     });
   }
   function renderLeaveReviewStars(container, maxStars) {
-    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "regular";
-    for (var i = 1; i <= 5; i++) {
+    for (var i = 1; i <= maxStars; i++) {
       var star = document.createElement("div");
       star.classList.add("leave-star-rating", "star", "fa-regular", "fa-star", "fa-2xl", "m-2");
       star.setAttribute("style", "color: #FFD43B;");
@@ -7076,7 +7075,7 @@ var reviewToggleAndRatingStars = exports.reviewToggleAndRatingStars = function r
       star.appendChild(spanBox);
 
       // 最後將 star 添加到 .star-rating 容器中
-      starRatingContainer.appendChild(star);
+      container.appendChild(star);
     }
   }
   function renderStars(container, maxStars) {
@@ -7089,7 +7088,7 @@ var reviewToggleAndRatingStars = exports.reviewToggleAndRatingStars = function r
     }
   }
   var starRatingContainer = document.querySelector(".star-rating");
-  renderLeaveReviewStars(starRatingContainer, 5, "regular");
+  renderLeaveReviewStars(starRatingContainer, 5);
 
   // 1) select all stars, rating input, rating value
   var leaveStarRating = Array.from(document.querySelectorAll(".leave-star-rating"));
@@ -7274,7 +7273,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57019" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62634" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

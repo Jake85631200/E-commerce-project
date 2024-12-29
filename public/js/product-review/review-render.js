@@ -66,8 +66,8 @@ export const reviewToggleAndRatingStars = () => {
     });
   }
 
-  function renderLeaveReviewStars(container, maxStars, type = "regular") {
-    for (let i = 1; i <= 5; i++) {
+  function renderLeaveReviewStars(container, maxStars) {
+    for (let i = 1; i <= maxStars; i++) {
       const star = document.createElement("div");
       star.classList.add("leave-star-rating", "star", "fa-regular", "fa-star", "fa-2xl", "m-2");
       star.setAttribute("style", "color: #FFD43B;");
@@ -90,7 +90,7 @@ export const reviewToggleAndRatingStars = () => {
       star.appendChild(spanBox);
 
       // 最後將 star 添加到 .star-rating 容器中
-      starRatingContainer.appendChild(star);
+      container.appendChild(star);
     }
   }
 
@@ -103,7 +103,7 @@ export const reviewToggleAndRatingStars = () => {
     }
   }
   const starRatingContainer = document.querySelector(".star-rating");
-  renderLeaveReviewStars(starRatingContainer, 5, "regular");
+  renderLeaveReviewStars(starRatingContainer, 5);
 
   // 1) select all stars, rating input, rating value
   const leaveStarRating = Array.from(document.querySelectorAll(".leave-star-rating"));
