@@ -5,7 +5,8 @@ const AppError = require("../utils/AppError");
 
 exports.getAllProducts = catchAsync(async (req, res, next) => {
   const query = Products.find();
-  const APIFeatures = new GetAllProductsFeature(query, req.query).filter().paginate().sort().fields();
+
+  const APIFeatures = new GetAllProductsFeature(query, req.query).search().filter().paginate().sort().fields();
 
   const products = await APIFeatures.query;
 
@@ -37,8 +38,6 @@ exports.getProduct = catchAsync(async (req, res, next) => {
 exports.getMyProduct = catchAsync(async (req, res, next) => {
   const products = await Products.find({ "seller._id": req.user._id });
 
-  console.log(products);
-
   if (!products || products.length === 0) {
     return next(new AppError("Can't find any products for this user!", 404));
   }
@@ -69,7 +68,6 @@ exports.updateProduct = catchAsync(async (req, res, next) => {
 
 exports.createProduct = catchAsync(async (req, res, next) => {
   try {
-    console.log(req.user.name);
     const product = await Products.create({
       product_name: req.body.product_name,
       image: req.body.image,

@@ -4,20 +4,30 @@ class GetAllProductsFeature {
     this.queryString = queryString;
   }
 
+  search() {
+    if (this.queryString.keyword) {
+      const keyword = {
+        product_name: {
+          $regex: this.queryString.keyword,
+          $options: "i",
+        },
+      };
+      this.query = this.query.find(keyword);
+    }
+    return this;
+  }
+
   filter() {
     // 對req.query進行淺拷貝，以便對其修改或添加屬性，且不改變原始req.query
     const queryObj = { ...this.queryString };
 
     // 排除以下不適用過濾數據的query，作為優化
-    const excludeQuery = ["page", "limit", "sort", "fields"];
+    const excludeQuery = ["page", "limit", "sort", "fields", "keyword"];
     excludeQuery.forEach((el) => delete queryObj[el]);
 
     // 將 "$" 從 URL 移除，因可能被作為保留字元
     let queryInString = JSON.stringify(queryObj);
-    queryInString = queryInString.replace(
-      /\b(gte|gt|lte|lt)\b/g,
-      (match) => `$${match}`
-    );
+    queryInString = queryInString.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
     this.query = this.query.find(JSON.parse(queryInString));
 
     return this;
@@ -39,6 +49,7 @@ class GetAllProductsFeature {
     } else {
       this.query = this.query.sort("-release_date");
     }
+
     return this;
   }
 
@@ -48,10 +59,6 @@ class GetAllProductsFeature {
       this.query = this.query.select(fields);
     }
     return this;
-  }
-
-  search() {
-    
   }
 }
 

@@ -1,5 +1,7 @@
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
+const GetAllProductsFeature = require("../utils/getAllProductsFeature");
+
 const Products = require("../models/productModel");
 const Users = require("../models/userModel");
 const Carts = require("../models/cartModel");
@@ -16,17 +18,19 @@ exports.overview = catchAsync(async (req, res, next) => {
 });
 
 exports.search = catchAsync(async (req, res, next) => {
-  const query = req.query.keyword.trim();
-  const products = await Products.find({ product_name: new RegExp(query, "i") });
+  const query = Products.find();
 
-  console.log(products);
+  const APIFeatures = new GetAllProductsFeature(query, req.query).search().filter().paginate().sort().fields();
+
+  const products = await APIFeatures.query;
 
   if (products.length === 0) {
     return next(new AppError("No related products found!", 404));
   }
 
-  res.render("product_partial", { products, query }, (err, html) => {
-    res.status(200).send(html);
+  res.status(200).render("overview", {
+    title: `Search results for ${req.query.keyword}`,
+    products,
   });
 });
 
@@ -54,7 +58,7 @@ exports.checkProd = catchAsync(async (req, res, next) => {
 });
 
 exports.myCart = catchAsync(async (req, res, next) => {
-  const cart = await Carts.findById(req.user.cart)
+  const cart = await Carts.findById(req.user.cart);
 
   res.status(200).render("cart", {
     title: "My Cart",
