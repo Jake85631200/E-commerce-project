@@ -38,22 +38,28 @@ app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 app.use(cookieParser());
 
 //  helmet: A collection of many smaller middleware that set HTTP headers.
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     directives: {
-//       defaultSrc: ["'self'"], // allowed source
-//       connectSrc: [
-//         "'self'",
-//         "https://jack-PowMart-75ebcc27b086.herokuapp.com/", // allowed url
-//       ],
-//       scriptSrc: [
-//         "'self'", // 當前網域的腳本
-//         "https://js.stripe.com", // 允許來自 Stripe 的腳本
-//       ],
-//       frameSrc: ["'self'", "https://js.stripe.com"],
-//     },
-//   }),
-// );
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      connectSrc: [
+        "'self'",
+        "https://jack-PowMart-75ebcc27b086.herokuapp.com/",
+        "ws://127.0.0.1:*",
+        "https://ka-f.fontawesome.com",
+      ],
+      scriptSrc: ["'self'", "https://js.stripe.com/v3/", "https://kit.fontawesome.com", "'nonce-stripePublishKey'"],
+      frameSrc: ["'self'", "https://js.stripe.com/v3/"],
+      imgSrc: [
+        "'self'",
+        "https://cdn.jsdelivr.net",
+        "https://storage.cloud.google.com",
+        "https://*.googleusercontent.com",
+        "data:",
+      ],
+    },
+  }),
+);
 
 // Limit requests from same API
 const limiter = rateLimit({
@@ -65,19 +71,19 @@ const limiter = rateLimit({
 app.use("/api", limiter);
 
 // Data sanitization against NoSQL query injection
-// Check req.body, req.queryString and req.params, then filter out all the "$"" and "."" sign
+// Check req.body, req.queryString and req.params, then filter out all the "$" and "." sign
 app.use(mongoSanitize());
 
 // Data sanitization against XSS
 // Clean any user input form malicious HTML code, convert all these HTML symbols
-// app.use(xss());
+app.use(xss());
 
 // // Prevent parameter pollution
-// app.use(
-//   hpp({
-//     whitelist: ["rating_quantity", "ratings_average", "price", "category", "quantity"],
-//   }),
-// );
+app.use(
+  hpp({
+    whitelist: ["rating_quantity", "ratings_average", "price", "category", "quantity"],
+  }),
+);
 
 // Development logging
 if (process.env.NODE_ENV === "development") {
