@@ -12,6 +12,7 @@ exports.overview = catchAsync(async (req, res, next) => {
   const products = await Products.find();
 
   res.status(200).render("overview", {
+    status: "success",
     title: "All Products",
     products,
   });
@@ -24,11 +25,15 @@ exports.search = catchAsync(async (req, res, next) => {
 
   const products = await APIFeatures.query;
 
-  if (products.length === 0) {
-    return next(new AppError("No related products found!", 404));
+  if (products.length === 0 || !products) {
+    return res.status(404).render("overview", {
+      title: `Search results for ${req.query.keyword}`,
+      products,
+    });
   }
 
   res.status(200).render("overview", {
+    status: "success",
     title: `Search results for ${req.query.keyword}`,
     products,
   });

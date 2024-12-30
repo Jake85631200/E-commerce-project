@@ -2,13 +2,9 @@ import axios from "axios";
 import { showAlert } from "../utils/alerts";
 
 const searchItem = async (query) => {
-  try {
-    const url = `/search?keyword=${query}`;
+  const url = `/search?keyword=${query}`;
 
-    window.location.href = url;
-  } catch (err) {
-    showAlert("error", `${`${err.response.data.message}`}`);
-  }
+  window.location.href = url;
 };
 
 export const initSearch = () => {

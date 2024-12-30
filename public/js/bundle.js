@@ -6500,13 +6500,9 @@ var searchItem = /*#__PURE__*/function () {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          try {
-            url = "/search?keyword=".concat(query);
-            window.location.href = url;
-          } catch (err) {
-            (0, _alerts.showAlert)("error", "".concat("".concat(err.response.data.message)));
-          }
-        case 1:
+          url = "/search?keyword=".concat(query);
+          window.location.href = url;
+        case 2:
         case "end":
           return _context.stop();
       }
