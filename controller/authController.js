@@ -149,7 +149,7 @@ exports.twoFactor = catchAsync(async (req, res, next) => {
   // Send verification code to email
   await sendMail(
     // user.email
-    "test1@gmail.com", // test email by Mailtrap
+    req.body.email, // test email by Mailtrap
     "Two-Factor Authentication Code",
     `Your verification code is: ${faCode}. This code will expire in 10 minutes.`,
   );

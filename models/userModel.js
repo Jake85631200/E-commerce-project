@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 
 // Used for password hashing, simple to use, provides high security, especially suitable for storing user passwords.
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 // Suitable for scenarios requiring various encryption and hashing functions, highly flexible, but requires more encryption knowledge.
 const crypto = require("crypto");
 
@@ -78,20 +78,14 @@ const userSchema = new mongoose.Schema({
 });
 
 // comparePassword method: Compare the password with the DB password during login
-userSchema.methods.comparePassword = async function (
-  candidatePassword,
-  userPassword
-) {
+userSchema.methods.comparePassword = async function (candidatePassword, userPassword) {
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
 // changePasswordAfter: Check if the password has been changed after the JWT timestamp
 userSchema.methods.changePasswordAfter = function (JWTTimeStamp) {
   if (passwordChangedAt) {
-    const currentTimeStamp = parseInt(
-      this.passwordChangedAt.getTime() / 1000,
-      10
-    );
+    const currentTimeStamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
 
     // If the password change timestamp is greater than the JWT timestamp, it means the password was changed after the token was issued
     return currentTimeStamp > JWTTimeStamp;
@@ -99,7 +93,6 @@ userSchema.methods.changePasswordAfter = function (JWTTimeStamp) {
   // If there is no passwordChangedAt, it means the password has never been changed
   return false;
 };
-
 
 // Middleware
 // Encrypt password when save
@@ -137,10 +130,7 @@ userSchema.pre("save", function (next) {
 
 userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
   if (this.passwordChangedAt) {
-    const changedTimestamp = parseInt(
-      this.passwordChangedAt.getTime() / 1000,
-      10
-    );
+    const changedTimestamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
     return JWTTimestamp < changedTimestamp;
   }
 

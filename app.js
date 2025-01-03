@@ -8,6 +8,7 @@ const { webhookCheckout } = require("./controller/orderController.js");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const path = require("path");
+const compression = require("compression");
 
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
@@ -55,6 +56,7 @@ app.use(
         "https://cdn.jsdelivr.net",
         "https://storage.cloud.google.com",
         "https://*.googleusercontent.com",
+        "https://res.cloudinary.com",
         "data:",
       ],
     },
@@ -84,6 +86,9 @@ app.use(
     whitelist: ["rating_quantity", "ratings_average", "price", "category", "quantity"],
   }),
 );
+
+// this will return a middleware, compress all the text that sent to clients, images not included.
+app.use(compression());
 
 // Development logging
 if (process.env.NODE_ENV === "development") {

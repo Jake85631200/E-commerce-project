@@ -54,9 +54,9 @@ reviewSchema.pre(/^find/, function (next) {
 });
 
 // AGGREGATION PIPELINE
-reviewSchema.statics.calcAverageRatings = async function (tourId) {
+reviewSchema.statics.calcAverageRatings = async function (productId) {
   const stats = await this.aggregate([
-    { $match: { product: tourId } },
+    { $match: { product: productId } },
     {
       $group: {
         _id: "$product",
@@ -67,12 +67,12 @@ reviewSchema.statics.calcAverageRatings = async function (tourId) {
   ]);
 
   if (stats.length > 0) {
-    await Product.findByIdAndUpdate(tourId, {
+    await Product.findByIdAndUpdate(productId, {
       ratingsQuantity: stats[0].numRating,
       ratingsAverage: stats[0].avgRating,
     });
   } else {
-    await Product.findByIdAndUpdate(tourId, {
+    await Product.findByIdAndUpdate(productId, {
       ratingsQuantity: 0,
       ratingsAverage: 4.5,
     });

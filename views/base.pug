@@ -20,6 +20,7 @@ html
 
     script(src="https://kit.fontawesome.com/5dd0d2e252.js", crossorigin="anonymous")
     script(src="https://js.stripe.com/v3/")
+    //- Don't push STRIPE_PUBLISHABLE_KEY to production
     script(nonce="stripePublishKey").
       window.STRIPE_PUBLISHABLE_KEY = "pk_test_51QLQ4AI3a5BAumhdTw8QzW29h7wbMei3VthvME7cNwYM5FmPB5brLtQRuPP1G836Pqj7M0ryKIc265qIN7vHmWSc00tf1qzk09";
     script(src="/js/bundle.js")
