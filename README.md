@@ -21,4 +21,5 @@
 - **前端**：HTML, CSS, Javascript
 - **後端**：Node.js, Express
 - **資料庫**：MongoDB (使用 MongoDB Atlas), Mongoose, Redis
+- **第三方支付**：Stripe
 - **部署**：Heroku
