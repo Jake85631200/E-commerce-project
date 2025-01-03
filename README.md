@@ -1,5 +1,7 @@
 # PowMart-電商網站
-[https://dashboard.heroku.com/apps/jack-e-commerce/deploy/github](https://jack-e-commerce-75ebcc27b086.herokuapp.com/)
+
+入口：[https://dashboard.heroku.com/apps/jack-e-commerce/deploy/github](https://jack-e-commerce-75ebcc27b086.herokuapp.com/)
+
 ## Node.js 後端技術的學習專案 😀
 
 歡迎來到我的 **PowMart** 的專案！
