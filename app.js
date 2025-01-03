@@ -45,11 +45,12 @@ app.use(
       defaultSrc: ["'self'"],
       connectSrc: [
         "'self'",
-        "https://jack-PowMart-75ebcc27b086.herokuapp.com/",
+        "https://jack-PowMart-75ebcc27b086.herokuapp.com/*",
         "ws://127.0.0.1:*",
+        "wss://jack-e-commerce-75ebcc27b086.herokuapp.com:*",
         "https://ka-f.fontawesome.com",
       ],
-      scriptSrc: ["'self'", "https://js.stripe.com/v3/", "https://kit.fontawesome.com", "'nonce-stripePublishKey'"],
+      scriptSrc: ["'self'", "https://js.stripe.com/v3/", "https://kit.fontawesome.com", "https://cdn.jsdelivr.net"],
       frameSrc: ["'self'", "https://js.stripe.com/v3/"],
       imgSrc: [
         "'self'",

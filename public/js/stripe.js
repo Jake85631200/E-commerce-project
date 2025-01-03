@@ -1,9 +1,7 @@
 import { showAlert } from "./utils/alerts";
 import axios from "axios";
 
-const stripe = Stripe(
-  "pk_test_51QLQ4AI3a5BAumhdTw8QzW29h7wbMei3VthvME7cNwYM5FmPB5brLtQRuPP1G836Pqj7M0ryKIc265qIN7vHmWSc00tf1qzk09",
-);
+const stripe = Stripe(`${process.env.STRIPE_PUBLISHABLE_KEY}`);
 
 export const orderProducts = async (productsId, productsQty) => {
   try {
