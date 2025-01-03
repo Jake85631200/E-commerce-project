@@ -24,7 +24,7 @@ const leaveReview = async (productId, review, rating) => {
 };
 
 export const initReview = async () => {
-  const productReview = document.querySelector(".product-review");
+  const productReview = document.querySelector(".review");
   if (productReview) {
     reviewToggleAndRatingStars();
   }

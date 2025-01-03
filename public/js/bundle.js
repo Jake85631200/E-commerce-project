@@ -7179,7 +7179,7 @@ var initReview = exports.initReview = /*#__PURE__*/function () {
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          productReview = document.querySelector(".product-review");
+          productReview = document.querySelector(".review");
           if (productReview) {
             (0, _reviewRender.reviewToggleAndRatingStars)();
           }
