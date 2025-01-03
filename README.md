@@ -1,9 +1,10 @@
-# PowMart-電商網站應用程式
+# PowMart-電商網站
+https://dashboard.heroku.com/apps/jack-e-commerce/deploy/github
+## Node.js 後端技術的學習專案 😀
 
-## 一個 Node.js 後端技術的學習專案 😀
-
-歡迎來到我的 **PowMart** 的專案！  
-這是一個現代化、功能豐富的線上購物平台，旨在提供流暢的購物體驗。
+歡迎來到我的 **PowMart** 的專案！
+此專案是為了學習並演示完整的 Web 全端開發而構建。
+模擬真實的電商網站，包含從商品管理到用戶購物的完整功能流程。
 
 ## 功能特色
 
@@ -19,8 +20,3 @@
 - **後端**：Node.js, Express
 - **資料庫**：MongoDB (使用 MongoDB Atlas), Mongoose, Redis
 - **部署**：Heroku
-
-## 項目背景
-
-此專案是為了學習並演示完整的 Web 全端開發而構建。  
-模擬真實的電商網站，包含從商品管理到用戶購物的完整功能流程。
