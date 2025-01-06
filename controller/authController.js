@@ -41,13 +41,17 @@ const createSendToken = (user, statusCode, req, res) => {
   });
 };
 
+const setLoginAttempts = async (userId, attempts, expiration) => {
+  await redis.set(`loginAttempts_${userId}`, attempts, {
+    EX: expiration,
+  });
+};
+
 // record login attempt count until endOfDay
 const handleFailedLogin = async (user, endOfDay, attempts) => {
   attempts = attempts + 1;
   // 1. Update attempt count
-  await redis.set(`loginAttempts_${user._id}`, attempts, {
-    EX: endOfDay,
-  });
+  await setLoginAttempts(user._id, attempts, endOfDay);
   // 2. Check if lock condition is met
   if (attempts >= 3) {
     const ttl = 10;
@@ -114,10 +118,7 @@ exports.login = catchAsync(async (req, res, next) => {
   // 5. Initialize or reset login attempt count
   if (attempts >= 3 && !lockUntil) {
     // Reset login attempts when lock expires
-    attempts = 0;
-    await redis.set(`loginAttempts_${user._id}`, attempts, {
-      EX: endOfDay,
-    });
+    await setLoginAttempts(user._id, (attempts = 0), endOfDay);
   }
 
   // 6. Validate password
@@ -126,9 +127,7 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   // 7. Login success processing
-  await redis.set(`loginAttempts_${user._id}`, attempts, {
-    EX: endOfDay,
-  });
+  await setLoginAttempts(user._id, (attempts = 0), endOfDay);
   createSendToken(user, 200, req, res);
 });
 
