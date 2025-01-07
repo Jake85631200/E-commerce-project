@@ -5,8 +5,6 @@ const GetAllProductsFeature = require("../utils/getAllProductsFeature");
 const Products = require("../models/productModel");
 const Users = require("../models/userModel");
 const Carts = require("../models/cartModel");
-const Reviews = require("../models/reviewModel");
-const Orders = require("../models/orderModel");
 
 exports.overview = catchAsync(async (req, res, next) => {
   const products = await Products.find();
