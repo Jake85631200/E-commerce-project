@@ -1,6 +1,5 @@
 import axios from "axios";
 import { showAlert } from "../utils/alerts";
-import { updateButtonText } from "../utils/updateButtonText";
 
 // type is either 'password' or 'data'
 const updateSettings = async (data, type) => {
@@ -54,14 +53,15 @@ export const initUpdateSetting = () => {
     userPasswordForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      updateButtonText(".save-password", "Updating...");
+      document.querySelector(".save-password").textContent = "Updating...";
 
       const passwordCurrent = document.getElementById("password-current").value;
       const password = document.getElementById("password").value;
       const passwordConfirm = document.getElementById("password-confirm").value;
       await updateSettings({ passwordCurrent, password, passwordConfirm }, "password");
 
-      updateButtonText(".save-password", "Save password");
+      document.querySelector(".save-password").textContent = "Save password";
+
       document.getElementById("password-current").value = "";
       document.getElementById("password").value = "";
       document.getElementById("password-confirm").value = "";

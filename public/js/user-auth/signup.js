@@ -44,10 +44,6 @@ export const initSignup = () => {
         passwordConfirm: document.getElementById("password-confirm").value,
         gender,
       };
-      // form.forEach((value, key) => {
-      //   console.log(key, value);
-      // });
-      // updateButtonText("sign-up-commit", "Signing up...");
 
       signup(form);
     });
