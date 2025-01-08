@@ -117,7 +117,7 @@ exports.getSignupForm = async (req, res) => {
   });
 };
 
-exports.Two2FACode = async (req, res) => {
+exports.TwoFACode = async (req, res) => {
   res.status(200).render("two_factor", {
     title: "Forget password",
   });

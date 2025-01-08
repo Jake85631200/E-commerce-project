@@ -10,7 +10,7 @@ const {
   addToCart,
   getLoginForm,
   getSignupForm,
-  Two2FACode,
+  TwoFACode,
 } = require("../controller/viewController");
 
 const { restrictTo, protect, isLoggedIn } = require("../controller/authController");
@@ -29,6 +29,6 @@ router.get("/login", isLoggedIn, getLoginForm);
 
 router.get("/signup", isLoggedIn, getSignupForm);
 
-router.get("/two-factor", isLoggedIn, Two2FACode);
+router.get("/two-factor", isLoggedIn, TwoFACode);
 
 module.exports = router;
