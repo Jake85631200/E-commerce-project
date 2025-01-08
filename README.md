@@ -12,7 +12,7 @@
 - **用戶驗證**：用戶登入和密碼重設功能，並實現登入嘗試限制。
 - **API 權限管理**：通過 middleware 實現 API 訪問控制，僅授權用戶可使用特定功能。
 
-詳細業務邏輯請參閱：[docs/business-logic.md]()
+詳細業務邏輯請參閱：[docs/business-logic.md](./docs/business-login.md)
 
 ## 技術棧
 
