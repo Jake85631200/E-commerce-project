@@ -1,7 +1,7 @@
 import axios from "axios";
 import { showAlert } from "../utils/alerts";
 
-const sendTwoFACode = async (email) => {
+const sendTwo2FACode = async (email) => {
   try {
     const res = await axios({
       method: "POST",
@@ -17,11 +17,11 @@ const sendTwoFACode = async (email) => {
   }
 };
 
-const checkTwoFACode = async (email, verifyCode) => {
+const checkTwo2FACode = async (email, verifyCode) => {
   try {
     const res = await axios({
       method: "POST",
-      url: "/api/v1/users/verifyFACode",
+      url: "/api/v1/users/verify2FACode",
       data: { email, verifyCode },
     });
     return res.data.status;
@@ -60,7 +60,7 @@ export const initForgetPassword = () => {
       e.preventDefault();
       document.querySelector(".send-verification").textContent = "Sending...";
       const email = document.getElementById("email").value.toLowerCase();
-      if ((await sendTwoFACode(email)) === "success") {
+      if ((await sendTwo2FACode(email)) === "success") {
         document.getElementById("send-verify").style.display = "none";
         document.getElementById("verify-email").style.display = "";
       }
@@ -77,7 +77,7 @@ export const initForgetPassword = () => {
       const email = document.getElementById("email").value.toLowerCase();
       const verifyCode = document.getElementById("verify-code").value;
 
-      const result = await checkTwoFACode(email, verifyCode);
+      const result = await checkTwo2FACode(email, verifyCode);
 
       // If verification successful
       if (result === "success") {

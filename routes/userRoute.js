@@ -18,7 +18,7 @@ const {
   resetPassword,
   updatePassword,
   twoFactor,
-  verifyFACode,
+  verify2FACode,
   protect,
   restrictTo,
 } = require("../controller/authController");
@@ -28,7 +28,7 @@ router.post("/login", login);
 router.get("/logout", logout);
 router.patch("/resetPassword", resetPassword);
 router.post("/twoFactor", twoFactor);
-router.post("/verifyFACode", verifyFACode);
+router.post("/verify2FACode", verify2FACode);
 
 router.use(protect);
 
