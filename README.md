@@ -8,9 +8,22 @@
 ## 核心功能
 
 - **商品瀏覽和購物車管理**：用戶可以瀏覽商品並將其加入購物車，後端處理商品數量的更新或添加。
+
+  ![](./docs/flow-charts/powmart-購物車結帳.drawio-商品瀏覽和加入購物車.jpg)
+
 - **結帳流程**：使用 Stripe 進行結帳，包括創建 checkout session 和處理訂單紀錄。
+
+  ![](./docs/flow-charts/powmart-購物車結帳.drawio-購物車商品結帳.jpg)
+
 - **用戶驗證**：用戶登入和密碼重設功能，並實現登入嘗試限制。
+
+  ![](./docs/flow-charts/powmart-購物車結帳.drawio-登入及限制登入嘗試.jpg)
+
+  ![](./docs/flow-charts/powmart-購物車結帳.drawio-忘記密碼.jpg)
+
 - **API 權限管理**：通過 middleware 實現 API 訪問控制，僅授權用戶可使用特定功能。
+
+  ![](./docs/flow-charts/powmart-購物車結帳.drawio-API%20使用權限限制.jpg)
 
 詳細業務邏輯請參閱：[docs/business-logic.md](./docs/business-login.md)
 

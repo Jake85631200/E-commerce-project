@@ -8,11 +8,12 @@
 
 #### 商品結帳
 
-1. 選擇指定 product 和 quantity 後，點擊「結帳」。
+1. User 選擇指定 product 和 quantity 後，點擊「結帳」。
 2. Front-end 將選定`product.id`和數量傳遞給 back-end 請求`checkout session`。
 3. 使用 Stripe 創建`checkout session`，成功後跳轉至 Stripe checkout page。
 4. Stripe 通過驗證`stripe-signature`和`webhook secret`完成結帳流程。
 5. 結帳成功後，back-end 根據`session`資料創建 order 紀錄。
+6. 將 user 導向回 App
 
 #### 用戶登入及限制登入嘗試
 
@@ -20,9 +21,10 @@
 2. Front-end 傳送 email 和 password 至後端進行 login handler 驗證。
 3. 若 user 不存在，返回「無效的 email 或 password」提示。
 4. 若 user 存在，檢查登入嘗試次數和鎖定狀態：
-   1. 若`attempts`次數達到上限且未鎖定，重置嘗試次數。
-   2. 若 password 錯誤，增加`attempts`次數並返回錯誤提示。
-5. 若 email 和 password 正確，重置`attempts`次數，生成 JWT`token`，並存入`res.cookie`，完成登入。
+   1. 若 password 錯誤，增加`attempts`次數並返回錯誤提示。
+   2. 若 password 錯誤，且`attempts` >= 3，限制 user 嘗試登入 10 秒
+   3. 若`attempts`次數達到上限且未鎖定，重置嘗試次數。
+5. 若 email 和 password 正確，重置`attempts`次數，生成`token`，並存入`res.cookie`，完成登入
 
 #### 忘記密碼
 
