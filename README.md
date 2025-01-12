@@ -1,9 +1,12 @@
 # PowMart-電商網站應用程式
 
-## 一個 Node.js 後端技術的學習專案 😀
-
 歡迎來到我的 **PowMart** 的專案！  
 這是一個現代化、功能豐富的線上購物平台，旨在提供流暢的購物體驗。
+
+## 項目背景
+
+此專案是為了學習並演示完整的 Web 全端開發而構建。  
+模擬真實的電商網站，包含從商品管理到用戶購物的完整功能流程。
 
 ## 核心功能
 
@@ -25,7 +28,76 @@
 
   ![](./docs/flow-charts/powmart-購物車結帳.drawio-API%20使用權限限制.jpg)
 
-詳細業務邏輯請參閱：[docs/business-logic.md](./docs/business-login.md)
+詳細業務邏輯請參閱：[business-logic](./docs/business-logic.md)
+
+## 安裝與設定
+
+- **使用本專案的建議版本**
+
+  - Node.js：20.x 或以上您可以在專案根目錄添加 .nvmrc 文件來指定 Node.js 版本：
+
+    ```bash
+    v20.18.0
+    ```
+
+  - MongoDB：6.x 或以上
+
+  - mongodb：6.9.0
+  - mongoose：8.7.0
+
+  - ioredis：5.4.1
+  - redis：4.7.0
+
+  - jsonwebtoken：9.0.2
+
+  - stripe：17.3.1
+
+  - @babel/preset-env：7.26.0
+  - prettier：3.4.1
+  - @prettier/plugin-pug：3.2.0
+  - express：4.21.0
+
+- **系統已安裝以下版本軟體**
+
+  - MongoDB: 可使用 local MongoDB 或 MongoDB Atlas
+  - Redis: 可使用 local Redis 或 Redis Cloud Console
+
+- **複製專案**
+
+  - 請先複製此專案到本地
+
+    ```bash
+    git clone https://github.com/Jake85631200/E-commerce-project
+    ```
+
+  - **安裝**
+
+    ```bash
+    npm install
+    ```
+
+- **環境變數**
+
+  - **請在您的根目錄新增 .env 文件，並參考[ config-template ](./config-template.env)設置環境變數**
+
+- **資料庫設定**
+
+  - 如果使用本地 MongoDB，請確保 MongoDB 伺服器正在運行。
+  - 如果使用 MongoDB Atlas，請在 .env 文件設置並連結您的 MongoDB Atlas，並確保已在 IP 白名單中添加了本機 IP。
+
+- **CLI 指令**
+
+  - **在測試環境啟動伺服器**
+
+    ```bash
+    npm start
+    ```
+
+  - **在生產環境啟動伺服器**
+
+    ```bash
+    npm run start:prod
+    ```
 
 ## 技術棧
 
@@ -33,8 +105,3 @@
 - **後端**：Node.js, Express
 - **資料庫**：MongoDB (使用 MongoDB Atlas), Mongoose, Redis
 - **部署**：Heroku
-
-## 項目背景
-
-此專案是為了學習並演示完整的 Web 全端開發而構建。  
-模擬真實的電商網站，包含從商品管理到用戶購物的完整功能流程。
