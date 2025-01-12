@@ -78,7 +78,32 @@
 
 - **環境變數**
 
-  - **請在您的根目錄新增 .env 文件，並參考[ config-template ](./config-template.env)設置環境變數**
+  - **請在您的根目錄新增 .env 文件，並設置環境變數：**
+
+    ```bash
+    PORT=3000
+    NODE_ENV=development
+
+    # MongoDB 配置
+    DATABASE=mongodb+srv://<USERNAME>:<PASSWORD>@e-commerce-project.mongodb.net/
+    DATABASE_PASSWORD=your_password_here
+
+    # Redis 配置
+    REDIS_ENDPOINT_USERNAME=default
+    REDIS_ENDPOINT_URI=redis://<REDIS_HOST>:<REDIS_PORT>
+    REDIS_ENDPOINT_PASSWORD=<YOUR_REDIS_PASSWORD>
+
+    # JWT 配置
+    JWT_SECRET=<YOUR_JWT_SECRET_KEY>
+    JWT_EXPIRES_IN=7d
+    JWT_COOKIE_SECRET=<YOUR_JWT_COOKIE_SECRET>
+    JWT_COOKIE_EXPIRES_IN=30
+    .
+    .
+    .
+    ```
+
+    更多環境變數設置請參考[ config-template ](./config-template.env)
 
 - **資料庫設定**
 
