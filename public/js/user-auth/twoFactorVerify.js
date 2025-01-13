@@ -1,8 +1,7 @@
 import axios from "axios";
 import { showAlert } from "../utils/alerts";
-import { updateButtonText } from "../utils/updateButtonText";
 
-const sendTwoFACode = async (email) => {
+const send2FACode = async (email) => {
   try {
     const res = await axios({
       method: "POST",
@@ -18,11 +17,11 @@ const sendTwoFACode = async (email) => {
   }
 };
 
-const checkTwoFACode = async (email, verifyCode) => {
+const check2FACode = async (email, verifyCode) => {
   try {
     const res = await axios({
       method: "POST",
-      url: "/api/v1/users/verifyFACode",
+      url: "/api/v1/users/verify2FACode",
       data: { email, verifyCode },
     });
     return res.data.status;
@@ -59,13 +58,13 @@ export const initForgetPassword = () => {
   if (sendEmailForm) {
     sendEmailForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      updateButtonText(".send-verification", "Sending...");
+      document.querySelector(".send-verification").textContent = "Sending...";
       const email = document.getElementById("email").value.toLowerCase();
-      if ((await sendTwoFACode(email)) === "success") {
+      if ((await send2FACode(email)) === "success") {
         document.getElementById("send-verify").style.display = "none";
         document.getElementById("verify-email").style.display = "";
       }
-      updateButtonText(".send-verification", "Send verification code");
+      document.querySelector(".send-verification").textContent = "Send verification code";
     });
   }
 
@@ -73,19 +72,19 @@ export const initForgetPassword = () => {
   if (sendVerifyForm) {
     sendVerifyForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      updateButtonText(".code-verifying", "Verifying...");
+      document.querySelector(".code-verifying").textContent = "Verifying...";
 
       const email = document.getElementById("email").value.toLowerCase();
       const verifyCode = document.getElementById("verify-code").value;
 
-      const result = await checkTwoFACode(email, verifyCode);
+      const result = await check2FACode(email, verifyCode);
 
       // If verification successful
       if (result === "success") {
         document.getElementById("verify-email").style.display = "none";
         document.getElementById("reset-password").style.display = "";
       }
-      updateButtonText(".code-verifying", "Verify");
+      document.querySelector(".code-verifying").textContent = "Verify";
     });
   }
 

@@ -112,11 +112,11 @@ exports.login = catchAsync(async (req, res, next) => {
   const lockUntil = await redis.get(`locked_${user._id}`);
   if (lockUntil) {
     const countDown = await redis.ttl(`locked_${user._id}`);
-    return next(new AppError(`Your account has been locked for safety. Please try again in ${countDown} seconds`, 403));
+    throw next(new AppError(`Your account has been locked for safety. Please try again in ${countDown} seconds`, 403));
   }
 
   // 5. Initialize or reset login attempt count
-  if (attempts >= 3 && !lockUntil) {
+  if (attempts >= 3) {
     // Reset login attempts when lock expires
     await setLoginAttempts(user._id, (attempts = 0), endOfDay);
   }
@@ -139,18 +139,17 @@ exports.twoFactor = catchAsync(async (req, res, next) => {
   }
 
   // Generate verification code and set expiration to 10 minutes
-  const faCode = Math.floor(100000 + Math.random() * 899999).toString();
+  const TwoFACode = Math.floor(100000 + Math.random() * 899999).toString();
 
   // Set verification code inside redis
-  await redis.set(`2fa_${user.email}`, faCode, {
+  await redis.set(`2fa_${user.email}`, TwoFACode, {
     EX: 600,
   });
   // Send verification code to email
   await sendMail(
-    // user.email
-    req.body.email, // test email by Mailtrap
+    req.body.email,
     "Two-Factor Authentication Code",
-    `Your verification code is: ${faCode}. This code will expire in 10 minutes.`,
+    `Your verification code is: ${TwoFACode}. This code will expire in 10 minutes.`,
   );
 
   res.status(200).json({
@@ -159,8 +158,8 @@ exports.twoFactor = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.verifyFACode = catchAsync(async (req, res, next) => {
-  // Check if user provide email and FACode
+exports.verify2FACode = catchAsync(async (req, res, next) => {
+  // Check if user provide email and 2FACode
   const { email, verifyCode } = req.body;
   if (!email || !verifyCode) {
     return next(new AppError("Please provide email and verification code.", 400));
@@ -239,7 +238,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   const payload = await promisify(jwt.verify)(token, jwtSecret); // payload contains user information
 
   // 3) If user still exist
-  const currentUser = await User.findById(payload.id);
+  const currentUser = await User.findById(payload.id);  
   if (!currentUser) {
     return next(new AppError("The user of this token is no-longer exist.", 401));
   }
@@ -251,7 +250,7 @@ exports.protect = catchAsync(async (req, res, next) => {
     });
   }
 
-  req.user = currentUser;
+  req.user = currentUser;  
   res.locals.user = currentUser;
   next();
 });

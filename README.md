@@ -1,20 +1,125 @@
 # PowMart-電商網站
 
-入口：[https://dashboard.heroku.com/apps/jack-e-commerce/deploy/github](https://jack-e-commerce-75ebcc27b086.herokuapp.com/)
+=======
+歡迎來到我的 **PowMart** 的專案！  
+這是一個現代化、功能豐富的線上購物平台，旨在提供流暢的購物體驗。
 
-## Node.js 後端技術的學習專案 😀
+## 項目背景
 
-歡迎來到我的 **PowMart** 的專案！
-此專案是為了學習並展示完整的 Web 全端開發而構建。
+=======
+此專案是為了學習並演示完整的 Web 全端開發而構建。  
 模擬真實的電商網站，包含從商品管理到用戶購物的完整功能流程。
 
-## 功能特色
+## 核心功能
 
-- **商品瀏覽**：用戶可以在商品頁瀏覽商品資訊，並可使用互動式評分系統留下評分和意見！
-- **購物車**：用戶可以輕鬆加入商品到購物車並依照所需項目和個數結帳！
-- **使用者系統**：包含註冊、登入、忘記密碼（2FA）、權限管理。
-- **個資管理**：用戶可以在個人頁面管理個資、個人頭像和更新帳戶密碼。
-- **支付整合**：連接第三方支付服務，安全快速地完成交易。
+- **商品瀏覽和購物車管理**：用戶可以瀏覽商品並將其加入購物車，後端處理商品數量的更新或添加。
+
+  ![](./docs/flow-charts/powmart-購物車結帳.drawio-商品瀏覽和加入購物車.jpg)
+
+- **結帳流程**：使用 Stripe 進行結帳，包括創建 checkout session 和處理訂單紀錄。
+
+  ![](./docs/flow-charts/powmart-購物車結帳.drawio-購物車商品結帳.jpg)
+
+- **用戶驗證**：用戶登入和密碼重設功能，並實現登入嘗試限制。
+
+  ![](./docs/flow-charts/powmart-購物車結帳.drawio-登入及限制登入嘗試.jpg)
+
+  ![](./docs/flow-charts/powmart-購物車結帳.drawio-忘記密碼.jpg)
+
+- **API 權限管理**：通過 middleware 實現 API 訪問控制，僅授權用戶可使用特定功能。
+
+  ![](./docs/flow-charts/powmart-購物車結帳.drawio-API%20使用權限限制.jpg)
+
+詳細業務邏輯請參閱：[business-logic](./docs/business-logic.md)
+
+## 安裝與設定
+
+- **使用本專案的建議版本**
+
+  - Node.js：20.x 或以上您可以在專案根目錄添加 .nvmrc 文件來指定 Node.js 版本：
+
+    ```bash
+    v20.18.0
+    ```
+
+  - MongoDB：6.x 或以上
+
+  - mongodb：6.9.0
+  - mongoose：8.7.0
+
+  - ioredis：5.4.1
+  - redis：4.7.0
+
+  - jsonwebtoken：9.0.2
+
+  - stripe：17.3.1
+
+  - @babel/preset-env：7.26.0
+  - prettier：3.4.1
+  - @prettier/plugin-pug：3.2.0
+  - express：4.21.0
+
+- **複製專案**
+
+  - 請先複製此專案到本地
+
+    ```bash
+    git clone https://github.com/Jake85631200/E-commerce-project
+    ```
+
+  - **安裝**
+
+    ```bash
+    npm install
+    ```
+
+- **環境變數**
+
+  - **請在您的根目錄新增 .env 文件，並設置環境變數：**
+
+    ```bash
+    PORT=3000
+    NODE_ENV=development
+
+    # MongoDB 配置
+    DATABASE=mongodb+srv://<USERNAME>:<PASSWORD>@e-commerce-project.mongodb.net/
+    DATABASE_PASSWORD=your_password_here
+
+    # Redis 配置
+    REDIS_ENDPOINT_USERNAME=default
+    REDIS_ENDPOINT_URI=redis://<REDIS_HOST>:<REDIS_PORT>
+    REDIS_ENDPOINT_PASSWORD=<YOUR_REDIS_PASSWORD>
+
+    # JWT 配置
+    JWT_SECRET=<YOUR_JWT_SECRET_KEY>
+    JWT_EXPIRES_IN=7d
+    JWT_COOKIE_SECRET=<YOUR_JWT_COOKIE_SECRET>
+    JWT_COOKIE_EXPIRES_IN=30
+    .
+    .
+    .
+    ```
+
+    更多環境變數設置請參考[ config-template ](./config-template.env)
+
+- **資料庫設定**
+
+  - 如果使用本地 MongoDB，請確保 MongoDB 伺服器正在運行。
+  - 如果使用 MongoDB Atlas，請在 .env 文件設置並連結您的 MongoDB Atlas，並確保已在 IP 白名單中添加了本機 IP。
+
+- **CLI 指令**
+
+  - **在測試環境啟動伺服器**
+
+    ```bash
+    npm start
+    ```
+
+  - **在生產環境啟動伺服器**
+
+        ```bash
+        npm run start:prod
+        ```
 
 ## 技術棧
 

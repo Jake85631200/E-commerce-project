@@ -61,6 +61,7 @@ const productSchema = new mongoose.Schema({
     min: 0,
     max: 5,
     default: 4.5,
+    get: (value) => value.toFixed(1),
   },
   ratings_quantity: {
     type: Number,
