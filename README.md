@@ -57,11 +57,6 @@
   - @prettier/plugin-pug：3.2.0
   - express：4.21.0
 
-- **系統已安裝以下版本軟體**
-
-  - MongoDB: 可使用 local MongoDB 或 MongoDB Atlas
-  - Redis: 可使用 local Redis 或 Redis Cloud Console
-
 - **複製專案**
 
   - 請先複製此專案到本地
