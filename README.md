@@ -115,7 +115,10 @@
 
 ## 技術棧
 
-- **前端**：HTML, CSS, Javascript
-- **後端**：Node.js, Express
-- **資料庫**：MongoDB (使用 MongoDB Atlas), Mongoose, Redis
-- **部署**：Heroku
+- **後端**：使用 Node.js (Express) 架設
+- **前端**：使用 HTML, CSS, JavaScript 手刻網頁佈局
+- **資料庫**：
+  1. 串接至 MongoDB 並使用 Mongoose 進行資料設計和資料庫操作
+  2. 使用 Redis 儲存短期資料 (驗證碼)
+- **第三方支付**：使用 Stripe API 處理第三方支付並建立訂單
+- **部署**：使用 Heroku 自動連接至 Github 更新部署
