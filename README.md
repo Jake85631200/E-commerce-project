@@ -1,4 +1,4 @@
-# PowMart-電商網站應用程式
+# PowMart-電商平台網站
 
 **See Here**：https://jack-e-commerce-75ebcc27b086.herokuapp.com
 
