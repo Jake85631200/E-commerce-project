@@ -238,7 +238,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   const payload = await promisify(jwt.verify)(token, jwtSecret); // payload contains user information
 
   // 3) If user still exist
-  const currentUser = await User.findById(payload.id);  
+  const currentUser = await User.findById(payload.id);
   if (!currentUser) {
     return next(new AppError("The user of this token is no-longer exist.", 401));
   }
@@ -250,7 +250,7 @@ exports.protect = catchAsync(async (req, res, next) => {
     });
   }
 
-  req.user = currentUser;  
+  req.user = currentUser;
   res.locals.user = currentUser;
   next();
 });

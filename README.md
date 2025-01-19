@@ -1,5 +1,7 @@
 # PowMart-電商網站應用程式
 
+**See Here**：https://jack-e-commerce-75ebcc27b086.herokuapp.com
+
 歡迎來到我的 **PowMart** 的專案！  
 這是一個現代化、功能豐富的線上購物平台，旨在提供流暢的購物體驗。
 
@@ -40,26 +42,18 @@
     v20.18.0
     ```
 
+  - express：4.21.0
   - MongoDB：6.x 或以上
-
   - mongodb：6.9.0
   - mongoose：8.7.0
-
   - ioredis：5.4.1
   - redis：4.7.0
-
   - jsonwebtoken：9.0.2
-
   - stripe：17.3.1
-
-  - @babel/preset-env：7.26.0
-  - prettier：3.4.1
-  - @prettier/plugin-pug：3.2.0
-  - express：4.21.0
 
 - **複製專案**
 
-  - 請先複製此專案到本地
+  - **請先複製此專案到本地**
 
     ```bash
     git clone https://github.com/Jake85631200/E-commerce-project
