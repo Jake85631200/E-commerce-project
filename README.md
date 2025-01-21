@@ -92,7 +92,7 @@
     .
     ```
 
-    更多環境變數設置請參考[ config-template ](./config-template.env)
+    更多環境變數設置請參考[ config-template ](./env-config-template)
 
 - **資料庫設定**
 
