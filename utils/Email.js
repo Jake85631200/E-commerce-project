@@ -5,8 +5,8 @@ if (process.env.NODE_ENV === "production") {
   transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASSWORD,
+      user: process.env.GMAIL_SEND_FROM,
+      pass: process.env.GMAIL_APP_PASSWORD,
     },
   });
 } else {
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === "production") {
 
 const sendMail = async (to, subject, text) => {
   const mailOptions = {
-    from: process.env.EMAIL_USER,
+    from: process.env.GMAIL_SEND_FROM,
     to,
     subject,
     text,
