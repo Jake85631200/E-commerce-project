@@ -43,7 +43,6 @@
     ```
 
   - express：4.21.0
-  - MongoDB：6.x 或以上
   - mongodb：6.9.0
   - mongoose：8.7.0
   - ioredis：5.4.1
@@ -71,7 +70,7 @@
 
     ```bash
     PORT=3000
-    NODE_ENV=development
+    NODE_ENV=production
 
     # MongoDB 配置
     DATABASE=mongodb+srv://<USERNAME>:<PASSWORD>@e-commerce-project.mongodb.net/
@@ -92,12 +91,7 @@
     .
     ```
 
-    更多環境變數設置請參考[ config-template ](./env-config-template)
-
-- **資料庫設定**
-
-  - 如果使用本地 MongoDB，請確保 MongoDB 伺服器正在運行。
-  - 如果使用 MongoDB Atlas，請在 .env 文件設置並連結您的 MongoDB Atlas，並確保已在 IP 白名單中添加了本機 IP。
+    更多環境變數設置請參考[ env-config-template ](./env-config-template)
 
 - **CLI 指令**
 
@@ -115,10 +109,10 @@
 
 ## 技術棧
 
-- **後端**：使用 Node.js (Express) 架設
-- **前端**：使用 HTML, CSS, JavaScript 手刻網頁佈局
+- **後端**：使用 Node.js 搭配 Express 框架，構建高效、可擴展的伺服器端應用
+- **前端**：手刻 HTML、CSS 和 JavaScript，實現自訂網頁佈局
 - **資料庫**：
-  1. 串接至 MongoDB 並使用 Mongoose 進行資料設計和資料庫操作
-  2. 使用 Redis 儲存短期資料 (驗證碼)
-- **第三方支付**：使用 Stripe API 處理第三方支付並建立訂單
+  1. 整合 MongoDB 並運用 Mongoose 進行資料設計及操作，提供高效的資料存取和管理
+  2. 使用 Redis 儲存短期資料，如驗證碼等，即時處理並提升系統效能
+- **第三方支付**：第三方支付：透過 Stripe API 實現安全、流暢的支付流程，並建立訂單管理系統。
 - **部署**：使用 Heroku 自動連接至 Github 更新部署
