@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === "production") {
     service: "gmail",
     auth: {
       user: process.env.GMAIL_SEND_FROM,
-      GMAIL_APP_PASSWORD,
+      pass: process.env.GMAIL_APP_PASSWORD,
     },
   });
 } else {
