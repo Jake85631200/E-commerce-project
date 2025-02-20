@@ -16,6 +16,7 @@ const reviewSchema = new mongoose.Schema(
       type: Number,
       min: 1,
       max: 5,
+      get: (value) => value.toFixed(1),
     },
     createdAt: {
       type: Date,

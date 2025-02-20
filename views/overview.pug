@@ -23,7 +23,7 @@ block content
           if products.length
             each product in products
               .card-box.col-12.col-sm-6.col-md-4.col-lg-3.mb-4
-                a.card(href=`/product/${product._id}`)
+                a.card(href=`/product/${product._id}`, style="text-decoration: none")
                   .card-img-container
                     img.card-img-top.img-fluid(
                       src=`${product.image || '/images/default-product.jpg'}`,
@@ -32,9 +32,14 @@ block content
                   .card-body
                     h5
                       span.card-title= product.product_name
-                    .product-rating.mb-2
-                      span.rating-value= product.ratings_average
-                      span.stars &starf;&starf;&starf;&starf;&star;
+                    .card-overview.rating.mb-2(style="margin: 0 auto")
+                      span.overview-rating= `(${product.ratings_average}/5)`
+                      span.overview-rating-star
+                        //- span.fa-regular.fa-star
+                        //- span.fa-regular.fa-star
+                        //- span.fa-regular.fa-star
+                        //- span.fa-regular.fa-star
+                        //- span.fa-regular.fa-star
           else
             .card-box.col-12.text-center(style="display: flex; justify-content: center; width: 100%")
               h1 No related products found!
