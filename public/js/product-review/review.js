@@ -40,7 +40,6 @@ export const initReview = async () => {
       const path = window.location.pathname;
       const productId = path.split("/").pop();
       const rating = ratingValue.replace(/[()]/g, "").split(" / ")[0];
-      console.log(rating);
       leaveReview(productId, newReview, rating);
     });
   }

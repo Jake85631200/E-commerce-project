@@ -142,7 +142,77 @@ var showAlert = exports.showAlert = function showAlert(type, msg) {
   document.querySelector("body").insertAdjacentHTML("afterbegin", alert);
   window.setTimeout(hideAlert, t * 1000);
 };
-},{}],"../../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
+},{}],"product-review/render-stars.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.updateRatingStars = exports.renderStars = void 0;
+var updateRatingStars = exports.updateRatingStars = function updateRatingStars(elements, typeOfStar, selectedValue) {
+  // turn elements into array if it's not
+  var stars = Array.isArray(elements) ? elements : [elements];
+  stars.forEach(function (star) {
+    console.log(star);
+    var value = parseFloat(star.getAttribute("data-value"));
+    // if star value <= selected rating value, display as solid
+    if (value <= selectedValue) {
+      star.classList.add("fa-solid");
+      star.classList.remove("fa-regular", typeOfStar);
+    }
+    // if star value - 0.5 = selected rating value, display as half star
+    else if (value - 0.5 === selectedValue) {
+      star.classList.add("fa-solid", typeOfStar);
+      star.classList.remove("fa-regular");
+    }
+    // display as empty
+    else {
+      star.classList.remove("fa-solid", typeOfStar);
+      star.classList.add("fa-regular");
+    }
+  });
+};
+var renderStars = exports.renderStars = function renderStars(starContainer, stars, reviewRating) {
+  var createEmptyStars = function createEmptyStars(container, maxStars) {
+    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "regular";
+    for (var i = 1; i <= maxStars; i++) {
+      var star = document.createElement("div");
+      star.className = "star-in-rating star fa-".concat(type, " fa-star fa-sm m-2");
+      star.setAttribute("data-value", i);
+      container.appendChild(star);
+    }
+  };
+  var reviewRatingStars = document.querySelectorAll(starContainer);
+  reviewRatingStars.forEach(function (el) {
+    createEmptyStars(el, 5, "regular");
+  });
+  var starInRating = document.querySelectorAll(stars);
+  starInRating.forEach(function (star) {
+    var ratingValue = star.closest(".rating").querySelector(reviewRating);
+    var ratingInReview = parseFloat(ratingValue.textContent.replace(/[()]/g, "").split("/")[0]);
+    updateRatingStars(star, "fa-star-half-stroke", ratingInReview);
+  });
+};
+},{}],"overview/overview.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.initOverview = void 0;
+var _renderStars = require("../product-review/render-stars");
+// const updateRatingStars = (elements, typeOfStar, selectedValue);
+var initOverview = exports.initOverview = function initOverview() {
+  var overviewCard = document.querySelector(".card-container");
+  if (overviewCard) {
+    (0, _renderStars.renderStars)(".overview-rating-star", ".star-in-rating", ".overview-rating");
+
+    // let value = document.querySelector(".overview-rating").innerText;
+    // value = parseInt(value)
+    // updateRatingStars(".star-in-rating", "regular", value);
+  }
+};
+},{"../product-review/render-stars":"product-review/render-stars.js"}],"../../node_modules/axios/lib/helpers/bind.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -6952,6 +7022,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.reviewToggleAndRatingStars = void 0;
+var _renderStars = require("./render-stars");
 var reviewToggleAndRatingStars = exports.reviewToggleAndRatingStars = function reviewToggleAndRatingStars() {
   // Expand/Fold review text
   // 1) Show expand button when review is overflowed
@@ -6973,7 +7044,7 @@ var reviewToggleAndRatingStars = exports.reviewToggleAndRatingStars = function r
   });
 
   // 2)Toggle review text (expand/fold)
-  function toggleText(button) {
+  var toggleText = function toggleText(button) {
     // select button's previous sibling (review)
     var foldedView = button.parentElement.previousElementSibling;
     // check if foldedView is expanded
@@ -6986,7 +7057,7 @@ var reviewToggleAndRatingStars = exports.reviewToggleAndRatingStars = function r
       foldedView.classList.add("expanded");
       button.textContent = "(Fold)";
     }
-  }
+  };
   var toggleReviewButtons = document.querySelectorAll(".toggle-button");
   toggleReviewButtons.forEach(function (toggleButton) {
     toggleButton.addEventListener("click", function () {
@@ -6995,30 +7066,7 @@ var reviewToggleAndRatingStars = exports.reviewToggleAndRatingStars = function r
   });
 
   //Leave rating stars
-  // update leaveStarRating display
-  function updateRatingStars(elements, typeOfStar, selectedValue) {
-    // turn elements into array if it's not
-    var stars = Array.isArray(elements) ? elements : [elements];
-    stars.forEach(function (star) {
-      var value = parseFloat(star.getAttribute("data-value"));
-      // if star value <= selected rating value, display as solid
-      if (value <= selectedValue) {
-        star.classList.add("fa-solid");
-        star.classList.remove("fa-regular", typeOfStar);
-      }
-      // if star value - 0.5 = selected rating value, display as half star
-      else if (value - 0.5 === selectedValue) {
-        star.classList.add("fa-solid", typeOfStar);
-        star.classList.remove("fa-regular");
-      }
-      // display as empty
-      else {
-        star.classList.remove("fa-solid", typeOfStar);
-        star.classList.add("fa-regular");
-      }
-    });
-  }
-  function renderLeaveReviewStars(container, maxStars) {
+  var renderLeaveReviewStars = function renderLeaveReviewStars(container, maxStars) {
     for (var i = 1; i <= maxStars; i++) {
       var star = document.createElement("div");
       star.classList.add("leave-star-rating", "star", "fa-regular", "fa-star", "fa-2xl", "m-2");
@@ -7041,16 +7089,7 @@ var reviewToggleAndRatingStars = exports.reviewToggleAndRatingStars = function r
       // 最後將 star 加到 .star-rating 中
       container.appendChild(star);
     }
-  }
-  function renderStars(container, maxStars) {
-    var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "regular";
-    for (var i = 1; i <= maxStars; i++) {
-      var star = document.createElement("div");
-      star.className = "star-in-rating star fa-".concat(type, " fa-star fa-sm m-2");
-      star.setAttribute("data-value", i);
-      container.appendChild(star);
-    }
-  }
+  };
   var starRatingContainer = document.querySelector(".star-rating");
   renderLeaveReviewStars(starRatingContainer, 5);
 
@@ -7072,7 +7111,7 @@ var reviewToggleAndRatingStars = exports.reviewToggleAndRatingStars = function r
       ratingInput.value = value;
       ratingValue.textContent = "(".concat(value, " / 5)");
       // update leaveStarRating display
-      updateRatingStars(leaveStarRating, "fa-star-half-stroke", value);
+      (0, _renderStars.updateRatingStars)(leaveStarRating, "fa-star-half-stroke", value);
     });
     // b) when right half mouseover
     spanRight.addEventListener("mouseover", function () {
@@ -7082,25 +7121,14 @@ var reviewToggleAndRatingStars = exports.reviewToggleAndRatingStars = function r
       ratingInput.value = value;
       ratingValue.textContent = "(".concat(value, " / 5)");
       // update leaveStarRating display
-      updateRatingStars(leaveStarRating, "fa-star-half-stroke", value);
+      (0, _renderStars.updateRatingStars)(leaveStarRating, "fa-star-half-stroke", value);
     });
   });
 
   // Star rating in review
-  // 1) select all reviewRatingStars
-  var reviewRatingStars = document.querySelectorAll(".review-rating-star");
-  reviewRatingStars.forEach(function (el) {
-    renderStars(el, 5, "regular");
-    //
-  });
-  var starInRating = document.querySelectorAll(".star-in-rating");
-  starInRating.forEach(function (star) {
-    var ratingValue = star.closest(".rating").querySelector(".rating-in-review");
-    var ratingInReview = parseFloat(ratingValue.textContent.replace(/[()]/g, "").split("/")[0]);
-    updateRatingStars(star, "fa-star-half-stroke", ratingInReview);
-  });
+  (0, _renderStars.renderStars)(".review-rating-star", ".star-in-rating", ".rating-in-review");
 };
-},{}],"product-review/review.js":[function(require,module,exports) {
+},{"./render-stars":"product-review/render-stars.js"}],"product-review/review.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7175,7 +7203,6 @@ var initReview = exports.initReview = /*#__PURE__*/function () {
               var path = window.location.pathname;
               var productId = path.split("/").pop();
               var rating = ratingValue.replace(/[()]/g, "").split(" / ")[0];
-              console.log(rating);
               leaveReview(productId, newReview, rating);
             });
           }
@@ -7193,6 +7220,7 @@ var initReview = exports.initReview = /*#__PURE__*/function () {
 "use strict";
 
 var _alerts = require("./utils/alerts");
+var _overview = require("./overview/overview");
 var _login = require("./user-auth/login");
 var _signup = require("./user-auth/signup");
 var _twoFactorVerify = require("./user-auth/twoFactorVerify");
@@ -7203,6 +7231,7 @@ var _review = require("./product-review/review");
 // IMPORT FUNCTIONS
 
 document.addEventListener("DOMContentLoaded", function () {
+  (0, _overview.initOverview)();
   (0, _login.initLoginOut)();
   (0, _signup.initSignup)();
   (0, _twoFactorVerify.initForgetPassword)();
@@ -7215,7 +7244,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // IF dateset-alert = alert, showAlert
 var alertMsg = document.querySelector("body").dataset.alert;
 if (alertMsg) (0, _alerts.showAlert)("success", alertMsg, 20);
-},{"./utils/alerts":"utils/alerts.js","./user-auth/login":"user-auth/login.js","./user-auth/signup":"user-auth/signup.js","./user-auth/twoFactorVerify":"user-auth/twoFactorVerify.js","./search-item/search":"search-item/search.js","./user-account/updateSettings":"user-account/updateSettings.js","./user-cart/cart":"user-cart/cart.js","./product-review/review":"product-review/review.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./utils/alerts":"utils/alerts.js","./overview/overview":"overview/overview.js","./user-auth/login":"user-auth/login.js","./user-auth/signup":"user-auth/signup.js","./user-auth/twoFactorVerify":"user-auth/twoFactorVerify.js","./search-item/search":"search-item/search.js","./user-account/updateSettings":"user-account/updateSettings.js","./user-cart/cart":"user-cart/cart.js","./product-review/review":"product-review/review.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -7240,7 +7269,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63864" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62496" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
