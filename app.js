@@ -55,7 +55,7 @@ app.use(
       imgSrc: [
         "'self'",
         "https://cdn.jsdelivr.net",
-        "https://storage.cloud.google.com",
+        "https://storage.cloud.google.com*",
         "https://*.googleusercontent.com",
         "https://res.cloudinary.com",
         "data:",
