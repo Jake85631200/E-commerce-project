@@ -2,7 +2,6 @@ export const updateRatingStars = (elements, typeOfStar, selectedValue) => {
   // turn elements into array if it's not
   const stars = Array.isArray(elements) ? elements : [elements];
   stars.forEach((star) => {
-    console.log(star);
     const value = parseFloat(star.getAttribute("data-value"));
     // if star value <= selected rating value, display as solid
     if (value <= selectedValue) {

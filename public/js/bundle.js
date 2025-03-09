@@ -153,7 +153,6 @@ var updateRatingStars = exports.updateRatingStars = function updateRatingStars(e
   // turn elements into array if it's not
   var stars = Array.isArray(elements) ? elements : [elements];
   stars.forEach(function (star) {
-    console.log(star);
     var value = parseFloat(star.getAttribute("data-value"));
     // if star value <= selected rating value, display as solid
     if (value <= selectedValue) {
@@ -7269,7 +7268,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62496" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61377" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
