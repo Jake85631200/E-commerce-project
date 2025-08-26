@@ -12,6 +12,9 @@ mongoose.connect(DB).then(() => {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`App is running http://127.0.0.1:${port}`);
+app.listen(port, "0.0.0.0", () => {
+  if (port === 3000) {
+    console.log(`App is running http://127.0.0.1:${port}`);
+  }
+  console.log(`App is running on port ${port}`);
 });
